@@ -21,7 +21,7 @@ public class Order {
     @ApiModelProperty(value = "(预期)金额")
     private Double amount;
 
-    @ApiModelProperty(value = "订单状态 1 未开始 2 已完成")
+    @ApiModelProperty(value = "订单状态 1 未开始 2 已完成 3 已取消")
     private Integer status;
 
     @ApiModelProperty(value = "预约的服务预期开始时间")
