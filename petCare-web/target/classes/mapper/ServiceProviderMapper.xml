@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="au.edu.sydney.web.dao.ServiceProviderMapper">
+  <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <id column="spid" jdbcType="INTEGER" property="spid" />
+    <result column="service_provider_name" jdbcType="VARCHAR" property="serviceProviderName" />
+    <result column="address" jdbcType="VARCHAR" property="address" />
+    <result column="contact_number" jdbcType="VARCHAR" property="contactNumber" />
+    <result column="type" jdbcType="INTEGER" property="type" />
+    <result column="service_content" jdbcType="VARCHAR" property="serviceContent" />
+    <result column="average_price" jdbcType="DOUBLE" property="averagePrice" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="sales" jdbcType="INTEGER" property="sales" />
+    <result column="rating" jdbcType="DOUBLE" property="rating" />
+    <result column="region" jdbcType="VARCHAR" property="region" />
+    <result column="business_hours" jdbcType="VARCHAR" property="businessHours" />
+    <result column="latitude" jdbcType="VARCHAR" property="latitude" />
+    <result column="longitude" jdbcType="VARCHAR" property="longitude" />
+    <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    spid, service_provider_name, address, contact_number, type, service_content, average_price,
+    description, sales, rating, region, business_hours, latitude, longitude, image_url
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from service_provider
+    where spid = #{spid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from service_provider
+    where spid = #{spid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    insert into service_provider (spid, service_provider_name, address,
+      contact_number, type, service_content, 
+      average_price, description, sales,
+      rating, region, business_hours, 
+      latitude, longitude, image_url
+      )
+    values (#{spid,jdbcType=INTEGER}, #{serviceProviderName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      #{contactNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{serviceContent,jdbcType=VARCHAR}, 
+      #{averagePrice,jdbcType=DOUBLE}, #{description,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER},
+      #{rating,jdbcType=DOUBLE}, #{region,jdbcType=VARCHAR}, #{businessHours,jdbcType=VARCHAR}, 
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    insert into service_provider
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="spid != null">
+        spid,
+      </if>
+      <if test="serviceProviderName != null">
+        service_provider_name,
+      </if>
+      <if test="address != null">
+        address,
+      </if>
+      <if test="contactNumber != null">
+        contact_number,
+      </if>
+      <if test="type != null">
+        type,
+      </if>
+      <if test="serviceContent != null">
+        service_content,
+      </if>
+      <if test="averagePrice != null">
+        average_price,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="sales != null">
+        sales,
+      </if>
+      <if test="rating != null">
+        rating,
+      </if>
+      <if test="region != null">
+        region,
+      </if>
+      <if test="businessHours != null">
+        business_hours,
+      </if>
+      <if test="latitude != null">
+        latitude,
+      </if>
+      <if test="longitude != null">
+        longitude,
+      </if>
+      <if test="imageUrl != null">
+        image_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="spid != null">
+        #{spid,jdbcType=INTEGER},
+      </if>
+      <if test="serviceProviderName != null">
+        #{serviceProviderName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        #{type,jdbcType=INTEGER},
+      </if>
+      <if test="serviceContent != null">
+        #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="averagePrice != null">
+        #{averagePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null">
+        #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null">
+        #{rating,jdbcType=DOUBLE},
+      </if>
+      <if test="region != null">
+        #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="businessHours != null">
+        #{businessHours,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        #{imageUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    update service_provider
+    <set>
+      <if test="serviceProviderName != null">
+        servie_provider_name = #{servieProviderName,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null">
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="contactNumber != null">
+        contact_number = #{contactNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null">
+        type = #{type,jdbcType=INTEGER},
+      </if>
+      <if test="serviceContent != null">
+        service_content = #{serviceContent,jdbcType=VARCHAR},
+      </if>
+      <if test="averagePrice != null">
+        average_price = #{averagePrice,jdbcType=DOUBLE},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="sales != null">
+        sales = #{sales,jdbcType=INTEGER},
+      </if>
+      <if test="rating != null">
+        rating = #{rating,jdbcType=DOUBLE},
+      </if>
+      <if test="region != null">
+        region = #{region,jdbcType=VARCHAR},
+      </if>
+      <if test="businessHours != null">
+        business_hours = #{businessHours,jdbcType=VARCHAR},
+      </if>
+      <if test="latitude != null">
+        latitude = #{latitude,jdbcType=VARCHAR},
+      </if>
+      <if test="longitude != null">
+        longitude = #{longitude,jdbcType=VARCHAR},
+      </if>
+      <if test="imageUrl != null">
+        image_url = #{imageUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where spid = #{spid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    update service_provider
+    set service_provider_name = #{serviceProviderName,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      contact_number = #{contactNumber,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      service_content = #{serviceContent,jdbcType=VARCHAR},
+      average_price = #{averagePrice,jdbcType=DOUBLE},
+      description = #{description,jdbcType=VARCHAR},
+      sales = #{sales,jdbcType=INTEGER},
+      rating = #{rating,jdbcType=DOUBLE},
+      region = #{region,jdbcType=VARCHAR},
+      business_hours = #{businessHours,jdbcType=VARCHAR},
+      latitude = #{latitude,jdbcType=VARCHAR},
+      longitude = #{longitude,jdbcType=VARCHAR},
+      image_url = #{imageUrl,jdbcType=VARCHAR}
+    where spid = #{spid,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="au.edu.sydney.web.dao.ServiceMapper">
+  <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.Service">
+    <id column="sid" jdbcType="INTEGER" property="sid" />
+    <result column="service_provider_id" jdbcType="INTEGER" property="serviceProviderId" />
+    <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
+    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="status" jdbcType="INTEGER" property="status" />
+    <result column="service_date" jdbcType="DATE" property="serviceDate" />
+    <result column="service_time" jdbcType="VARCHAR" property="serviceTime" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    sid, service_provider_id, service_name, price, status, service_date, service_time
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from service
+    where sid = #{sid,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from service
+    where sid = #{sid,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.Service">
+    insert into service (sid, service_provider_id, service_name, 
+      price, status, service_date, 
+      service_time)
+    values (#{sid,jdbcType=INTEGER}, #{serviceProviderId,jdbcType=INTEGER}, #{serviceName,jdbcType=VARCHAR}, 
+      #{price,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{serviceDate,jdbcType=DATE}, 
+      #{serviceTime,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Service">
+    insert into service
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        sid,
+      </if>
+      <if test="serviceProviderId != null">
+        service_provider_id,
+      </if>
+      <if test="serviceName != null">
+        service_name,
+      </if>
+      <if test="price != null">
+        price,
+      </if>
+      <if test="status != null">
+        status,
+      </if>
+      <if test="serviceDate != null">
+        service_date,
+      </if>
+      <if test="serviceTime != null">
+        service_time,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="sid != null">
+        #{sid,jdbcType=INTEGER},
+      </if>
+      <if test="serviceProviderId != null">
+        #{serviceProviderId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceName != null">
+        #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="serviceDate != null">
+        #{serviceDate,jdbcType=DATE},
+      </if>
+      <if test="serviceTime != null">
+        #{serviceTime,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.Service">
+    update service
+    <set>
+      <if test="serviceProviderId != null">
+        service_provider_id = #{serviceProviderId,jdbcType=INTEGER},
+      </if>
+      <if test="serviceName != null">
+        service_name = #{serviceName,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null">
+        price = #{price,jdbcType=DOUBLE},
+      </if>
+      <if test="status != null">
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="serviceDate != null">
+        service_date = #{serviceDate,jdbcType=DATE},
+      </if>
+      <if test="serviceTime != null">
+        service_time = #{serviceTime,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.Service">
+    update service
+    set service_provider_id = #{serviceProviderId,jdbcType=INTEGER},
+      service_name = #{serviceName,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DOUBLE},
+      status = #{status,jdbcType=INTEGER},
+      service_date = #{serviceDate,jdbcType=DATE},
+      service_time = #{serviceTime,jdbcType=VARCHAR}
+    where sid = #{sid,jdbcType=INTEGER}
+  </update>
+</mapper>
