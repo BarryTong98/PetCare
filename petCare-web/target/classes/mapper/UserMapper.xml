@@ -117,4 +117,13 @@
   <select id="findAll" resultType="au.edu.sydney.web.entity.pojo.User">
         SELECT * FROM user
    </select>
+  <select id="queryAllByUserName" parameterType="string" resultType="au.edu.sydney.web.entity.pojo.User">
+        SELECT * FROM user where user_name like CONCAT('%',#{userName},'%')
+   </select>
+  <select id="selectByUserName" parameterType="string" resultType="au.edu.sydney.web.entity.pojo.User">
+        SELECT * FROM user where user_name = #{userName,jdbcType=VARCHAR}
+   </select>
+  <select id="selectByEmail" parameterType="string" resultType="au.edu.sydney.web.entity.pojo.User">
+        SELECT * FROM user where email = #{email,jdbcType=VARCHAR}
+   </select>
 </mapper>

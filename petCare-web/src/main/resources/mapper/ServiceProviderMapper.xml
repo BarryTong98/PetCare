@@ -17,10 +17,12 @@
     <result column="latitude" jdbcType="VARCHAR" property="latitude" />
     <result column="longitude" jdbcType="VARCHAR" property="longitude" />
     <result column="image_url" jdbcType="VARCHAR" property="imageUrl" />
+    <result column="recommend" jdbcType="INTEGER" property="recommend" />
   </resultMap>
   <sql id="Base_Column_List">
-    spid, service_provider_name, address, contact_number, type, service_content, average_price,
-    description, sales, rating, region, business_hours, latitude, longitude, image_url
+    spid, service_provider_name, address, contact_number, type, service_content, average_price, 
+    description, sales, rating, region, business_hours, latitude, longitude, image_url, 
+    recommend
   </sql>
   <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
     select 
@@ -33,18 +35,18 @@
     where spid = #{spid,jdbcType=INTEGER}
   </delete>
   <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
-    insert into service_provider (spid, service_provider_name, address,
+    insert into service_provider (spid, service_provider_name, address, 
       contact_number, type, service_content, 
-      average_price, description, sales,
+      average_price, description, sales, 
       rating, region, business_hours, 
-      latitude, longitude, image_url
-      )
-    values (#{spid,jdbcType=INTEGER}, #{serviceProviderName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR},
+      latitude, longitude, image_url, 
+      recommend)
+    values (#{spid,jdbcType=INTEGER}, #{serviceProviderName,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
       #{contactNumber,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{serviceContent,jdbcType=VARCHAR}, 
-      #{averagePrice,jdbcType=DOUBLE}, #{description,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER},
+      #{averagePrice,jdbcType=DOUBLE}, #{description,jdbcType=VARCHAR}, #{sales,jdbcType=INTEGER}, 
       #{rating,jdbcType=DOUBLE}, #{region,jdbcType=VARCHAR}, #{businessHours,jdbcType=VARCHAR}, 
-      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}
-      )
+      #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR}, 
+      #{recommend,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
     insert into service_provider
@@ -94,6 +96,9 @@
       <if test="imageUrl != null">
         image_url,
       </if>
+      <if test="recommend != null">
+        recommend,
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides=",">
       <if test="spid != null">
@@ -141,13 +146,16 @@
       <if test="imageUrl != null">
         #{imageUrl,jdbcType=VARCHAR},
       </if>
+      <if test="recommend != null">
+        #{recommend,jdbcType=INTEGER},
+      </if>
     </trim>
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
     update service_provider
     <set>
       <if test="serviceProviderName != null">
-        servie_provider_name = #{servieProviderName,jdbcType=VARCHAR},
+        service_provider_name = #{serviceProviderName,jdbcType=VARCHAR},
       </if>
       <if test="address != null">
         address = #{address,jdbcType=VARCHAR},
@@ -188,6 +196,9 @@
       <if test="imageUrl != null">
         image_url = #{imageUrl,jdbcType=VARCHAR},
       </if>
+      <if test="recommend != null">
+        recommend = #{recommend,jdbcType=INTEGER},
+      </if>
     </set>
     where spid = #{spid,jdbcType=INTEGER}
   </update>
@@ -206,7 +217,11 @@
       business_hours = #{businessHours,jdbcType=VARCHAR},
       latitude = #{latitude,jdbcType=VARCHAR},
       longitude = #{longitude,jdbcType=VARCHAR},
-      image_url = #{imageUrl,jdbcType=VARCHAR}
+      image_url = #{imageUrl,jdbcType=VARCHAR},
+      recommend = #{recommend,jdbcType=INTEGER}
     where spid = #{spid,jdbcType=INTEGER}
   </update>
+  <select id="getRecommendProviders" resultType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+        SELECT * FROM service_provider where recommend = 1
+   </select>
 </mapper>

@@ -1,6 +1,5 @@
 package au.edu.sydney.web.entity.pojo;
 
-
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 
@@ -52,6 +51,9 @@ public class ServiceProvider {
 
     @ApiModelProperty(value = "商家照片url")
     private String imageUrl;
+
+    @ApiModelProperty(value = "是否在首页显示 1 显示 0 不显示")
+    private Integer recommend;
 
     public Integer getSpid() {
         return spid;
@@ -105,8 +107,8 @@ public class ServiceProvider {
         return averagePrice;
     }
 
-    public void setAveragePrice(Double avergePrice) {
-        this.averagePrice = avergePrice;
+    public void setAveragePrice(Double averagePrice) {
+        this.averagePrice = averagePrice;
     }
 
     public String getDescription() {
@@ -171,5 +173,35 @@ public class ServiceProvider {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl == null ? null : imageUrl.trim();
+    }
+
+    public Integer getRecommend() {
+        return recommend;
+    }
+
+    public void setRecommend(Integer recommend) {
+        this.recommend = recommend;
+    }
+
+    @Override
+    public String toString() {
+        return "ServiceProvider{" +
+                "spid=" + spid +
+                ", serviceProviderName='" + serviceProviderName + '\'' +
+                ", address='" + address + '\'' +
+                ", contactNumber='" + contactNumber + '\'' +
+                ", type=" + type +
+                ", serviceContent='" + serviceContent + '\'' +
+                ", averagePrice=" + averagePrice +
+                ", description='" + description + '\'' +
+                ", sales=" + sales +
+                ", rating=" + rating +
+                ", region='" + region + '\'' +
+                ", businessHours='" + businessHours + '\'' +
+                ", latitude='" + latitude + '\'' +
+                ", longitude='" + longitude + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                ", recommend=" + recommend +
+                '}';
     }
 }

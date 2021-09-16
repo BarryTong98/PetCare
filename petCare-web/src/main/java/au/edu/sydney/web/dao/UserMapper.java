@@ -15,6 +15,17 @@ public interface UserMapper {
 
     User selectByPrimaryKey(Integer uid);
 
+    /**
+     * query all the users with similar username
+     * @param userName
+     * @return List<User>
+     */
+    List<User> queryAllByUserName(String userName);
+
+    User selectByUserName(String userName);
+
+    User selectByEmail(String email);
+
     int updateByPrimaryKeySelective(User record);
 
     int updateByPrimaryKey(User record);

@@ -1,10 +1,9 @@
 package au.edu.sydney.web.dao;
 
 import au.edu.sydney.web.entity.pojo.ServiceProvider;
-import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
 
-@Mapper
 public interface ServiceProviderMapper {
     int deleteByPrimaryKey(Integer spid);
 
@@ -13,6 +12,12 @@ public interface ServiceProviderMapper {
     int insertSelective(ServiceProvider record);
 
     ServiceProvider selectByPrimaryKey(Integer spid);
+
+    /**
+     * get all the recommend providers（Show on home page）
+     * @return
+     */
+    List<ServiceProvider> getRecommendProviders();
 
     int updateByPrimaryKeySelective(ServiceProvider record);
 

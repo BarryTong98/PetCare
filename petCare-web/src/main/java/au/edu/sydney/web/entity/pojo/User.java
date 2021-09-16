@@ -11,7 +11,7 @@ public class User {
     @ApiModelProperty(value = "用户ID")
     private Integer uid;
 
-    @ApiModelProperty(value = "用户名")
+    @ApiModelProperty(value = "用户名 不可重复")
     private String userName;
 
     @ApiModelProperty(value = "昵称")
@@ -23,7 +23,7 @@ public class User {
     @ApiModelProperty(value = "手机号")
     private String phoneNumber;
 
-    @ApiModelProperty(value = "邮箱")
+    @ApiModelProperty(value = "邮箱 不可重复")
     private String email;
 
     @ApiModelProperty(value = "头像照片url")
@@ -83,5 +83,18 @@ public class User {
 
     public void setImageUrl(String imageUrl) {
         this.imageUrl = imageUrl == null ? null : imageUrl.trim();
+    }
+
+    @Override
+    public String toString() {
+        return "User{" +
+                "uid=" + uid +
+                ", userName='" + userName + '\'' +
+                ", nickName='" + nickName + '\'' +
+                ", password='" + password + '\'' +
+                ", phoneNumber='" + phoneNumber + '\'' +
+                ", email='" + email + '\'' +
+                ", imageUrl='" + imageUrl + '\'' +
+                '}';
     }
 }
