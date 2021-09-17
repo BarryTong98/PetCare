@@ -3,12 +3,10 @@ package au.edu.sydney.web.controller;
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.User;
 import au.edu.sydney.web.service.UserService;
+import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author Chris
@@ -24,7 +22,6 @@ public class UserController {
     @ApiOperation("query all the users")
     @GetMapping("/findAll")
     public Result findAll() {
-
         return Result.ok(userService.findAll());
     }
 
@@ -32,10 +29,23 @@ public class UserController {
     @GetMapping("/{id}")
     public Result getUser(@PathVariable int id) {
         User user = userService.getUser(id);
-        if (user==null){
+        if (user == null) {
             return Result.error("User doesn't exist!");
         }
         return Result.ok(user);
+    }
+
+    @ApiOperation("register")
+    @PostMapping("/register")
+    public Result insert(@RequestBody User user) {
+        if (user == null) {
+            return Result.error("user is empty");
+        }
+        int code = userService.insert(user);
+        if (code == 1) {
+            return Result.ok(user);
+        }
+        return Result.error("Failed to register user");
     }
 
 }

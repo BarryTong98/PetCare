@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.annotation.Resource;
+
 /**
  * @author Chris
  * @date 2021-09-14 22:09
@@ -20,7 +22,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/serviceProvider")
 public class ServiceProviderController {
 
-    @Autowired
+    @Resource
     ServiceProviderService serviceProviderService;
 
     @ApiOperation("get service provider by id")
@@ -32,4 +34,6 @@ public class ServiceProviderController {
         }
         return Result.ok(serviceProvider);
     }
+
+
 }

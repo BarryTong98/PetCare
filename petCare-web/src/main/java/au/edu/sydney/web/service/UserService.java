@@ -12,4 +12,6 @@ public interface UserService {
     List<User> findAll();
 
     User getUser(int id);
+
+    int insert(User user);
 }
