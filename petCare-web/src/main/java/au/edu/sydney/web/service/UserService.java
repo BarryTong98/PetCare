@@ -16,4 +16,6 @@ public interface UserService {
     int insert(User user);
 
     int selectUidByUserName(String userName);
+
+    int updateUser(User record);
 }

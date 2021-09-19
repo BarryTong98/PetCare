@@ -42,10 +42,20 @@ public class UserController {
         if (state > 0) {
             int uid = userService.selectUidByUserName(user.getUserName());
             user.setUid(uid);
-            user.setPassword("hahahahahaha");
+            user.setPassword("hahahahahaha");//假装加密，最后再改
             return Result.ok(user);
-        }else {
+        } else {
             return Result.error("Failed to register user");
         }
+    }
+
+    @ApiOperation("update user information")
+    @PutMapping("/{id}")
+    public Result update(@PathVariable int id, @RequestBody User record) {
+        int state = userService.updateUser(record);
+        if (state < 0) {
+            return Result.error("failed to update user information");
+        }
+        return Result.ok("success", null);
     }
 }
