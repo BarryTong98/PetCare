@@ -2,6 +2,7 @@ package au.edu.sydney;
 
 import au.edu.sydney.web.dao.UserMapper;
 import au.edu.sydney.web.entity.pojo.User;
+import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,5 +24,16 @@ public class MyTest {
         for (User user : all) {
             System.out.println(user);
         }
+    }
+
+    @Test
+    public void toJSON(){
+        User user = new User();
+        user.setUserName("hjs");
+        user.setNickName("huang");
+        user.setPassword("111");
+        user.setPhoneNumber("110");
+        user.setEmail("111@qq.com");
+        System.out.println(new JSONObject().toJSONString(user));
     }
 }

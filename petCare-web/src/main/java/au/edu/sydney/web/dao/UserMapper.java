@@ -17,6 +17,7 @@ public interface UserMapper {
 
     /**
      * query all the users with similar username
+     *
      * @param userName
      * @return List<User>
      */
@@ -31,4 +32,6 @@ public interface UserMapper {
     int updateByPrimaryKey(User record);
 
     List<User> findAll();
+
+    int selectUidByUserName(String userName);
 }

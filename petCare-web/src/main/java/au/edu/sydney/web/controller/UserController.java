@@ -38,14 +38,14 @@ public class UserController {
     @ApiOperation("register")
     @PostMapping("/register")
     public Result insert(@RequestBody User user) {
-        if (user == null) {
-            return Result.error("user is empty");
-        }
-        int code = userService.insert(user);
-        if (code == 1) {
+        int state = userService.insert(user);
+        if (state > 0) {
+            int uid = userService.selectUidByUserName(user.getUserName());
+            user.setUid(uid);
+            user.setPassword("hahahahahaha");
             return Result.ok(user);
+        }else {
+            return Result.error("Failed to register user");
         }
-        return Result.error("Failed to register user");
     }
-
 }

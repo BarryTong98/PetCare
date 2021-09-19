@@ -15,6 +15,7 @@ public interface ServiceProviderMapper {
 
     /**
      * get all the recommend providers（Show on home page）
+     *
      * @return
      */
     List<ServiceProvider> getRecommendProviders();
@@ -22,4 +23,6 @@ public interface ServiceProviderMapper {
     int updateByPrimaryKeySelective(ServiceProvider record);
 
     int updateByPrimaryKey(ServiceProvider record);
+
+    List<ServiceProvider> getServiceProviderByTag(String tag);
 }

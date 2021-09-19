@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.annotation.Resource;
+import java.util.List;
 
 /**
  * @author Chris
@@ -29,10 +30,20 @@ public class ServiceProviderController {
     @GetMapping("/{id}")
     public Result getServiceProvider(@PathVariable int id) {
         ServiceProvider serviceProvider = serviceProviderService.getServiceProviderById(id);
-        if (serviceProvider==null){
+        if (serviceProvider == null) {
             return Result.error("Service provider doesn't exist!");
         }
         return Result.ok(serviceProvider);
+    }
+
+    @ApiOperation("get service provider by tag such as health, beauty")
+    @GetMapping("/module/{tag}")
+    public Result getServiceProviderByTag(@PathVariable String tag) {
+        List<ServiceProvider> serviceProviderList = serviceProviderService.getServiceProviderByTag(tag);
+        if (serviceProviderList == null) {
+            return Result.error("No related service provider");
+        }
+        return Result.ok(serviceProviderList);
     }
 
 
