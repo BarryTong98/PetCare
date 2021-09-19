@@ -56,6 +56,7 @@ public class UserController {
         if (state < 0) {
             return Result.error("failed to update user information");
         }
-        return Result.ok("success", null);
+        User user = userService.getUser(id);
+        return Result.ok("success", user);
     }
 }
