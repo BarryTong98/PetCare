@@ -13,5 +13,5 @@ public interface ServiceProviderService {
 
     ServiceProvider getServiceProviderById(int id);
 
-    List<ServiceProvider> getServiceProviderByTag(String tag);
+    List<ServiceProvider> getServiceProviderByType(int type);
 }

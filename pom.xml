@@ -17,6 +17,11 @@
         <relativePath/>
     </parent>
 
+    <modules>
+        <module>petCare-base</module>
+        <module>petCare-web</module>
+    </modules>
+
     <properties>
         <mybatis.version>3.5.6</mybatis.version>
         <druid.version>1.1.12</druid.version>
@@ -26,6 +31,18 @@
 
     <dependencyManagement>
         <dependencies>
+
+            <dependency>
+                <groupId>sydney.edu.au</groupId>
+                <artifactId>petCare-base</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
+
+            <dependency>
+                <groupId>sydney.edu.au</groupId>
+                <artifactId>petCare-web</artifactId>
+                <version>1.0-SNAPSHOT</version>
+            </dependency>
 
             <!--druid connection pool-->
             <dependency>
@@ -52,20 +69,10 @@
     <build>
         <plugins>
             <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-compiler-plugin</artifactId>
-                <version>3.7.0</version>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <source>1.8</source>
-                    <target>1.8</target>
-                    <encoding>UTF-8</encoding>
-                </configuration>
-            </plugin>
-            <plugin>
-                <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-surefire-plugin</artifactId>
-                <configuration>
-                    <testFailureIgnore>true</testFailureIgnore>
+                    <mainClass>au.edu.sydney.SpringApplication</mainClass>
                 </configuration>
             </plugin>
         </plugins>

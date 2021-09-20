@@ -24,5 +24,5 @@ public interface ServiceProviderMapper {
 
     int updateByPrimaryKey(ServiceProvider record);
 
-    List<ServiceProvider> getServiceProviderByTag(String tag);
+    List<ServiceProvider> getServiceProviderByType(int type);
 }

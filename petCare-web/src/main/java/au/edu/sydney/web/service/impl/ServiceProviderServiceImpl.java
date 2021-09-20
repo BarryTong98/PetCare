@@ -3,7 +3,6 @@ package au.edu.sydney.web.service.impl;
 import au.edu.sydney.web.dao.ServiceProviderMapper;
 import au.edu.sydney.web.entity.pojo.ServiceProvider;
 import au.edu.sydney.web.service.ServiceProviderService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -26,7 +25,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
     }
 
     @Override
-    public List<ServiceProvider> getServiceProviderByTag(String tag) {
-        return serviceProviderMapper.getServiceProviderByTag(tag);
+    public List<ServiceProvider> getServiceProviderByType(int type) {
+        return serviceProviderMapper.getServiceProviderByType(type);
     }
 }
