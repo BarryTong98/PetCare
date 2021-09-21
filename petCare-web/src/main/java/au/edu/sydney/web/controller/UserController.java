@@ -8,6 +8,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * @author Chris
  * @date 2021-09-14 21:08
@@ -18,7 +20,7 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/user")
 public class UserController {
 
-    @Autowired
+    @Resource
     private UserService userService;
 
     @ApiOperation("query all the users")
@@ -37,6 +39,7 @@ public class UserController {
         return Result.ok(user);
     }
 
+    @CrossOrigin
     @ApiOperation("register")
     @PostMapping("/register")
     public Result insert(@RequestBody User user) {
