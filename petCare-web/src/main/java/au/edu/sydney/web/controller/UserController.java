@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.*;
  * @author Chris
  * @date 2021-09-14 21:08
  */
+
+@CrossOrigin
 @RestController
 @RequestMapping("/user")
 public class UserController {

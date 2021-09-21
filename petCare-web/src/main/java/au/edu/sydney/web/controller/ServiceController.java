@@ -5,10 +5,7 @@ import au.edu.sydney.web.entity.pojo.Service;
 import au.edu.sydney.web.service.ServiceService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
 
@@ -18,6 +15,7 @@ import javax.annotation.Resource;
  * @description
  */
 
+@CrossOrigin
 @RestController
 @RequestMapping("/service")
 public class ServiceController {
