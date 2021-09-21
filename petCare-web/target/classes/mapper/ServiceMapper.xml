@@ -19,6 +19,14 @@
     from service
     where sid = #{sid,jdbcType=INTEGER}
   </select>
+
+  <select id="selectBySpid" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from service
+    where service_provider_id = #{spid,jdbcType=INTEGER}
+  </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from service
     where sid = #{sid,jdbcType=INTEGER}
