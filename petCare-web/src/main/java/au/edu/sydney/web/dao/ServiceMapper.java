@@ -3,6 +3,8 @@ package au.edu.sydney.web.dao;
 import au.edu.sydney.web.entity.pojo.Service;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 
 @Mapper
 public interface ServiceMapper {
@@ -14,7 +16,10 @@ public interface ServiceMapper {
 
     Service selectByPrimaryKey(Integer sid);
 
+    List selectBySpid(Integer spid);
+
     int updateByPrimaryKeySelective(Service record);
 
     int updateByPrimaryKey(Service record);
+
 }

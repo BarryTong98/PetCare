@@ -1,5 +1,6 @@
 package au.edu.sydney.web.service;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.Order;
 
 /**
@@ -9,6 +10,6 @@ import au.edu.sydney.web.entity.pojo.Order;
  */
 public interface OrderService {
 
-    Order getOrderById(int id);
+    Result getOrderById(int id);
 
 }

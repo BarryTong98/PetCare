@@ -26,10 +26,12 @@ public class ServiceController {
     @ApiOperation("get service by id")
     @GetMapping("/{id}")
     public Result getService(@PathVariable int id) {
-        Service service = serviceService.getServiceById(id);
-        if (service==null){
-            return Result.error("Service doesn't exist!");
-        }
-        return Result.ok(service);
+        return serviceService.getServiceById(id);
+    }
+
+    @ApiOperation("get service by spid")
+    @GetMapping("/spid/{spid}")
+    public Result getServiceBySpid(@PathVariable int spid) {
+        return serviceService.getServiceBySpid(spid);
     }
 }

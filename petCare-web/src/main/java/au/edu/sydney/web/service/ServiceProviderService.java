@@ -1,5 +1,6 @@
 package au.edu.sydney.web.service;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.ServiceProvider;
 
 import java.util.List;
@@ -11,7 +12,7 @@ import java.util.List;
  */
 public interface ServiceProviderService {
 
-    ServiceProvider getServiceProviderById(int id);
+    Result getServiceProviderById(int id);
 
-    List<ServiceProvider> getServiceProviderByType(int type);
+    Result getServiceProviderByType(int type);
 }

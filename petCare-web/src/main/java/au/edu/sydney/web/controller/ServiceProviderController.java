@@ -26,21 +26,13 @@ public class ServiceProviderController {
     @ApiOperation("get service provider by id")
     @GetMapping("/{id}")
     public Result getServiceProvider(@PathVariable int id) {
-        ServiceProvider serviceProvider = serviceProviderService.getServiceProviderById(id);
-        if (serviceProvider == null) {
-            return Result.error("Service provider doesn't exist!");
-        }
-        return Result.ok(serviceProvider);
+        return serviceProviderService.getServiceProviderById(id);
     }
 
     @ApiOperation("get service provider by tag such as health, beauty")
     @GetMapping("/type/{type}")
     public Result getServiceProviderByType(@PathVariable int type) {
-        List<ServiceProvider> serviceProviderList = serviceProviderService.getServiceProviderByType(type);
-        if (serviceProviderList == null) {
-            return Result.error("No related service provider");
-        }
-        return Result.ok(serviceProviderList);
+        return serviceProviderService.getServiceProviderByType(type);
     }
 
 

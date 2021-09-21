@@ -1,5 +1,6 @@
 package au.edu.sydney.web.service;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.Service;
 
 /**
@@ -9,5 +10,7 @@ import au.edu.sydney.web.entity.pojo.Service;
  */
 public interface ServiceService {
 
-    Service getServiceById(int id);
+    Result getServiceById(int id);
+
+    Result getServiceBySpid(int spid);
 }

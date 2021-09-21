@@ -1,5 +1,6 @@
 package au.edu.sydney.web.service;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.Review;
 
 /**
@@ -9,5 +10,7 @@ import au.edu.sydney.web.entity.pojo.Review;
  */
 public interface ReviewService {
 
-    Review getReviewById(int id);
+    Result getReviewById(int id);
+
+    Result getReviewBySpid(int id);
 }

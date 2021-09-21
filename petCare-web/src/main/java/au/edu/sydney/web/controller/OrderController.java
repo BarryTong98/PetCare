@@ -24,11 +24,7 @@ public class OrderController {
     @ApiOperation("get order by id")
     @GetMapping("/{id}")
     public Result getServiceProvider(@PathVariable int id) {
-        Order order = orderService.getOrderById(id);
-        if (order==null){
-            return Result.error("Order doesn't exist!");
-        }
-        return Result.ok(order);
+       return orderService.getOrderById(id);
     }
 
 }

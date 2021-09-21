@@ -1,10 +1,13 @@
 package au.edu.sydney.web.service.impl;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.OrderMapper;
 import au.edu.sydney.web.entity.pojo.Order;
 import au.edu.sydney.web.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import javax.annotation.Resource;
 
 /**
  * @author Chris
@@ -13,12 +16,15 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class OrderServiceImpl implements OrderService {
-    @Autowired
+    @Resource
     OrderMapper orderMapper;
 
     @Override
-    public Order getOrderById(int id) {
-        return orderMapper.selectByPrimaryKey(id);
+    public Result getOrderById(int id) {
+        Order order = orderMapper.selectByPrimaryKey(id);
+        if (order==null){
+            return Result.error("Order doesn't exist!");
+        }
+        return Result.ok(order);
     }
-
 }

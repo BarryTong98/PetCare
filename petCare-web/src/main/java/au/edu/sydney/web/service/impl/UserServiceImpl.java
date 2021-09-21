@@ -1,5 +1,6 @@
 package au.edu.sydney.web.service.impl;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.UserMapper;
 import au.edu.sydney.web.entity.pojo.User;
 import au.edu.sydney.web.service.UserService;
@@ -21,27 +22,48 @@ public class UserServiceImpl implements UserService {
     private UserMapper userMapper;
 
     @Override
-    public List<User> findAll() {
-        return userMapper.findAll();
+    public Result findAll() {
+        List<User> users = userMapper.findAll();
+        return Result.ok(users);
     }
 
     @Override
-    public User getUser(int id) {
-        return userMapper.selectByPrimaryKey(id);
+    public Result getUser(int id) {
+        User user = userMapper.selectByPrimaryKey(id);
+        if (user == null) {
+            return Result.error("User doesn't exist!");
+        }
+        return Result.ok(user);
     }
 
     @Override
-    public int insert(User user) {
-        return userMapper.insertSelective(user);
+    public Result insert(User user) {
+        try{
+            userMapper.insertSelective(user);
+        }catch (Exception e){
+            return Result.error("Failed to register user");
+        }
+        return Result.ok(null);
     }
 
     @Override
-    public int selectUidByUserName(String userName) {
-        return userMapper.selectUidByUserName(userName);
+    public Result selectUidByUserName(String userName) {
+        int id=-1;
+        try{
+            id = userMapper.selectUidByUserName(userName);
+        }catch (Exception e){
+            return Result.error("Can not find user");
+        }
+        return Result.ok(id);
     }
 
     @Override
-    public int updateUser(User record) {
-        return userMapper.updateByPrimaryKey(record);
+    public Result updateUser(User record) {
+        try{
+            userMapper.updateByPrimaryKey(record);
+        }catch (Exception e){
+            return Result.error("Failed to update user information");
+        }
+        return Result.ok("success", null);
     }
 }

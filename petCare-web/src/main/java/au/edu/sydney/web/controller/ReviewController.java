@@ -7,6 +7,8 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.annotation.Resource;
+
 /**
  * @author Chris
  * @date 2021-09-14 22:10
@@ -18,16 +20,17 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/review")
 public class ReviewController {
 
-    @Autowired
+    @Resource
     ReviewService reviewService;
 
     @ApiOperation("get review by id")
     @GetMapping("/{id}")
     public Result getReview(@PathVariable int id) {
-        Review review = reviewService.getReviewById(id);
-        if (review == null) {
-            return Result.error("Review doesn't exist!");
-        }
-        return Result.ok(review);
+        return reviewService.getReviewById(id);
+    }
+
+    @GetMapping("/spid/{spid}")
+    public Result getReviewBySpid(@PathVariable int spid) {
+        return reviewService.getReviewBySpid(spid);
     }
 }

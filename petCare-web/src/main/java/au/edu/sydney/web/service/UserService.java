@@ -1,5 +1,6 @@
 package au.edu.sydney.web.service;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.User;
 
 import java.util.List;
@@ -9,13 +10,13 @@ import java.util.List;
  * @date 2021-09-14 21:05
  */
 public interface UserService {
-    List<User> findAll();
+    Result findAll();
 
-    User getUser(int id);
+    Result getUser(int id);
 
-    int insert(User user);
+    Result insert(User user);
 
-    int selectUidByUserName(String userName);
+    Result selectUidByUserName(String userName);
 
-    int updateUser(User record);
+    Result updateUser(User record);
 }
