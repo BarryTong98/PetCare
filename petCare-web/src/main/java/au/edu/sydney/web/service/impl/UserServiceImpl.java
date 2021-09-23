@@ -57,7 +57,7 @@ public class UserServiceImpl implements UserService {
         } catch (Exception e) {
             return Result.error("Failed to register user");
         }
-        return Result.ok(null);
+        return Result.ok();
     }
 
     @Override

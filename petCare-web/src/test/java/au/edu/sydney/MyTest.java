@@ -1,7 +1,7 @@
 package au.edu.sydney;
 
 import au.edu.sydney.web.dao.UserMapper;
-import au.edu.sydney.web.entity.pojo.Review;
+import au.edu.sydney.web.entity.pojo.Order;
 import au.edu.sydney.web.entity.pojo.User;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringRunner;
 
+import java.util.Date;
 import java.util.List;
 
 @RunWith(SpringRunner.class)
@@ -29,12 +30,13 @@ public class MyTest {
 
     @Test
     public void toJSON(){
-        Review review=new Review();
-        review.setUserId(1);
-        review.setServiceProviderId(1);
-        review.setRating(5.0);
-        review.setContent("very good");
-        review.setNumberOfLikes(40);
-        System.out.println(new JSONObject().toJSONString(review));
+        Order order=new Order();
+        order.setServiceId(2);
+        order.setUserId(1);
+        order.setAmount(100.00);
+        order.setStatus(1);
+        order.setServiceStartTime("21 September 2021 1pm");
+        order.setCreateTime(new Date());
+        System.out.println(JSONObject.toJSON(order));
     }
 }
