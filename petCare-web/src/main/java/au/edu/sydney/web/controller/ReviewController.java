@@ -40,7 +40,7 @@ public class ReviewController {
         return reviewService.getReviewByUid(uid);
     }
 
-    @ApiOperation("insert new review")
+    @ApiOperation("add new review")
     @PostMapping("/add")
     public Result insert(@RequestBody Review review) {
         return reviewService.insert(review);
