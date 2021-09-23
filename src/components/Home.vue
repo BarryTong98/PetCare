@@ -6,6 +6,14 @@
         <img src="../assets/Dog.png">
         <span>Pet Care</span>
       </div>
+      <div>
+        <el-input
+            placeholder="请输入内容"
+            v-model="input"
+            clearable>
+        </el-input>
+        <el-button type="primary" icon="el-icon-search">搜索</el-button>
+      </div>
       <el-button type="info" @click="logout">退出</el-button>
     </el-header>
     <!--页面主题区域-->
@@ -62,7 +70,7 @@
         <div>
           <el-carousel :interval="4000" type="card" height="300px">
             <el-carousel-item v-for="item in itemList" :key="item">
-              <img :src="item" alt="missing"/>
+              <img :src="item" alt="missing" width="100%" height="100%" />
             </el-carousel-item>
           </el-carousel>
         </div>
@@ -111,7 +119,7 @@ export default {
     align-items: center;
 
     span {
-      margin-left: 20px;
+      margin-left: 15px;
     }
 
     img {
@@ -131,8 +139,11 @@ export default {
 }
 .el-menu{
   svg{
-    margin-right: 10px;
+    margin-right: 5%;
   }
 }
-
+.el-input{
+  margin-left: -19%;
+  width: 700px;
+}
 </style>
