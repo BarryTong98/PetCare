@@ -3,6 +3,7 @@ import Router from 'vue-router'
 import Login from '/src/components/Login'
 import Home from '/src/components/Home'
 import Signup from '@/components/Signup'
+import Template from '/src/components/Template'
 
 Vue.use(Router)
 
@@ -23,6 +24,10 @@ export default new Router({
         {
           path: '/signup',
           component: Signup
+        },
+        {
+          path: '/template',
+          component: Template
         }
       ]
 })
