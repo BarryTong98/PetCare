@@ -2,9 +2,10 @@ package au.edu.sydney.web.service.impl;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.ReviewMapper;
+import au.edu.sydney.web.dao.ServiceProviderMapper;
 import au.edu.sydney.web.entity.pojo.Review;
+import au.edu.sydney.web.entity.pojo.ServiceProvider;
 import au.edu.sydney.web.service.ReviewService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -17,8 +18,12 @@ import java.util.List;
  */
 @Service
 public class ReviewServiceImpl implements ReviewService {
+
     @Resource
     ReviewMapper reviewMapper;
+
+    @Resource
+    ServiceProviderMapper serviceProviderMapper;
 
     @Override
     public Result getReviewById(int id) {
@@ -36,5 +41,16 @@ public class ReviewServiceImpl implements ReviewService {
             return Result.error("Review doesn't exist!");
         }
         return Result.ok(list);
+    }
+
+    @Override
+    public Result insert(Review review) {
+        Integer spid = review.getServiceProviderId();
+        ServiceProvider serviceProvider = serviceProviderMapper.selectByPrimaryKey(spid);
+        Double rating = (serviceProvider.getRating() + review.getRating()) / 2;
+        serviceProvider.setRating(rating);
+        reviewMapper.insert(review);
+        serviceProviderMapper.updateByPrimaryKeySelective(serviceProvider);
+        return Result.ok();
     }
 }

@@ -4,7 +4,6 @@ import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.Review;
 import au.edu.sydney.web.service.ReviewService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -29,8 +28,15 @@ public class ReviewController {
         return reviewService.getReviewById(id);
     }
 
+    @ApiOperation("get review by spid")
     @GetMapping("/spid/{spid}")
     public Result getReviewBySpid(@PathVariable int spid) {
         return reviewService.getReviewBySpid(spid);
+    }
+
+    @ApiOperation("insert new review")
+    @PostMapping("/add")
+    public Result insert(@RequestBody Review review) {
+        return reviewService.insert(review);
     }
 }

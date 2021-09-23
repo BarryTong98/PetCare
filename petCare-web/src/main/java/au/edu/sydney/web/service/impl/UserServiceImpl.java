@@ -52,7 +52,6 @@ public class UserServiceImpl implements UserService {
 
         String password=new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(password);
-        System.out.println(password);
         try {
             userMapper.insertSelective(user);
         } catch (Exception e) {

@@ -13,4 +13,6 @@ public interface ReviewService {
     Result getReviewById(int id);
 
     Result getReviewBySpid(int id);
+
+    Result insert(Review review);
 }

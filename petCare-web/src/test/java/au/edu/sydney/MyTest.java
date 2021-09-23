@@ -1,6 +1,7 @@
 package au.edu.sydney;
 
 import au.edu.sydney.web.dao.UserMapper;
+import au.edu.sydney.web.entity.pojo.Review;
 import au.edu.sydney.web.entity.pojo.User;
 import com.alibaba.fastjson.JSONObject;
 import org.junit.Test;
@@ -28,12 +29,12 @@ public class MyTest {
 
     @Test
     public void toJSON(){
-        User user = new User();
-        user.setUserName("hjs");
-        user.setNickName("huang");
-        user.setPassword("111");
-        user.setPhoneNumber("110");
-        user.setEmail("111@qq.com");
-        System.out.println(new JSONObject().toJSONString(user));
+        Review review=new Review();
+        review.setUserId(1);
+        review.setServiceProviderId(1);
+        review.setRating(5.0);
+        review.setContent("very good");
+        review.setNumberOfLikes(40);
+        System.out.println(new JSONObject().toJSONString(review));
     }
 }
