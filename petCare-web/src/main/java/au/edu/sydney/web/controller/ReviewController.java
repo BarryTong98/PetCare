@@ -34,6 +34,12 @@ public class ReviewController {
         return reviewService.getReviewBySpid(spid);
     }
 
+    @ApiOperation("get review by uid")
+    @GetMapping("/uid/{uid}")
+    public Result getReviewByUid(@PathVariable int uid) {
+        return reviewService.getReviewByUid(uid);
+    }
+
     @ApiOperation("insert new review")
     @PostMapping("/add")
     public Result insert(@RequestBody Review review) {

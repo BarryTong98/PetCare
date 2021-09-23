@@ -21,4 +21,6 @@ public interface ReviewMapper {
     int updateByPrimaryKey(Review record);
 
     List<Review> selectBySpid(Integer spid);
+
+    List<Review> selectByUid(Integer uid);
 }

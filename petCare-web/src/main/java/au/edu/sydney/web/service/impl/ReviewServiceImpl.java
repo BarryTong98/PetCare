@@ -35,11 +35,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public Result getReviewBySpid(int id) {
-        List<Review> list = reviewMapper.selectBySpid(id);
-        if (list.isEmpty()) {
-            return Result.error("Review doesn't exist!");
-        }
+    public Result getReviewBySpid(int spid) {
+        List<Review> list = reviewMapper.selectBySpid(spid);
+        return Result.ok(list);
+    }
+
+    @Override
+    public Result getReviewByUid(int uid) {
+        List<Review> list = reviewMapper.selectByUid(uid);
         return Result.ok(list);
     }
 
