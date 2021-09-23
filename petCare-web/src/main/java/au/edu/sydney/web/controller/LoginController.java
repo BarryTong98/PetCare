@@ -1,8 +1,11 @@
 package au.edu.sydney.web.controller;
 
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import au.edu.sydney.base.Result;
+import au.edu.sydney.web.service.UserService;
+import io.swagger.annotations.ApiOperation;
+import org.springframework.web.bind.annotation.*;
+
+import javax.annotation.Resource;
 
 /**
  * @author Chris
@@ -13,4 +16,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequestMapping("/login")
 public class LoginController {
+
+    @Resource
+    private UserService userService;
+
+    @ApiOperation("login")
+    @GetMapping("/login")
+    public Result login(@RequestParam String username, @RequestParam String password) {
+        return userService.login(username, password);
+    }
 }

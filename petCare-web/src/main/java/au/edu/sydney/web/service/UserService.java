@@ -3,8 +3,6 @@ package au.edu.sydney.web.service;
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.User;
 
-import java.util.List;
-
 /**
  * @author Chris
  * @date 2021-09-14 21:05
@@ -19,4 +17,6 @@ public interface UserService {
     Result selectUidByUserName(String userName);
 
     Result updateUser(User record);
+
+    Result login(String username, String password);
 }
