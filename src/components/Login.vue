@@ -17,8 +17,8 @@
         </el-form-item>
         <!--按钮区-->
         <el-form-item class="btns">
-          <el-button type="primary" @click="login">登陆</el-button>
-          <el-button type="info" @click="signup">注册</el-button>
+          <el-button type="primary" @click="login">Login</el-button>
+          <el-button type="info" @click="signup">Signup</el-button>
         </el-form-item>
       </el-form>
 
