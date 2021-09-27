@@ -97,6 +97,7 @@
 
 <script>
 import Aboutus from '@/components/HomePage/Aboutus'
+import CardList from '@/components/HomePage/CardList'
 import Welcome from '@/components/HomePage/Welcome'
 import HomeProfile from '@/components/HomePage/HomeProfile'
 export default {
