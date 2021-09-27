@@ -37,4 +37,13 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         }
         return Result.ok(lists);
     }
+
+    @Override
+    public Result getRecommendedServiceProvider() {
+        List<ServiceProvider> recommendProviders = serviceProviderMapper.getRecommendProviders();
+        if (recommendProviders.isEmpty()) {
+            return Result.error("Recommended service provider doesn't exist!");
+        }
+        return Result.ok(recommendProviders);
+    }
 }

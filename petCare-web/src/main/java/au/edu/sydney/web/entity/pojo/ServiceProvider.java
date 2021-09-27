@@ -18,7 +18,7 @@ public class ServiceProvider {
     @ApiModelProperty(value = "联系电话")
     private String contactNumber;
 
-    @ApiModelProperty(value = "类型 1 健康 2 美容")
+    @ApiModelProperty(value = "类型 1 健康 2 美容 3 寄养/托管")
     private Integer type;
 
     @ApiModelProperty(value = "提供的具体服务内容 搜索匹配字段  \n" +
