@@ -3,7 +3,7 @@
     <div class="login_box">
       <!--头像区域-->
       <div class="avatar_box">
-        <img src="../assets/d.png" alt="">
+        <img src="../../assets/d.png" alt="">
       </div>
       <!-- 登陆表单区域-->
       <el-form ref="loginFormRef" :model="loginForm" :rules="loginFormRules"  label-width="0px" class="login_form">
@@ -21,7 +21,6 @@
           <el-button type="info" @click="signup">Signup</el-button>
         </el-form-item>
       </el-form>
-
     </div>
   </div>
 
@@ -68,7 +67,7 @@ export default {
       //   //1、1 项目中除了登陆之外的其他API接口欧，必须在登陆之后才能访问
       //   //1、2 token只应在当前网站打开期间生效，所以将token保存在sessionStorage中
       //   window.sessionStorage.setItem("token",res.data.token);
-      //   //2、通过变成屎导航跳转到后台主页，路由地址是 /home
+      //   //2、通过变成是导航跳转到后台主页，路由地址是 /home
       //   this.$router.push("/home")
       // });
     }

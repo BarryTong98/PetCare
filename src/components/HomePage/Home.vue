@@ -3,7 +3,7 @@
     <!--头部区域-->
     <el-header>
       <div>
-        <img src="../assets/Dog.png" alt="missing"/>
+        <img src="../../assets/Dog.png" alt="missing"/>
         <span>Pet Care</span>
       </div>
       <div>
@@ -20,10 +20,10 @@
     <el-container>
       <!--侧边栏-->
       <el-aside :width="isCollapse ? '64px' : '200px'">
-        <div class="toggle-button" @click="toggleCollapse">|||</div>
+        <div class="toggle-button" @click="toggleCollapse" router><-></div>
         <!--侧边栏Menu区域-->
         <el-menu
-            background-color="#bbe6d6"
+            background-color="#fa997e"
             text-color="#2C3D50"
             active-text-color="#fff"
             unique-opened :collapse="isCollapse"
@@ -83,35 +83,26 @@
               <el-menu-item index="1-2">*****</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
-
-
         </el-menu>
       </el-aside>
       <!--右侧主题内容-->
       <el-main>
-        Main
-        <div>
-          <el-carousel :interval="4000" type="card">
-            <el-carousel-item v-for="item in itemList" :key="item">
-              <img :src="item" alt="missing"/>
-            </el-carousel-item>
-          </el-carousel>
-        </div>
+        <HomeProfile/>
+        <Welcome/>
+        <Aboutus/>
       </el-main>
     </el-container>
   </el-container>
 </template>
 
 <script>
+import Aboutus from '@/components/HomePage/Aboutus'
+import Welcome from '@/components/HomePage/Welcome'
+import HomeProfile from '@/components/HomePage/HomeProfile'
 export default {
+  components: { HomeProfile, Welcome, CardList, Aboutus },
   data () {
     return {
-      itemList: [
-        require('../assets/img/agathe-marty-2cdvYh6ULCs-unsplash.jpeg'),
-        require('../assets/img/abstract-low-poly-minimalist-minimalism-y710.jpg'),
-        require('../assets/img/amored-titan-vs-attack-titan-attack-on-titan-shingeki-no-kyojin-t461.jpg'),
-        require('../assets/img/boruto-cute-boruto-anime-y741.jpg')
-      ],
       isCollapse: false
     }
   },
@@ -138,7 +129,7 @@ body {
 }
 
 .el-header {
-  background-color: #b3ddce;
+  background-color: #fcb517;
   display: flex;
   justify-content: space-between;
   padding-left: 0;
@@ -163,7 +154,7 @@ body {
 }
 
 .el-aside {
-  background-color: #bbe6d6;
+  background-color: #fa997e;
 
   .el-menu {
     border-right: none;
@@ -171,7 +162,8 @@ body {
 }
 
 .el-main {
-  background-color: #daebe6;
+  padding: 0;
+  background-color: #fff;
 }
 
 .el-menu {

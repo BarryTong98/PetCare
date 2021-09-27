@@ -4,6 +4,7 @@ import router from './router'
 import './plugins/element.js'
 //导入全局样式表
 import './assets/css/global.css'
+import './assets/style/font.less'
 //导入字体图标
 import './assets/fonts/iconfont.css'
 import axios from 'axios'
