@@ -33,4 +33,16 @@ public class ServiceProviderTest {
             System.out.println("No recommend provider");
         }
     }
+
+    @Test
+    public void getProvidersByTypeTest(){
+        List<ServiceProvider> providers = serviceProviderMapper.getServiceProviderByType(3);
+        if (!providers.isEmpty()) {
+            for (ServiceProvider Provider : providers) {
+                System.out.println(Provider);
+            }
+        }else {
+            System.out.println("No provider of such type");
+        }
+    }
 }
