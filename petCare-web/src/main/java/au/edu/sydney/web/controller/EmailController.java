@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.*;
  */
 @RestController
 @RequestMapping("/email")
+@CrossOrigin
 public class EmailController {
 
     @Autowired

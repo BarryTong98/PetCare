@@ -18,6 +18,8 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
+    private final static String DEFAULT_AVATAR_URL="https://pet-care-file.oss-cn-beijing.aliyuncs.com/avatar.jpg";
+
     @Resource
     private UserMapper userMapper;
 
@@ -52,6 +54,7 @@ public class UserServiceImpl implements UserService {
 
         String password=new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(password);
+        user.setImageUrl(DEFAULT_AVATAR_URL);
         try {
             userMapper.insertSelective(user);
         } catch (Exception e) {

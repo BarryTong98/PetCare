@@ -74,3 +74,9 @@ server:
     enabled: true
     mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
     min-response-size: 1024
+aliyun:
+  oss:
+    endpoint: oss-cn-beijing.aliyuncs.com
+    keyId: LTAI5tGQ7THGEuPykgLYmL7X
+    keySecret: ymqfwwjLaPbgxTRDMwKJHy9RGrz7ti
+    bucketName: pet-care-file
