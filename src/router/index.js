@@ -8,6 +8,8 @@ import Welcome from '@/components/HomePage/Welcome'
 import Examination from '@/components/Health/Examination'
 import Aboutus from '@/components/HomePage/Aboutus'
 import CardList from '@/components/HomePage/CardList'
+import HomeHeader from '@/components/HomePage/HomeHeader'
+import Register from '@/components/HomePage/Register'
 Vue.use(Router)
 
 export default new Router({
@@ -45,11 +47,22 @@ export default new Router({
         },
         {
           path: '/signup',
-          component: Signup
+          component: Signup,
+          children:[
+            {
+              path: '/register',
+              component: Register
+            }
+          ]
         },
         {
           path: '/template',
           component: Template
+        }
+        ,
+        {
+          path: '/homeheader',
+          component: HomeHeader
         }
       ]
 })

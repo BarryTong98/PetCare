@@ -14,7 +14,7 @@
     </p>
     <div class="bot" style="color: #e3f2f3">1</div>
     <div class="github">
-      <a href="https://github.com/BarryTong98/PetCare">
+      <a href="https://github.com/BarryTong98/PetCare" target="_blank">
         <img class="githubicon" src="../../assets/img/GitHub-Mark-64px.png" alt="missing"/>
       </a>
     </div>
@@ -35,10 +35,10 @@ export default {
 </script>
 
 <style scoped>
-.icon {
-  display: block;
-  text-align: center;
-}
+/*.icon {*/
+/*  display: block;*/
+/*  text-align: center;*/
+/*}*/
 
 .githubicon{
   width: 40%;
@@ -72,6 +72,9 @@ div {
 
 .val {
   font-size: x-small;
+  text-align: center;
+  margin-left: -2%;
+  margin-top: 0.5%;
 }
 
 .ThatWay {

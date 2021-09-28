@@ -3,8 +3,10 @@
     <!--头部区域-->
     <el-header>
       <div>
-        <img src="../../assets/Dog.png" alt="missing"/>
-        <span>Pet Care</span>
+        <a href="http://localhost:8080/#/welcome">
+          <img src="../../assets/img/dogicon.svg" alt="missing" />
+        </a>
+        <span class="homeName">Pet Care</span>
       </div>
       <div>
         <el-input
@@ -14,7 +16,7 @@
         </el-input>
         <el-button type="primary" icon="el-icon-search"></el-button>
       </div>
-      <el-button type="info" @click="logout">Sign Out</el-button>
+      <el-button type="info" class="signoutButton" @click="logout">Sign Out</el-button>
     </el-header>
     <!--页面主题区域-->
     <el-container>
@@ -108,6 +110,9 @@ export default {
     }
   },
   methods: {
+    refersh(){
+      this.$router.push('/home')
+    },
     logout () {
       window.sessionStorage.clear()
       this.$router.push('/login')
@@ -122,7 +127,17 @@ export default {
 <style lang="less" scoped>
 
 body {
-  font-family: "American Typewriter", serif;
+
+  //font-family: "American Typewriter", serif;
+  font-family: "Object Sans","Helvetica Neue", Helvetica,Arial,sans-serif;
+}
+.homeName{
+  font-family: PPWoodland-Ultralight;
+}
+.signoutButton{
+  font-family: "Object Sans","Helvetica Neue", Helvetica,Arial,sans-serif;
+  background-color: #fa997e;
+  border: transparent;
 }
 
 .home-container {
