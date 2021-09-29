@@ -106,7 +106,7 @@ export default {
   components: { HomeProfile, Welcome, CardList, Aboutus },
   data () {
     return {
-      isCollapse: false
+      isCollapse: true
     }
   },
   methods: {

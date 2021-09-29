@@ -5,6 +5,23 @@
         <el-aside width="50%">
           <div>
             <img class="dog" src="../../assets/img/dogicon.svg"/>
+            <div class="sign">
+              <div class="login">
+                <router-link to="/homelogin">
+                  <div>I'm back</div>
+                </router-link>
+              </div>
+
+              <div class="register">
+                <router-link to="/register" exact>
+                  <div>I'm new here</div>
+                </router-link>
+              </div>
+
+
+              <router-view></router-view>
+
+            </div>
           </div>
         </el-aside>
         <el-main style="padding: 0">
@@ -24,10 +41,24 @@ export default {
 
 <style>
 
+.sign{
+  display: flex;
+}
+
+
 img{
   max-width: 100%;
   max-height: 100%;
 }
+
+/*为了让router-link不显示下划线*/
+a {
+  text-decoraction: none;
+}
+.router-link-active {
+  text-decoration: none;
+}
+
 
 .people{
   width: 50%;

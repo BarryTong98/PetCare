@@ -10,61 +10,67 @@ import Aboutus from '@/components/HomePage/Aboutus'
 import CardList from '@/components/HomePage/CardList'
 import HomeHeader from '@/components/HomePage/HomeHeader'
 import Register from '@/components/HomePage/Register'
+import HomeLogin from '@/components/HomePage/HomeLogin'
+
 Vue.use(Router)
 
 export default new Router({
-      routes: [
+  routes: [
+    {
+      path: '/',
+      redirect: '/login'
+    },
+    {
+      path: '/login',
+      component: Login
+    },
+    {
+      path: '/home',
+      component: Home,
+      redirect: '/welcome',
+      children: [
         {
-          path: '/',
-          redirect:'/login'
+          path: '/welcome',
+          component: Welcome
         },
         {
-          path: '/login',
-          component: Login
+          path: '/examination',
+          component: Examination
         },
         {
-          path: '/home',
-          component: Home,
-          redirect:'/welcome',
-          children:[
-            {
-              path: '/welcome',
-              component: Welcome
-            },
-            {
-              path: '/examination',
-              component: Examination
-            },
-            {
-              path: '/aboutus',
-              component: Aboutus
-            },
-            {
-              path: '/cardlist',
-              component: CardList
-            }
-          ]
+          path: '/aboutus',
+          component: Aboutus
         },
         {
-          path: '/signup',
-          component: Signup,
-          children:[
-            {
-              path: '/register',
-              component: Register
-            }
-          ]
-        },
-        {
-          path: '/template',
-          component: Template
-        }
-        ,
-        {
-          path: '/homeheader',
-          component: HomeHeader
+          path: '/cardlist',
+          component: CardList
         }
       ]
+    },
+    {
+      path: '/signup',
+      component: Signup,
+      children: [
+        {
+          path: '/register',
+          component: Register
+        },
+        {
+          path: '/homelogin',
+          component: HomeLogin
+        }
+      ]
+    },
+    {
+      path: '/template',
+      component: Template
+    }
+    ,
+    {
+      path: '/homeheader',
+      component: HomeHeader
+    }
+  ]
 })
 
 // 挂载路由导航守卫
