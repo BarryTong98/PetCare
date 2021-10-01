@@ -9,6 +9,7 @@ import au.edu.sydney.web.service.FileService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -28,6 +29,7 @@ public class FileController {
 
     @ApiOperation("file upload")
     @PostMapping("/upload")
+    @Transactional
     public Result upload(
             @ApiParam(value = "file", required = true)
             @RequestParam("file") MultipartFile file,

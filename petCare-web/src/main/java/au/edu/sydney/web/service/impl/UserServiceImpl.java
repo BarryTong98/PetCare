@@ -18,7 +18,7 @@ import java.util.List;
 @Service
 public class UserServiceImpl implements UserService {
 
-    private final static String DEFAULT_AVATAR_URL="https://pet-care-file.oss-cn-beijing.aliyuncs.com/avatar.jpg";
+    private final static String DEFAULT_AVATAR_URL = "https://pet-care-file.oss-cn-beijing.aliyuncs.com/avatar.jpg";
 
     @Resource
     private UserMapper userMapper;
@@ -40,19 +40,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result insert(User user) {
-        if (user.getUserName()==null){
+        if (user.getUserName() == null) {
             return Result.error("Username can not be empty");
         }
-        User checkName=userMapper.selectByUserName(user.getUserName());
-        if(checkName!=null){
+        User checkName = userMapper.selectByUserName(user.getUserName());
+        if (checkName != null) {
             return Result.error("Username already exists");
         }
-        User checkEmail=userMapper.selectByEmail(user.getEmail());
-        if(checkEmail!=null){
+        User checkEmail = userMapper.selectByEmail(user.getEmail());
+        if (checkEmail != null) {
             return Result.error("Email already exists");
         }
 
-        String password=new BCryptPasswordEncoder().encode(user.getPassword());
+        String password = new BCryptPasswordEncoder().encode(user.getPassword());
         user.setPassword(password);
         user.setImageUrl(DEFAULT_AVATAR_URL);
         try {
@@ -94,9 +94,28 @@ public class UserServiceImpl implements UserService {
             return Result.error("User doesn't exist!");
         }
         boolean flag = new BCryptPasswordEncoder().matches(password, user.getPassword());
-        if (!flag){
-            return  Result.error("Username and password don't match");
+        if (!flag) {
+            return Result.error("Username and password don't match");
         }
         return Result.ok("Login success");
+    }
+
+    @Override
+    public Result resetPassword(String password, Integer uid) {
+        if (password == null || uid == null) {
+            return Result.error("Password or uid is empty");
+        }
+        User user = userMapper.selectByPrimaryKey(uid);
+        if (user == null) {
+            return Result.error("User doesn't exist!");
+        }
+        String newPassword = new BCryptPasswordEncoder().encode(password);
+        user.setPassword(newPassword);
+        int i = userMapper.updateByPrimaryKey(user);
+        if (i > 0) {
+            return Result.ok("reset password successfully!");
+        } else {
+            return Result.error("reset password failed");
+        }
     }
 }

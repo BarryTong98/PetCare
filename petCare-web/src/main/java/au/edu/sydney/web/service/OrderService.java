@@ -14,5 +14,5 @@ public interface OrderService {
 
     Result insert(Order order);
 
-    Result cancel(Integer id);
+    Result updateStatus(Integer id,Integer code);
 }

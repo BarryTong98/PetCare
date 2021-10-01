@@ -19,4 +19,6 @@ public interface UserService {
     Result updateUser(User record);
 
     Result login(String username, String password);
+
+    Result resetPassword(String password, Integer uid);
 }

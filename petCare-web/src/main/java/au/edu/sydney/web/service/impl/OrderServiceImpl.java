@@ -38,13 +38,19 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Result cancel(Integer id) {
+    public Result updateStatus(Integer id, Integer code) {
         Order order = orderMapper.selectByPrimaryKey(id);
-        order.setStatus(3);
+        if (order == null) {
+            return Result.error("No such order");
+        }
+        if (code < 1 || code > 3) {
+            return Result.error("Status code error");
+        }
+        order.setStatus(code);
         try {
             orderMapper.updateByPrimaryKeySelective(order);
         } catch (Exception e) {
-            return Result.error("failed to cancel order");
+            return Result.error("failed to update order status");
         }
         return Result.ok();
     }

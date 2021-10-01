@@ -2,6 +2,7 @@ package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.Order;
+import au.edu.sydney.web.entity.req.OrderREQ;
 import au.edu.sydney.web.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
@@ -34,9 +35,9 @@ public class OrderController {
         return orderService.insert(order);
     }
 
-    @ApiOperation("cancel order")
-    @GetMapping("/cancel/{id}")
-    public Result cancel(@PathVariable int id) {
-        return orderService.cancel(id);
+    @ApiOperation("update order status  1 未开始 2 已完成 3  已取消")
+    @PutMapping("/update")
+    public Result updateStatus(@RequestBody OrderREQ orderREQ) {
+        return orderService.updateStatus(orderREQ.getOrderID(), orderREQ.getCode());
     }
 }

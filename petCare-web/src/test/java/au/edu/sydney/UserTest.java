@@ -1,7 +1,9 @@
 package au.edu.sydney;
 
+import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.UserMapper;
 import au.edu.sydney.web.entity.pojo.User;
+import au.edu.sydney.web.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +23,9 @@ public class UserTest {
 
     @Autowired
     UserMapper userMapper;
+
+    @Autowired
+    UserServiceImpl userService;
 
     @Test
     public void queryAllByUserNameTest() {
@@ -54,6 +59,13 @@ public class UserTest {
         } else {
             System.out.println(user);
         }
+
+    }
+
+    @Test
+    public void resetPasswordTest() {
+        Result result = userService.resetPassword("12345678", 1);
+        System.out.println(result);
 
     }
 
