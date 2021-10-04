@@ -29,8 +29,8 @@ public class MyTest {
     }
 
     @Test
-    public void toJSON(){
-        Order order=new Order();
+    public void toJSON() {
+        Order order = new Order();
         order.setServiceId(2);
         order.setUserId(1);
         order.setAmount(100.00);
@@ -39,4 +39,5 @@ public class MyTest {
         order.setCreateTime(new Date());
         System.out.println(JSONObject.toJSON(order));
     }
+
 }

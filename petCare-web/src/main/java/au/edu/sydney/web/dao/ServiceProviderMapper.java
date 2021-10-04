@@ -3,6 +3,7 @@ package au.edu.sydney.web.dao;
 import au.edu.sydney.web.entity.pojo.ServiceProvider;
 
 import java.util.List;
+import java.util.Map;
 
 public interface ServiceProviderMapper {
     int deleteByPrimaryKey(Integer spid);
@@ -20,9 +21,11 @@ public interface ServiceProviderMapper {
      */
     List<ServiceProvider> getRecommendProviders();
 
+    List<ServiceProvider> searchByKeyword(Map<String,String> map);
+
     int updateByPrimaryKeySelective(ServiceProvider record);
 
     int updateByPrimaryKey(ServiceProvider record);
 
-    List<ServiceProvider> getServiceProviderByType(int type);
+    List<ServiceProvider> getServiceProviderByType(Integer type);
 }

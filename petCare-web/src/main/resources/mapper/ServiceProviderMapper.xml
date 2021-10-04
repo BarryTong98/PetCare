@@ -229,10 +229,93 @@
         where recommend = 1
     </select>
 
-    <select id="getServiceProviderByType" parameterType="_int"
+    <select id="getServiceProviderByType" parameterType="java.lang.Integer"
             resultType="au.edu.sydney.web.entity.pojo.ServiceProvider">
         SELECT *
         FROM service_provider
         where type = #{type,jdbcType=INTEGER}
+    </select>
+
+    <select id="searchByKeyword" parameterType="map" resultType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+        (SELECT *
+        FROM service_provider
+        WHERE (service_provider_name LIKE
+        "%"#{keyword}"%" OR service_content LIKE "%"#{keyword}"%" OR description LIKE "%" #{keyword}"%" OR address LIKE "%" #{keyword}"%")
+        and spid IN
+        (select spid from service_provider
+        <where>
+            <if test="filter0!=null">
+                or service_content LIKE "%"#{filter0}"%"
+            </if>
+            <if test="filter1!=null">
+                or service_content LIKE "%"#{filter1}"%"
+            </if>
+            <if test="filter2!=null">
+                or service_content LIKE "%"#{filter2}"%"
+            </if>
+            <if test="filter3!=null">
+                or service_content LIKE "%"#{filter3}"%"
+            </if>
+            <if test="filter4!=null">
+                or service_content LIKE "%"#{filter4}"%"
+            </if>
+            <if test="filter5!=null">
+                or service_content LIKE "%"#{filter5}"%"
+            </if>
+            <if test="filter6!=null">
+                or service_content LIKE "%"#{filter6}"%"
+            </if>
+            <if test="filter7!=null">
+                or service_content LIKE "%"#{filter7}"%"
+            </if>
+            <if test="filter8!=null">
+                or service_content LIKE "%"#{filter8}"%"
+            </if>
+            <if test="filter9!=null">
+                or service_content LIKE "%"#{filter9}"%"
+            </if>
+        </where>
+        ))
+        UNION
+        SELECT * FROM service_provider WHERE spid IN
+        ((SELECT DISTINCT service_provider_id
+        FROM service
+        WHERE service_name LIKE "%"#{keyword}"%"
+        AND service_provider_id
+        IN
+        (select spid from service_provider
+        <where>
+            <if test="filter0!=null">
+                or service_content LIKE "%"#{filter0}"%"
+            </if>
+            <if test="filter1!=null">
+                or service_content LIKE "%"#{filter1}"%"
+            </if>
+            <if test="filter2!=null">
+                or service_content LIKE "%"#{filter2}"%"
+            </if>
+            <if test="filter3!=null">
+                or service_content LIKE "%"#{filter3}"%"
+            </if>
+            <if test="filter4!=null">
+                or service_content LIKE "%"#{filter4}"%"
+            </if>
+            <if test="filter5!=null">
+                or service_content LIKE "%"#{filter5}"%"
+            </if>
+            <if test="filter6!=null">
+                or service_content LIKE "%"#{filter6}"%"
+            </if>
+            <if test="filter7!=null">
+                or service_content LIKE "%"#{filter7}"%"
+            </if>
+            <if test="filter8!=null">
+                or service_content LIKE "%"#{filter8}"%"
+            </if>
+            <if test="filter9!=null">
+                or service_content LIKE "%"#{filter9}"%"
+            </if>
+        </where>
+        )))
     </select>
 </mapper>

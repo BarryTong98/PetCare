@@ -14,4 +14,6 @@ public interface ServiceProviderService {
     Result getServiceProviderByType(int type);
 
     Result getRecommendedServiceProvider();
+
+    Result search(String region,int filter,String keyword);
 }

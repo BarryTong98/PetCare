@@ -18,6 +18,8 @@ public interface ServiceMapper {
 
     List selectBySpid(Integer spid);
 
+    List searchByKeyword(String keyword);
+
     int updateByPrimaryKeySelective(Service record);
 
     int updateByPrimaryKey(Service record);
