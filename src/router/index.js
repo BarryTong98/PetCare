@@ -11,14 +11,15 @@ import CardList from '@/components/HomePage/CardList'
 import HomeHeader from '@/components/HomePage/HomeHeader'
 import Register from '@/components/HomePage/Register'
 import HomeLogin from '@/components/HomePage/HomeLogin'
-
+import Reset from '@/components/HomePage/Reset'
+import Reset2 from '@/components/HomePage/Reset2'
 Vue.use(Router)
 
 export default new Router({
   routes: [
     {
       path: '/',
-      redirect: '/login'
+      redirect: '/home'
     },
     {
       path: '/login',
@@ -50,6 +51,7 @@ export default new Router({
     {
       path: '/signup',
       component: Signup,
+      redirect: '/homelogin',
       children: [
         {
           path: '/register',
@@ -58,6 +60,14 @@ export default new Router({
         {
           path: '/homelogin',
           component: HomeLogin
+        },
+        {
+          path: '/reset',
+          component: Reset
+        },
+        {
+          path: '/reset2',
+          component: Reset2
         }
       ]
     },

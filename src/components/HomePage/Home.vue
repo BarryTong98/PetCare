@@ -14,9 +14,9 @@
             v-model="input"
             clearable>
         </el-input>
-        <el-button type="primary" icon="el-icon-search"></el-button>
+        <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
       </div>
-      <el-button type="info" class="signoutButton" @click="logout">Sign Out</el-button>
+      <el-button type="info" class="signoutButton" @click="logout">Login</el-button>
     </el-header>
     <!--页面主题区域-->
     <el-container>
@@ -57,12 +57,7 @@
               <el-menu-item index="1-1">Health Examination</el-menu-item>
               <el-menu-item index="1-2">Vaccine</el-menu-item>
             </el-menu-item-group>
-            <el-submenu index="1-4">
-              <template slot="title">Vaccine</template>
-              <!--二级菜单-->
-              <el-menu-item index="1-4-1">Canine parvovirus</el-menu-item>
-              <el-menu-item index="1-4-1">Rabies</el-menu-item>
-            </el-submenu>
+
           </el-submenu>
 
           <el-submenu index="2">
@@ -115,7 +110,7 @@ export default {
     },
     logout () {
       window.sessionStorage.clear()
-      this.$router.push('/login')
+      this.$router.push('/signup')
     },
     toggleCollapse () {
       this.isCollapse = !this.isCollapse
@@ -142,6 +137,11 @@ body {
 
 .home-container {
   height: 100%;
+}
+
+.searchBtn{
+  background-color: #fb9a7f;
+  border: transparent;
 }
 
 .el-header {

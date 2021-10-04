@@ -1,19 +1,20 @@
 <template>
-  <div class="now">
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
-      <el-form-item label="Account" prop="pass">
-        <el-input v-model="ruleForm.pass" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="Password" prop="checkPass">
-        <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item>
-      </el-form-item>
-      <el-form-item>
-        <el-button class="btn-quality" type="primary" @click="submitForm('ruleForm')">Register</el-button>
-        <!--<el-button class="btn-quality" @click="resetForm('ruleForm')">重置</el-button>-->
-      </el-form-item>
-    </el-form>
+  <div clas>
+    <div class="now">
+      <h2 class="resetH2">Password Reset</h2>
+      <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+        <el-form-item  label="Passwrod" prop="pass">
+          <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
+        </el-form-item>
+        <el-form-item label="Confirm" prop="checkPass">
+          <el-input  type="password" v-model="ruleForm.checkPass" class="code" autocomplete="off"></el-input>
+        </el-form-item>
+
+        <el-form-item>
+          <el-button class="btn-quality" type="primary" @click="submitForm('ruleForm')">Reset</el-button>
+        </el-form-item>
+      </el-form>
+    </div>
   </div>
 </template>
 
@@ -22,7 +23,7 @@ export default {
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
-        callback(new Error('Please Enter Your Account'))
+        callback(new Error('Please Enter Your Password'))
       } else {
         if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass')
@@ -40,6 +41,10 @@ export default {
       }
     };
     return {
+      // 验证码按钮
+      flag: false,//按钮是否可取
+      content: "Verify via SMS",//按钮内文本
+      totalTime: 60,//倒计时时间
       ruleForm: {
         pass: '',
         checkPass: '',
@@ -54,7 +59,7 @@ export default {
       }
     };
   },
-  methods: {
+  methods:{
     submitForm(formName) {
       this.$refs[formName].validate((valid) => {
         if (valid) {
@@ -70,17 +75,28 @@ export default {
 </script>
 
 <style scoped>
+.resetH2{
+  font-family: PPWoodland-Bold;
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 7%;
+}
+.code {
+  float: left;
+}
 
-.el-form-item{
+.el-form-item {
   margin-left: 5%;
 }
 
-.el-input{
+.el-input {
   width: 80%;
 }
-.now{
+
+.now {
   margin-top: 10%;
 }
+
 .btn-quality {
   width: 22vw;
   height: 4.6vw;
@@ -99,10 +115,8 @@ export default {
   margin-top: 9%;
   margin-bottom: 2vw;
 }
-.el-form-item{
+
+.el-form-item {
   font-family: PPWoodland-Bold;
 }
-
-
-
 </style>
