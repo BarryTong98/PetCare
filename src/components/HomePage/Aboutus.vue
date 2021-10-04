@@ -73,7 +73,6 @@ div {
 .val {
   font-size: x-small;
   text-align: center;
-  margin-left: -2%;
   margin-top: 0.5%;
 }
 
