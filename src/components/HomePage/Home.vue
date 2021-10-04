@@ -9,14 +9,16 @@
         <span class="homeName">Pet Care</span>
       </div>
       <div class="searchInput" style="font-family: PPWoodland-Bold">
-        <el-input  placeholder="Search" v-model="input1">
-          <div  slot="prepend">Find</div>
+        <el-button class="twoinput" type="primary">Find</el-button>
+        <el-input placeholder="Search" v-model="input1">
         </el-input>
-        <el-input  placeholder="Location" v-model="input2">
-          <template slot="prepend">Near</template>
+        <el-button class="twoinput" type="primary">Near</el-button>
+        <el-input placeholder="Location" v-model="input2">
         </el-input>
-        <el-button  class="searchBtn" type="info" icon="el-icon-search"></el-button>
-        <el-button style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton" @click="logout">Login</el-button>
+        <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
+        <el-button style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton" @click="logout">Login
+        </el-button>
+
       </div>
 
     </el-header>
@@ -58,6 +60,8 @@
             <el-menu-item-group>
               <el-menu-item index="1-1">Health Examination</el-menu-item>
               <el-menu-item index="1-2">Vaccine</el-menu-item>
+              <el-menu-item index="1-2">Skin Allergies</el-menu-item>
+              <el-menu-item index="1-2">Skin Infection</el-menu-item>
             </el-menu-item-group>
 
           </el-submenu>
@@ -78,8 +82,11 @@
               <span>Grooming</span>
             </template>
             <el-menu-item-group>
-              <el-menu-item index="1-1">*****</el-menu-item>
-              <el-menu-item index="1-2">*****</el-menu-item>
+              <el-menu-item index="1-1">Shampoo & Bath</el-menu-item>
+              <el-menu-item index="1-2">Nail Trimming</el-menu-item>
+              <el-menu-item index="1-3">Full Body Brush</el-menu-item>
+              <el-menu-item index="1-4">Undercoat Removal</el-menu-item>
+              <el-menu-item index="1-5">Ear Cleaning</el-menu-item>
             </el-menu-item-group>
           </el-submenu>
         </el-menu>
@@ -131,7 +138,12 @@ export default {
 
 <style lang="less" scoped>
 
-.searchInput{
+.twoinput {
+  background-color: #fb9a7f;
+  border: transparent;
+}
+
+.searchInput {
   margin-left: 20%;
 }
 
@@ -171,6 +183,7 @@ body {
   > div {
     display: flex;
     align-items: center;
+
     .dogimg {
       width: 50px;
       height: 50px;
