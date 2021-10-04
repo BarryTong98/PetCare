@@ -2,21 +2,23 @@
   <el-container class="home-container">
     <!--头部区域-->
     <el-header>
-      <div>
+      <div style="margin-right: 20%">
         <a href="http://localhost:8080/#/welcome">
-          <img src="../../assets/img/dogicon.svg" alt="missing" />
+          <img src="../../assets/img/dogicon.svg" alt="missing"/>
         </a>
         <span class="homeName">Pet Care</span>
       </div>
-      <div>
-        <el-input
-            placeholder="Search "
-            v-model="input"
-            clearable>
+      <div style="font-family: PPWoodland-Bold">
+        <el-input  placeholder="Search" v-model="input1">
+          <div  slot="prepend">Find</div>
         </el-input>
-        <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
+        <el-input  placeholder="Location" v-model="input2">
+          <template slot="prepend">Near</template>
+        </el-input>
+        <el-button  class="searchBtn" type="info" icon="el-icon-search"></el-button>
+        <el-button  type="info" class="signoutButton" @click="logout">Login</el-button>
       </div>
-      <el-button type="info" class="signoutButton" @click="logout">Login</el-button>
+
     </el-header>
     <!--页面主题区域-->
     <el-container>
@@ -97,15 +99,23 @@ import Aboutus from '@/components/HomePage/Aboutus'
 import CardList from '@/components/HomePage/CardList'
 import Welcome from '@/components/HomePage/Welcome'
 import HomeProfile from '@/components/HomePage/HomeProfile'
+
 export default {
-  components: { HomeProfile, Welcome, CardList, Aboutus },
+  components: {
+    HomeProfile,
+    Welcome,
+    CardList,
+    Aboutus
+  },
   data () {
     return {
+      input1: '',
+      input2: '',
       isCollapse: true
     }
   },
   methods: {
-    refersh(){
+    refersh () {
       this.$router.push('/home')
     },
     logout () {
@@ -121,16 +131,19 @@ export default {
 
 <style lang="less" scoped>
 
-body {
+
+ody {
 
   //font-family: "American Typewriter", serif;
-  font-family: "Object Sans","Helvetica Neue", Helvetica,Arial,sans-serif;
+  font-family: "Object Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
-.homeName{
+
+.homeName {
   font-family: PPWoodland-Ultralight;
 }
-.signoutButton{
-  font-family: "Object Sans","Helvetica Neue", Helvetica,Arial,sans-serif;
+
+.signoutButton {
+  font-family: "Object Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
   background-color: #fa997e;
   border: transparent;
 }
@@ -139,7 +152,7 @@ body {
   height: 100%;
 }
 
-.searchBtn{
+.searchBtn {
   background-color: #fb9a7f;
   border: transparent;
 }
@@ -147,7 +160,6 @@ body {
 .el-header {
   background-color: #fcb517;
   display: flex;
-  justify-content: space-between;
   padding-left: 0;
   align-items: center;
   color: #fff;
@@ -156,15 +168,11 @@ body {
   > div {
     display: flex;
     align-items: center;
-
-    span {
-      margin-left: 15px;
-    }
-
     img {
       width: 50px;
       height: 50px;
       margin-left: 10px;
+      margin-right: 15px;
     }
   }
 }
@@ -188,10 +196,6 @@ body {
   }
 }
 
-.el-input {
-  margin-left: -19%;
-  width: 700px;
-}
 
 .toggle-button {
   background-color: #bbfad6;

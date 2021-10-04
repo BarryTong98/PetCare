@@ -64,7 +64,7 @@ a{
   margin-top: 20%;
 }
 .dog{
-  margin: 10%;
+  margin: 10% 10% 5%;
   width: 67px;
   height: 70px;
 }

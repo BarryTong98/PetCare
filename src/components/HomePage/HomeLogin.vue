@@ -8,7 +8,7 @@
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <router-link to="/reset" style="margin-left: 52%">forget your password?</router-link>
+        <router-link to="/reset" style="margin-left: 52%">Forget your password?</router-link>
       </el-form-item>
       <el-form-item>
         <el-button class="btn-quality" type="primary" @click="submitForm('ruleForm')">Login</el-button>
@@ -83,7 +83,7 @@ export default {
   width: 80%;
 }
 .now{
-  margin-top: 10%;
+  margin-top: 5%;
 }
 .btn-quality {
   width: 22vw;

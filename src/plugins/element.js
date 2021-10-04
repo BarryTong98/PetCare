@@ -1,6 +1,6 @@
 import Vue from 'vue'
 //导入弹框提示组件
-import { Button, Form, FormItem, Input, Message , Container, Header, Aside, Main, Carousel, CarouselItem, Menu,MenuItemGroup,MenuItem,Submenu, Card, Row} from 'element-ui'
+import { Button, Form, FormItem, Input, Message , Container, Header, Aside, Main, Carousel, CarouselItem, Menu,MenuItemGroup,MenuItem,Submenu, Card, Row,Radio,RadioGroup} from 'element-ui'
 
 Vue.use(Button)
 Vue.use(Form)
@@ -18,4 +18,6 @@ Vue.use(MenuItem)
 Vue.use(MenuItemGroup)
 Vue.use(Card)
 Vue.use(Row)
+Vue.use(Radio)
+Vue.use(RadioGroup)
 Vue.prototype.$message = Message
