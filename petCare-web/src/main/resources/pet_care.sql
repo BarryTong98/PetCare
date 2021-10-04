@@ -101,6 +101,8 @@ CREATE TABLE `service` (
 -- ----------------------------
 INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `status`,`service_date`,`service_time`) VALUES (1, 'pet medical check-ups', 200,1,'2021-09-14','9am - 11am');
 INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `status`,`service_date`,`service_time`) VALUES (1, 'pet vaccination', 100,0,'2021-09-16','1pm - 3pm');
+INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `status`,`service_date`,`service_time`) VALUES (2, 'pet grooming hospital', 80,1,'2021-09-16','1pm - 3pm');
+
 
 
 -- ----------------------------
@@ -112,8 +114,8 @@ CREATE TABLE `user_order` (
   `service_id` INT(10) NOT NULL,
 	`user_id` INT(10) NOT NULL,
   `amount` DOUBLE(8,2) DEFAULT NULL,
-	`status` INT(2) NOT NULL COMMENT '1 未开始 2 已完成 3  已取消',
-	`service_start_time` VARCHAR(50) DEFAULT NULL,
+	`status` INT(2) NOT NULL DEFAULT '1' COMMENT '1 未开始 2 已完成 3  已取消',
+	`service_time` VARCHAR(50) DEFAULT NULL,
 	`create_time` TIMESTAMP DEFAULT NOW(), 
   PRIMARY KEY (`oid`),
 	FOREIGN KEY(`service_id`) REFERENCES service(`sid`),
@@ -123,8 +125,9 @@ CREATE TABLE `user_order` (
 -- ----------------------------
 -- Records of user order
 -- ----------------------------
-INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_start_time`) VALUES (1, 1,200,2,'14 September 2021 9am');
-INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_start_time`) VALUES (2, 1,100,1,'16 September 2021 1pm');
+INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_time`) VALUES (1, 1,200,2,'14 November 2021 9am');
+INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_time`) VALUES (2, 1,100,1,'16 November 2021 1pm-3pm');
+INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_time`) VALUES (3, 2,80,3,'16 November 2021 1pm-3pm');
 
 
 

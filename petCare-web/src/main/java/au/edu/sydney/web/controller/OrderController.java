@@ -40,4 +40,11 @@ public class OrderController {
     public Result updateStatus(@RequestBody OrderREQ orderREQ) {
         return orderService.updateStatus(orderREQ.getOrderID(), orderREQ.getCode());
     }
+
+    @ApiOperation("search orders according to userId,keyword(service name,service provider name ) and status code")
+    @GetMapping("/search")
+    public Result searchOrders(@RequestParam Integer userId, @RequestParam(required = false) String keyword, @RequestParam(required = false) Integer code) {
+
+        return orderService.searchOrders(userId, keyword, code);
+    }
 }

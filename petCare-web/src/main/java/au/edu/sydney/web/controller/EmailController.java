@@ -1,7 +1,7 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.entity.vo.EmailVerificationVO;
+import au.edu.sydney.web.entity.req.EmailVerificationREQ;
 import au.edu.sydney.web.service.EmailService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
@@ -32,8 +32,8 @@ public class EmailController {
     @ApiOperation("核对验证码")
     @PostMapping("/verify")
     public Result checkCode(
-            @RequestBody EmailVerificationVO emailVerificationVO) {
-        return emailService.verifyCode(emailVerificationVO.getEmail(),emailVerificationVO.getVerificationCode());
+            @RequestBody EmailVerificationREQ emailVerificationREQ) {
+        return emailService.verifyCode(emailVerificationREQ.getEmail(),emailVerificationREQ.getVerificationCode());
     }
 
 

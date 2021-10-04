@@ -35,7 +35,7 @@ public class MyTest {
         order.setUserId(1);
         order.setAmount(100.00);
         order.setStatus(1);
-        order.setServiceStartTime("21 September 2021 1pm");
+        order.setServiceTime("21 September 2021 1pm");
         order.setCreateTime(new Date());
         System.out.println(JSONObject.toJSON(order));
     }

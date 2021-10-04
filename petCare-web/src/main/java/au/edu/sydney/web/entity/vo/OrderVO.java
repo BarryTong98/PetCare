@@ -1,15 +1,17 @@
-package au.edu.sydney.web.entity.pojo;
+package au.edu.sydney.web.entity.vo;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
 
-
-@ApiModel(value="Order", description="订单对象")
+/**
+ * @author Chris
+ * @date 2021-10-04 15:16
+ * @description
+ */
 @Data
-public class Order {
+public class OrderVO {
 
     @ApiModelProperty(value = "订单ID")
     private Integer oid;
@@ -31,4 +33,12 @@ public class Order {
 
     @ApiModelProperty(value = "订单创建时间")
     private Date createTime;
+
+    @ApiModelProperty(value = "对应的服务名")
+    private String serviceName;
+
+    @ApiModelProperty(value = "对应的服务提供者名")
+    private String serviceProviderName;
+
+
 }

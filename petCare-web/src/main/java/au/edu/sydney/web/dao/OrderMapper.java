@@ -1,6 +1,9 @@
 package au.edu.sydney.web.dao;
 
 import au.edu.sydney.web.entity.pojo.Order;
+import au.edu.sydney.web.entity.vo.OrderVO;
+
+import java.util.List;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer oid);
@@ -14,5 +17,7 @@ public interface OrderMapper {
     int updateByPrimaryKeySelective(Order record);
 
     int updateByPrimaryKey(Order record);
+
+    List<OrderVO> searchOrders(Integer userId, String keyword,Integer code);
 
 }

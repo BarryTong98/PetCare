@@ -1,114 +1,161 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="au.edu.sydney.web.dao.OrderMapper">
-  <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.Order">
-    <id column="oid" jdbcType="INTEGER" property="oid" />
-    <result column="service_id" jdbcType="INTEGER" property="serviceId" />
-    <result column="user_id" jdbcType="INTEGER" property="userId" />
-    <result column="amount" jdbcType="DOUBLE" property="amount" />
-    <result column="status" jdbcType="INTEGER" property="status" />
-    <result column="service_start_time" jdbcType="VARCHAR" property="serviceStartTime" />
-    <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-  </resultMap>
-  <sql id="Base_Column_List">
-    oid, service_id, user_id, amount, status, service_start_time, create_time
+    <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.Order">
+        <id column="oid" jdbcType="INTEGER" property="oid"/>
+        <result column="service_id" jdbcType="INTEGER" property="serviceId"/>
+        <result column="user_id" jdbcType="INTEGER" property="userId"/>
+        <result column="amount" jdbcType="DOUBLE" property="amount"/>
+        <result column="status" jdbcType="INTEGER" property="status"/>
+        <result column="service_time" jdbcType="VARCHAR" property="serviceTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    oid, service_id, user_id, amount, status, service_time, create_time
   </sql>
-  <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
-    select<include refid="Base_Column_List" />from user_order where oid= #{oid,jdbcType=INTEGER}
-  </select>
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+        select<include refid="Base_Column_List"/>from user_order where oid= #{oid,jdbcType=INTEGER}
+    </select>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from user_order
     where oid = #{oid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.Order">
+    <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.Order">
     insert into user_order (oid, service_id, user_id,
-      amount, status, service_start_time, 
+      amount, status, service_time,
       create_time)
     values (#{oid,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{amount,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{serviceStartTime,jdbcType=VARCHAR}, 
+      #{amount,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{serviceTime,jdbcType=VARCHAR},
       #{createTime,jdbcType=TIMESTAMP})
   </insert>
-  <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Order">
-    insert into user_order
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="oid != null">
-        oid,
-      </if>
-      <if test="serviceId != null">
-        service_id,
-      </if>
-      <if test="userId != null">
-        user_id,
-      </if>
-      <if test="amount != null">
-        amount,
-      </if>
-      <if test="status != null">
-        status,
-      </if>
-      <if test="serviceStartTime != null">
-        service_start_time,
-      </if>
-      <if test="createTime != null">
-        create_time,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="oid != null">
-        #{oid,jdbcType=INTEGER},
-      </if>
-      <if test="serviceId != null">
-        #{serviceId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="amount != null">
-        #{amount,jdbcType=DOUBLE},
-      </if>
-      <if test="status != null">
-        #{status,jdbcType=INTEGER},
-      </if>
-      <if test="serviceStartTime != null">
-        #{serviceStartTime,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </trim>
-  </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.Order">
-    update user_order
-    <set>
-      <if test="serviceId != null">
-        service_id = #{serviceId,jdbcType=INTEGER},
-      </if>
-      <if test="userId != null">
-        user_id = #{userId,jdbcType=INTEGER},
-      </if>
-      <if test="amount != null">
-        amount = #{amount,jdbcType=DOUBLE},
-      </if>
-      <if test="status != null">
-        status = #{status,jdbcType=INTEGER},
-      </if>
-      <if test="serviceStartTime != null">
-        service_start_time = #{serviceStartTime,jdbcType=VARCHAR},
-      </if>
-      <if test="createTime != null">
-        create_time = #{createTime,jdbcType=TIMESTAMP},
-      </if>
-    </set>
-    where oid = #{oid,jdbcType=INTEGER}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.Order">
+    <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Order">
+        insert into user_order
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="oid != null">
+                oid,
+            </if>
+            <if test="serviceId != null">
+                service_id,
+            </if>
+            <if test="userId != null">
+                user_id,
+            </if>
+            <if test="amount != null">
+                amount,
+            </if>
+            <if test="status != null">
+                status,
+            </if>
+            <if test="serviceTime != null">
+                service_time,
+            </if>
+            <if test="createTime != null">
+                create_time,
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="oid != null">
+                #{oid,jdbcType=INTEGER},
+            </if>
+            <if test="serviceId != null">
+                #{serviceId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="serviceTime != null">
+                #{serviceTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.Order">
+        update user_order
+        <set>
+            <if test="serviceId != null">
+                service_id = #{serviceId,jdbcType=INTEGER},
+            </if>
+            <if test="userId != null">
+                user_id = #{userId,jdbcType=INTEGER},
+            </if>
+            <if test="amount != null">
+                amount = #{amount,jdbcType=DOUBLE},
+            </if>
+            <if test="status != null">
+                status = #{status,jdbcType=INTEGER},
+            </if>
+            <if test="serviceTime != null">
+                service_time = #{serviceTime,jdbcType=VARCHAR},
+            </if>
+            <if test="createTime != null">
+                create_time = #{createTime,jdbcType=TIMESTAMP},
+            </if>
+        </set>
+        where oid = #{oid,jdbcType=INTEGER}
+    </update>
+    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.Order">
     update user_order
     set service_id = #{serviceId,jdbcType=INTEGER},
       user_id = #{userId,jdbcType=INTEGER},
       amount = #{amount,jdbcType=DOUBLE},
       status = #{status,jdbcType=INTEGER},
-      service_start_time = #{serviceStartTime,jdbcType=VARCHAR},
+      service_time = #{serviceTime,jdbcType=VARCHAR},
       create_time = #{createTime,jdbcType=TIMESTAMP}
     where oid = #{oid,jdbcType=INTEGER}
   </update>
+    <select id="searchOrders" resultType="au.edu.sydney.web.entity.vo.OrderVO">
+        select
+        uo.oid,
+        uo.service_id,
+        uo.user_id,
+        uo.amount,
+        uo.status,
+        uo.service_time,
+        uo.create_time,
+        s.service_name,
+        sp.service_provider_name
+        from
+        user_order uo,
+        service s,
+        service_provider sp
+        where
+        uo.service_id=s.sid and s.service_provider_id=sp.spid and uo.user_id=#{userId,jdbcType=INTEGER}
+        <if test="code != null">
+            and uo.status=#{code,jdbcType=INTEGER}
+        </if>
+        <if test="keyword != null">
+            and sp.service_provider_name like concat('%',#{keyword},'%')
+        </if>
+        union
+        select
+        uo.oid,
+        uo.service_id,
+        uo.user_id,
+        uo.amount,
+        uo.status,
+        uo.service_time,
+        uo.create_time,
+        s.service_name,
+        sp.service_provider_name
+        from
+        user_order uo,
+        service s,
+        service_provider sp
+        where
+        uo.service_id=s.sid and s.service_provider_id=sp.spid and uo.user_id=#{userId,jdbcType=INTEGER}
+        <if test="keyword != null">
+            and s.service_name like concat('%',#{keyword},'%')
+        </if>
+        <if test="code != null">
+            and uo.status=#{code,jdbcType=INTEGER}
+        </if>
+    </select>
 </mapper>

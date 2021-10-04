@@ -14,5 +14,7 @@ public interface OrderService {
 
     Result insert(Order order);
 
-    Result updateStatus(Integer id,Integer code);
+    Result updateStatus(Integer orderId,Integer code);
+
+    Result searchOrders(Integer userId,String keyword,Integer code);
 }
