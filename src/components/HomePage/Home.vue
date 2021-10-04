@@ -2,13 +2,13 @@
   <el-container class="home-container">
     <!--头部区域-->
     <el-header>
-      <div style="margin-right: 20%">
+      <div>
         <a href="http://localhost:8080/#/welcome">
-          <img src="../../assets/img/dogicon.svg" alt="missing"/>
+          <img class="dogimg" src="../../assets/img/dogicon.svg" alt="missing"/>
         </a>
         <span class="homeName">Pet Care</span>
       </div>
-      <div style="font-family: PPWoodland-Bold">
+      <div class="searchInput" style="font-family: PPWoodland-Bold">
         <el-input  placeholder="Search" v-model="input1">
           <div  slot="prepend">Find</div>
         </el-input>
@@ -16,7 +16,7 @@
           <template slot="prepend">Near</template>
         </el-input>
         <el-button  class="searchBtn" type="info" icon="el-icon-search"></el-button>
-        <el-button  type="info" class="signoutButton" @click="logout">Login</el-button>
+        <el-button style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton" @click="logout">Login</el-button>
       </div>
 
     </el-header>
@@ -131,6 +131,9 @@ export default {
 
 <style lang="less" scoped>
 
+.searchInput{
+  margin-left: 20%;
+}
 
 body {
 
@@ -168,7 +171,7 @@ body {
   > div {
     display: flex;
     align-items: center;
-    img {
+    .dogimg {
       width: 50px;
       height: 50px;
       margin-left: 10px;
