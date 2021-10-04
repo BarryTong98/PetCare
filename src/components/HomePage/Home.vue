@@ -132,7 +132,7 @@ export default {
 <style lang="less" scoped>
 
 
-ody {
+body {
 
   //font-family: "American Typewriter", serif;
   font-family: "Object Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
