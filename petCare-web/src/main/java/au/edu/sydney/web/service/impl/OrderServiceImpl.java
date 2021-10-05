@@ -28,6 +28,15 @@ public class OrderServiceImpl implements OrderService {
     ServiceMapper serviceMapper;
 
     @Override
+    public Result getOrderByUid(Integer id) {
+        List<OrderVO> orders = orderMapper.getOrderByUid(id);
+        if (orders.isEmpty()) {
+            return Result.error("Order doesn't exist!");
+        }
+        return Result.ok(orders);
+    }
+
+    @Override
     public Result getOrderById(Integer id) {
         Order order = orderMapper.selectByPrimaryKey(id);
         if (order == null) {

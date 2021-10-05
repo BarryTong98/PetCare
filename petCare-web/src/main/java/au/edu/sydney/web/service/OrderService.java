@@ -10,6 +10,8 @@ import au.edu.sydney.web.entity.pojo.Order;
  */
 public interface OrderService {
 
+    Result getOrderByUid(Integer id);
+
     Result getOrderById(Integer id);
 
     Result insert(Order order);

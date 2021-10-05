@@ -23,9 +23,15 @@ public class OrderController {
     @Resource
     OrderService orderService;
 
+    @ApiOperation("get order by user id")
+    @GetMapping("user/{id}")
+    public Result getOrderByUid(@PathVariable int id) {
+        return orderService.getOrderByUid(id);
+    }
+
     @ApiOperation("get order by id")
     @GetMapping("/{id}")
-    public Result getServiceProvider(@PathVariable int id) {
+    public Result getOrderById(@PathVariable int id) {
         return orderService.getOrderById(id);
     }
 

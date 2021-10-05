@@ -11,23 +11,25 @@
         <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
     </resultMap>
     <sql id="Base_Column_List">
-    oid, service_id, user_id, amount, status, service_time, create_time
-  </sql>
+        oid
+        , service_id, user_id, amount, status, service_time, create_time
+    </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select<include refid="Base_Column_List"/>from user_order where oid= #{oid,jdbcType=INTEGER}
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from user_order
-    where oid = #{oid,jdbcType=INTEGER}
-  </delete>
+        delete
+        from user_order
+        where oid = #{oid,jdbcType=INTEGER}
+    </delete>
     <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.Order">
-    insert into user_order (oid, service_id, user_id,
-      amount, status, service_time,
-      create_time)
-    values (#{oid,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, 
-      #{amount,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{serviceTime,jdbcType=VARCHAR},
-      #{createTime,jdbcType=TIMESTAMP})
-  </insert>
+        insert into user_order (oid, service_id, user_id,
+                                amount, status, service_time,
+                                create_time)
+        values (#{oid,jdbcType=INTEGER}, #{serviceId,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER},
+                #{amount,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{serviceTime,jdbcType=VARCHAR},
+                #{createTime,jdbcType=TIMESTAMP})
+    </insert>
     <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Order">
         insert into user_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
@@ -102,15 +104,15 @@
         where oid = #{oid,jdbcType=INTEGER}
     </update>
     <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.Order">
-    update user_order
-    set service_id = #{serviceId,jdbcType=INTEGER},
-      user_id = #{userId,jdbcType=INTEGER},
-      amount = #{amount,jdbcType=DOUBLE},
-      status = #{status,jdbcType=INTEGER},
-      service_time = #{serviceTime,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP}
-    where oid = #{oid,jdbcType=INTEGER}
-  </update>
+        update user_order
+        set service_id   = #{serviceId,jdbcType=INTEGER},
+            user_id      = #{userId,jdbcType=INTEGER},
+            amount       = #{amount,jdbcType=DOUBLE},
+            status       = #{status,jdbcType=INTEGER},
+            service_time = #{serviceTime,jdbcType=VARCHAR},
+            create_time  = #{createTime,jdbcType=TIMESTAMP}
+        where oid = #{oid,jdbcType=INTEGER}
+    </update>
     <select id="searchOrders" resultType="au.edu.sydney.web.entity.vo.OrderVO">
         select
         uo.oid,
@@ -157,5 +159,23 @@
         <if test="code != null">
             and uo.status=#{code,jdbcType=INTEGER}
         </if>
+    </select>
+
+    <select id="getOrderByUid" parameterType="Integer" resultType="au.edu.sydney.web.entity.vo.OrderVO">
+        select uo.oid,
+               uo.service_id,
+               uo.user_id,
+               uo.amount,
+               uo.status,
+               uo.service_time,
+               uo.create_time,
+               s.service_name,
+               sp.service_provider_name
+        from user_order uo,
+             service s,
+             service_provider sp
+        where uo.service_id = s.sid
+          AND s.service_provider_id = sp.spid
+          AND uo.user_id = #{id,jdbcType=INTEGER}
     </select>
 </mapper>

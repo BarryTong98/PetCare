@@ -7,7 +7,6 @@ import java.util.List;
 
 public interface OrderMapper {
     int deleteByPrimaryKey(Integer oid);
-
     int insert(Order record);
 
     int insertSelective(Order record);
@@ -19,5 +18,7 @@ public interface OrderMapper {
     int updateByPrimaryKey(Order record);
 
     List<OrderVO> searchOrders(Integer userId, String keyword,Integer code);
+
+    List<OrderVO> getOrderByUid(Integer id);
 
 }
