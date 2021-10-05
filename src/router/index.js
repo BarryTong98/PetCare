@@ -13,6 +13,10 @@ import Register from '@/components/HomePage/Register'
 import HomeLogin from '@/components/HomePage/HomeLogin'
 import Reset from '@/components/HomePage/Reset'
 import Reset2 from '@/components/HomePage/Reset2'
+import MyAccount from "@/components/UserAccountPage/MyAccount";
+import MyOrder from "@/components/UserAccountPage/MyOrder";
+import PersonalInformation from "@/components/UserAccountPage/PersonalInformation";
+import EditInformation from "@/components/UserAccountPage/EditInformation";
 Vue.use(Router)
 
 export default new Router({
@@ -79,7 +83,23 @@ export default new Router({
     {
       path: '/homeheader',
       component: HomeHeader
-    }
+    },
+    {
+      path: '/myaccount',
+      component: MyAccount,
+      children:[
+        { path: '/order',
+          component: MyOrder,
+        },
+        { path: '/information',
+          component: PersonalInformation,
+        },
+        { path: '/editinfo',
+          component:EditInformation,
+        }
+      ]
+    },
+
   ]
 })
 
