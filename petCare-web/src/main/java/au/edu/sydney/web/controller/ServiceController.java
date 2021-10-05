@@ -1,10 +1,8 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.entity.pojo.Service;
 import au.edu.sydney.web.service.ServiceService;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -25,7 +23,7 @@ public class ServiceController {
 
     @ApiOperation("get service by id")
     @GetMapping("/{id}")
-    public Result getService(@PathVariable int id) {
+    public Result getServiceById(@PathVariable int id) {
         return serviceService.getServiceById(id);
     }
 
