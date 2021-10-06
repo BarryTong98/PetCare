@@ -52,7 +52,7 @@ export default {
     return {
       // 验证码按钮
       flag: false,//按钮是否可取
-      content: "Verify via SMS",//按钮内文本
+      content: "Verify via Email",//按钮内文本
       totalTime: 60,//倒计时时间
       ruleForm: {
         pass: '',

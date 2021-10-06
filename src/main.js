@@ -9,6 +9,17 @@ import './assets/style/font.less'
 //导入字体图标
 import './assets/fonts/iconfont.css'
 import axios from 'axios'
+import { LoaderPlugin,GoogleLogin } from 'vue-google-login';
+
+Vue.use(LoaderPlugin, {
+  client_id: '870223928949-0h13cc4egdup97kjmjp2d9e39io95lc7.apps.googleusercontent.com'
+});
+
+Vue.GoogleAuth.then(auth2 => {
+  console.log(auth2.isSignedIn.get());
+  console.log(auth2.currentUser.get())
+})
+Vue.use(GoogleLogin)
 
 Vue.config.productionTip = false
 //配置请求的根路径
