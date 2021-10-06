@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import javax.servlet.http.HttpServletRequest;
 
 /**
  * @author Chris
@@ -43,8 +44,9 @@ public class ServiceProviderController {
             "\n code:200(data from database)" +
             "\n code:201(data from YelpApi)")
 
-    @GetMapping("/search/{region}/{filter}/keyword={keyword}")
-    public Result search(@PathVariable String region, @PathVariable int filter, @PathVariable String keyword) {
+    @GetMapping("/search/{region}/{filter}")
+    public Result search(@PathVariable String region, @PathVariable int filter, String keyword, HttpServletRequest request) {
+        keyword = request.getParameter("keyword");
         return serviceProviderService.search(region, filter, keyword);
     }
 }
