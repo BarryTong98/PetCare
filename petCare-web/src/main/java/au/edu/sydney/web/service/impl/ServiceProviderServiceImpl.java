@@ -56,23 +56,24 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
     @Override
     public Result search(String region, int filter, String keyword) {
         String binary = Integer.toBinaryString(filter);
-        while (binary.length() < 9) {
+        while (binary.length() < 11) {
             binary = "0" + binary;
         }
         HashMap<String, String> map = new HashMap<>();
 
         HashMap<Integer, String> filters = new HashMap<>();
-        filters.put(8, "hospital");//医院
-        filters.put(7, "sterilization");//绝育
-        filters.put(6, "medical");//体检
-        filters.put(5, "vaccination");//疫苗
-        filters.put(4, "groom");//美容
-        filters.put(3, "washing");//洗澡
-        filters.put(2, "repellent");//驱虫
-        filters.put(1, "teeth");//洁牙
-        filters.put(0, "hosting");//托管
+        filters.put(10, "hospital");//医院
+        filters.put(9, "sterilization");//绝育
+        filters.put(8, "medical");//体检
+        filters.put(7, "vaccination");//疫苗
+        filters.put(6, "groom");//美容
+        filters.put(5, "washing");//洗澡
+        filters.put(4, "repellent");//驱虫
+        filters.put(3, "teeth");//洁牙
+        filters.put(2, "hosting");//托管
+        filters.put(1, "training");//训练
+        filters.put(0, "playground");//乐园
 
-        //HashMap<String, Object> map = new HashMap<>();
         map.put("keyword", keyword);
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) == '1') {

@@ -240,7 +240,8 @@
         (SELECT *
         FROM service_provider
         WHERE (service_provider_name LIKE
-        "%"#{keyword}"%" OR service_content LIKE "%"#{keyword}"%" OR description LIKE "%" #{keyword}"%" OR address LIKE "%" #{keyword}"%")
+        "%"#{keyword}"%" OR service_content LIKE "%"#{keyword}"%" OR description LIKE "%" #{keyword}"%" OR address LIKE
+        "%" #{keyword}"%")
         and spid IN
         (select spid from service_provider
         <where>
@@ -273,6 +274,9 @@
             </if>
             <if test="filter9!=null">
                 or service_content LIKE "%"#{filter9}"%"
+            </if>
+            <if test="filter10!=null">
+                or service_content LIKE "%"#{filter10}"%"
             </if>
         </where>
         ))
@@ -314,6 +318,9 @@
             </if>
             <if test="filter9!=null">
                 or service_content LIKE "%"#{filter9}"%"
+            </if>
+            <if test="filter10!=null">
+                or service_content LIKE "%"#{filter10}"%"
             </if>
         </where>
         )))

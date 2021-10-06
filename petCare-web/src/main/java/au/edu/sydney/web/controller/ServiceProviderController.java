@@ -42,7 +42,8 @@ public class ServiceProviderController {
     @ApiOperation(value = "get service provider by region and keyword " +
             "\n code:200(data from database)" +
             "\n code:201(data from YelpApi)")
-    @GetMapping("/search/{region}/{filter}/{keyword}")
+
+    @GetMapping("/search/{region}/{filter}/keyword={keyword}")
     public Result search(@PathVariable String region, @PathVariable int filter, @PathVariable String keyword) {
         return serviceProviderService.search(region, filter, keyword);
     }
