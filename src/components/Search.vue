@@ -491,6 +491,7 @@ export default {
 
     axios.get("http://110.40.184.115:8080/serviceProvider/search/sydney/" + this.$route.params.checked + "?keyword=" + this.$route.params.keyword).then(
       function (response) {
+        console.log(response)
 
         const reqs = response.data.data
 
