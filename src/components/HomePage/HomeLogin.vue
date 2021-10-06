@@ -40,7 +40,7 @@
 </template>
 <script>
 import GoogleLogin from 'vue-google-login'
-
+//new
 export default {
   name: 'App',
   props: {
