@@ -14,9 +14,12 @@ import HomeLogin from '@/components/HomePage/HomeLogin'
 import Reset from '@/components/HomePage/Reset'
 import Reset2 from '@/components/HomePage/Reset2'
 import MyAccount from "@/components/UserAccountPage/MyAccount";
-import MyOrder from "@/components/UserAccountPage/MyOrder";
+import MyOrderCompleted from "@/components/UserAccountPage/MyOrderCompleted";
 import PersonalInformation from "@/components/UserAccountPage/PersonalInformation";
 import EditInformation from "@/components/UserAccountPage/EditInformation";
+import MyOrderNotStart from "@/components/UserAccountPage/MyOrderNotStart";
+import MyOrderCanceled from "@/components/UserAccountPage/MyOrderCanceled";
+import MyAccountHome from "@/components/UserAccountPage/MyAccountHome";
 Vue.use(Router)
 
 export default new Router({
@@ -87,9 +90,19 @@ export default new Router({
     {
       path: '/myaccount',
       component: MyAccount,
+      redirect:'/myaccounthome',
       children:[
-        { path: '/order',
-          component: MyOrder,
+        { path: '/myaccounthome',
+          component: MyAccountHome,
+        },
+        { path: '/ordercom',
+          component: MyOrderCompleted,
+        },
+        { path: '/ordernotstart',
+          component: MyOrderNotStart,
+        },
+        { path: '/ordercancel',
+          component: MyOrderCanceled,
         },
         { path: '/information',
           component: PersonalInformation,

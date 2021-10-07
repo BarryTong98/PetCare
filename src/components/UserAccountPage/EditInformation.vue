@@ -2,21 +2,21 @@
   <div class="edit">
 
     <el-row>
-      <el-page-header @back="back2Info" content="Edit" title="Back" style="color:#fa997e">
+      <el-page-header @back="back2Info" content="Edit Page" title="Back" style="color:#fa997e">
       </el-page-header>
     </el-row>
     <el-row style="margin-top: 20px">
       <!--当前头像-->
       <el-col :span="2" :offset="9" >
         <div id="userImg">
-          <img src="../../assets/d.png" alt="" style="width: 100px; height: 100px"></img>
+          <img :src="customer.imageUrl" alt="" style="width: 100px; height: 100px"></img>
         </div>
       </el-col>
       <!--上传图片-->
       <el-col  :span="4" :offset="1">
         <el-upload id="uploadImg"
           class="avatar-uploader"
-          action="https://jsonplaceholder.typicode.com/posts/"
+          action="http://110.40.184.115:8080/oss/upload?module=avatar&&userName=test1"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
@@ -35,27 +35,21 @@
       ref="ruleForm"
       style="margin-top: 20px"
     >
-      <el-form-item label="Username" prop="name">
-        <el-input v-model="customer.name"></el-input>
+      <el-form-item label="Username" prop="userName">
+        <el-input v-model="customer.userName"></el-input>
       </el-form-item>
-      <el-form-item label="Nickname" prop="nickname">
-        <el-input v-model="customer.nickname"></el-input>
+      <el-form-item label="Nickname" prop="nickName">
+        <el-input v-model="customer.nickName"></el-input>
       </el-form-item>
-      <el-form-item label="Phone" prop="phone">
-        <el-input v-model="customer.phone"></el-input>
+      <el-form-item label="Phone" prop="phoneNumber">
+        <el-input v-model="customer.phoneNumber"></el-input>
       </el-form-item>
       <el-form-item label="Email" prop="email">
         <el-input v-model="customer.email"></el-input>
       </el-form-item>
-      <el-form-item label="Password" prop="pass">
-        <el-input type="password" v-model="customer.pass" autocomplete="off"></el-input>
-      </el-form-item>
-      <el-form-item label="Confirm password" prop="checkPass">
-        <el-input type="password" v-model="customer.checkPass" autocomplete="off"></el-input>
-      </el-form-item>
 
       <el-form-item >
-        <el-button id="update_button" type="primary" @click="submitForm('update')">Update</el-button>
+        <el-button id="update_button" type="primary" @click="submitForm('ruleForm')">Update</el-button>
       </el-form-item>
     </el-form>
 
@@ -68,60 +62,39 @@ export default {
   name: "EditInformation",
   data(){
     return {
-      //表单
+      imageUrl: '',
       labelPosition: 'right',
+      //表单
       customer:{
-        //上传头像
-        imageUrl: '',
-        name:'',
-        nickname:'',
-        phone:'',
+        userName:'',
+        nickName:'',
+        phoneNumber:'',
         email:'',
-        pass: '',
-        checkPass: ''
+        password: '',
       },
       rules:{
-        name:[
+        userName:[
           { required: true, message: 'Please input username', trigger: 'blur' }
         ],
-        nickname:[
+        nickName:[
           { required: true, message: 'Please input nickname', trigger: 'blur' }
         ],
-        phone:[
+        phoneNumber:[
           { required: true, message: 'Please input phone number', trigger: 'blur' },
         ],
         email:[
           { required: true, message: 'Please input email', trigger: 'blur' },
           { type: 'email', message: 'Email format is incorrect', trigger: ['blur', 'change'] }
         ],
-        pass: [
-          { required: true, message: 'Please input password', trigger: 'blur' },
-          { validator: validatePass, trigger: 'blur' }
-        ],
-        checkPass: [
-          { required: true, message: 'Please confirm email', trigger: 'blur' },
-          { validator: validatePass2, trigger: 'blur' }
-        ],
       }
     }
-    var validatePass = (rule, value, callback) => {
-      if (this.ruleForm.checkPass !== '') {
-        this.$refs.ruleForm.validateField('checkPass');
-      }
-      callback();
-    };
-    var validatePass2 = (rule, value, callback) => {
-      if (value !== this.ruleForm.pass) {
-        callback(new Error('Two input password must be consistent!'));
-      } else {
-        callback();
-      }
-    };
   },
 
   created() {
-    this.handle(this.$route.query.id);
+   // this.handle(this.$route.query.id);
+    this.getInfo();
   },
+
   handle(id){
     let config = {
       url:'http://localhost:3000/users/'+id,
@@ -135,30 +108,35 @@ export default {
       })
   },
 
-
   methods:{
+    //回到用户信息界面
     back2Info(){
       this.$router.replace('/information')
     },
+
     //提交表单
+    //这里的uid是乱写的，到时候记得改为从localhost中拿来的uid
     submitForm(formName) {
+      const _this = this;
       this.$refs[formName].validate((valid) => {
         if (valid) {
           //  alert('submit!');
           let updateCustomer = {
-            name: this.customer.name,
-            phone: this.customer.phone,
+            uid:1,
             email: this.customer.email,
-            desc: this.customer.desc,
+            userName:this.customer.userName,
+            nickName:this.customer.nickName,
+            phoneNumber:this.customer.phoneNumber,
+            password:this.customer.password,
           }
 
-          axios.put('http://localhost:3000/users/'+this.$route.query.id,updateCustomer)
+          _this.$http.put('http://110.40.184.115:8080/user/update',updateCustomer)
             .then((response) => {
               this.$message({
-                message: '更新用户信息成功',
+                message: 'Update successfully!',
                 type: 'success'
               });
-              this.$router.push({path:'/customers',query:{alert:'success'}})
+              // this.$router.push({path:'/customers',query:{alert:'success'}})
             })
         } else {
           console.log('error submit!!');
@@ -170,6 +148,9 @@ export default {
     //上传头像
     handleAvatarSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
+      console.log(URL.createObjectURL(file.raw))
+      console.log(this.imageUrl)
+      console.log(res)
     },
     beforeAvatarUpload(file) {
       const isJPG = file.type === 'image/jpeg';
@@ -182,8 +163,18 @@ export default {
         this.$message.error('上传头像图片大小不能超过 2MB!');
       }
       return isJPG && isLt2M;
+    },
+
+    //获取用户信息
+    getInfo(){
+      const _this = this;
+      _this.$http.get("http://110.40.184.115:8080/user/" + 1) //userid是1目前是瞎写的，到时候从localdatabse拿
+        .then(function (response) {
+          console.log(response.data.data);
+          _this.customer = response.data.data;
+        });
     }
-  }
+  },
 }
 </script>
 

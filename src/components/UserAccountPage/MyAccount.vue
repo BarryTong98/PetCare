@@ -21,7 +21,7 @@
 <script>
 import MyOrderHeader from "@/components/UserAccountPage/MyOrderHeader";
 import MyOrderAside from "@/components/UserAccountPage/MyOrderAside";
-import MyOrder from "@/components/UserAccountPage/MyOrder";
+import MyOrder from "@/components/UserAccountPage/MyOrderCompleted";
 
 export default {
   name: "MyAccount",
@@ -29,7 +29,8 @@ export default {
     "orderheader":MyOrderHeader,
     "orderaside":MyOrderAside,
     "myorder":MyOrder,
-  }
+  },
+
 }
 </script>
 

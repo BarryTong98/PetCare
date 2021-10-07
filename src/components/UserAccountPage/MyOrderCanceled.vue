@@ -1,0 +1,214 @@
+<template>
+  <div>
+    <!--面包屑-->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/myaccount' }">My Account</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/myaccount' }">My Order</el-breadcrumb-item>
+      <el-breadcrumb-item>Canceled</el-breadcrumb-item>
+    </el-breadcrumb>
+
+    <!--预定订单搜索框-->
+    <div class="search bar1">
+      <form>
+        <input type="text"
+               @keydown.enter="checKSearch"
+               v-model="searchInfo"
+               placeholder="Please input service provider or service name...">
+        <button type="submit" @click="checKSearch">
+          <i class="el-icon-search"></i> search
+        </button>
+      </form>
+    </div>
+
+    <!--预定的商家列表-->
+    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in orders">
+      <li>
+        <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
+          <!--医院图片-->
+          <el-aside style="width: 200px; padding: 10px;margin: 10px;text-align: center">
+            <img style="width: 100px"></img>
+          </el-aside>
+
+          <!--预定医院的信息-->
+          <el-col :span="13" style="text-align: left;">
+            <div style="margin: 10px;">
+              <span
+                style="font-family: Arial;font-size: 18px;font-weight: bolder">{{ order.serviceProviderName }}</span>
+              <ul>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-date"></i>
+                    <span> Date: {{ order.serviceTime }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-map-location"></i>
+                    <span> Location: {{ order.serviceProviderName }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-s-finance"></i>
+                    <span> Price: ${{ order.amount }}</span>
+                  </div>
+                </li>
+              </ul>
+            </div>
+          </el-col>
+          <el-col :span="11" style="text-align: center;">
+            <el-button id="evaluate_button" type="primary">Evaluate</el-button>
+          </el-col>
+        </el-container>
+      </li>
+    </ul>
+  </div>
+</template>
+
+<script>
+export default {
+  name: "MyOrderCanceled",
+  data() {
+    return {
+      searchInfo: '',
+      orders: []
+    }
+  },
+  methods: {
+    //搜索框
+    searchOrders() {
+      const _this = this;
+      _this.$http.get("http://110.40.184.115:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code=" + 3) //1目前是瞎写的，到时候从localdatabse拿
+        .then(function (response) {
+          let temporders = response.data.data;
+          if (temporders != null) {
+            _this.orders.length = 0;
+            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+              console.log(temporders[item])
+              temporders.forEach(function (element) {
+                console.log(element);
+                //把得到的jason转化为字符串
+                const newstr = JSON.stringify(element);
+                if (newstr.search(_this.searchInfo)) {
+                  _this.orders.push(temporders[item]);
+                  console.log("成功")
+                }
+              })
+            }
+          }else {
+            //如果输入的内容不匹配，则清空列表
+            while(_this.orders.length > 0) {
+              _this.orders.pop();
+            }
+            console.log("失败")
+          }
+        });
+    },
+
+    //搜索之前先判断一下搜索框中有没有输入内容，如果没有输入内容就显示所有订单
+    checKSearch(){
+      if (this.searchInfo == ''){
+        while(this.orders.length > 0) {
+          this.orders.pop();
+        }
+        this.findAll();
+        console.log("显示所有订单")
+      }else{
+        this.searchOrders();
+
+      }
+    },
+
+    //查找所有订单
+    findAll() {
+      const _this = this;
+      _this.$http.get("http://110.40.184.115:8080/order/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+        .then(function (response) {
+          let temporders = response.data.data;
+          for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+            if (temporders[item].status == 3) {
+              console.log(temporders[item])
+              _this.orders.push(temporders[item]);
+            }
+          }
+        });
+    },
+  },
+  created() {
+    this.findAll()
+  },
+}
+</script>
+
+<style scoped>
+/*为了让所有的ul都不缩进，并且没有一点*/
+ul {
+  list-style: none;
+  margin: 0px;
+  padding: 0px;
+}
+
+/*order搜索框*/
+.bar1 input {
+  border: 2px solid #fb9a7f;
+  border-radius: 5px;
+  background: #FFFFFF;
+  color: #9E9C9C;
+}
+
+.bar1 button {
+  top: 0;
+  right: 0;
+  background: #fb9a7f;
+  border-radius: 0 5px 5px 0;
+}
+
+.bar1 button:before {
+  font-family: FontAwesome;
+  font-size: 14px;
+  color: #FFFFFF;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+div.search {
+  padding: 30px 0;
+}
+
+form {
+  position: relative;
+  width: 700px;
+  margin: 0 auto;
+}
+
+input, button {
+  border: none;
+  outline: none;
+}
+
+input {
+  width: 100%;
+  height: 42px;
+  padding-left: 13px;
+}
+
+button {
+  height: 42px;
+  width: 80px;
+  cursor: pointer;
+  position: absolute;
+  color: #FFFFFF;
+}
+
+#evaluate_button {
+  margin-top: 45px;
+  width: 100px;
+  color: #fff;
+  background-color: #fa997e;
+  border-color: #fa997e;
+}
+
+</style>

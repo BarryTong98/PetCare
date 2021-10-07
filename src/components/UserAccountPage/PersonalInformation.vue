@@ -9,51 +9,44 @@
       <!--用户头像-->
       <el-col :span="2" :offset="9" >
         <div id="userImg">
-          <img src="../../assets/d.png" alt="" style="width: 100px; height: 100px"></img>
+          <img :src="user.imageUrl" alt="" style="width: 100px; height: 100px"></img>
         </div>
       </el-col>
       <!--上传图片-->
       <el-col  :span="4" :offset="1">
-        <h2>Lin Tang</h2>
+        <h2>{{ user.userName }}</h2>
       </el-col>
     </el-row>
 
     <!--用户信息-->
-    <el-descriptions style="margin: 50px;" class="margin-top"  :column="2" :size="size" border>
+    <el-descriptions style="margin: 50px;" class="margin-top"  :column="2" border>
       <el-descriptions-item>
         <template  slot="label">
           <i class="el-icon-user"></i>
           Username
         </template>
-        Lin Tang
+        {{ user.userName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-user"></i>
           Nickname
         </template>
-        kooriookami
-      </el-descriptions-item>
-      <el-descriptions-item>
-        <template slot="label">
-          <i class="el-icon-view"></i>
-          Password
-        </template>
-        qwertyui123
+        {{ user.nickName }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-mobile-phone"></i>
           Phone number
         </template>
-        18100000000
+        {{ user.phoneNumber }}
       </el-descriptions-item>
       <el-descriptions-item>
         <template slot="label">
           <i class="el-icon-message"></i>
           Email
         </template>
-        871616433@qq.com
+        {{ user.email }}
       </el-descriptions-item>
     </el-descriptions>
 
@@ -65,14 +58,27 @@ export default {
   name: "PersonalInformation",
   data() {
     return {
-
+      user: {},
     };
   },
   methods:{
     editinfo(){
       this.$router.replace('/editinfo')
+    },
+
+    getInfo(){
+      const _this = this;
+      _this.$http.get("http://110.40.184.115:8080/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+        .then(function (response) {
+          console.log(response.data.data);
+          _this.user = response.data.data;
+        });
     }
-  }
+  },
+
+  created() {
+    this.getInfo()
+  },
 }
 </script>
 

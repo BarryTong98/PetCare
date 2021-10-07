@@ -11,7 +11,7 @@
     <!--用户头像-->
     <el-col :span="1" :offset="15">
       <div id="userImg">
-        <img src="../../assets/d.png" alt="" style="width: 50px; height: 50px"></img>
+        <img :src="user.imageUrl" alt="" style="width: 50px; height: 50px"></img>
       </div>
     </el-col>
     <!--顶部右侧下拉菜单栏-->
@@ -40,7 +40,8 @@ export default {
   data() {
     return {
       activeIndex: '1',
-      activeIndex2: '1'
+      activeIndex2: '1',
+      user: {},
     };
   },
   methods: {
@@ -61,12 +62,25 @@ export default {
     },
     //点击改变路由
     myorder(){
-      this.$router.replace('/order')
+      this.$router.replace('/ordernotstart')
     },
     information(){
       this.$router.replace('/information')
+    },
+    //获取用户信息，得到头像url
+    getInfo(){
+      const _this = this;
+      _this.$http.get("http://110.40.184.115:8080/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+        .then(function (response) {
+          console.log(response.data.data);
+          _this.user = response.data.data;
+        });
     }
-  }
+  },
+
+  created() {
+    this.getInfo()
+  },
 }
 </script>
 
