@@ -23,7 +23,6 @@ export default {
         require('../assets/img/abstract-low-poly-minimalist-minimalism-y710.jpg'),
         require('../assets/img/amored-titan-vs-attack-titan-attack-on-titan-shingeki-no-kyojin-t461.jpg'),
         require('../assets/img/boruto-cute-boruto-anime-y741.jpg')
-
       ]
     }
   }
