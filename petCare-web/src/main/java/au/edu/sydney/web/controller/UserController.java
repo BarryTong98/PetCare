@@ -43,6 +43,7 @@ public class UserController {
     @ApiOperation("update user information")
     @PutMapping("/update")
     public Result update(@RequestBody User record) {
+        System.out.println(record.toString());
         return userService.updateUser(record);
     }
 }

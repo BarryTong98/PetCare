@@ -76,8 +76,24 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Result updateUser(User record) {
+        int uid = record.getUid();
+        User user = userMapper.selectByPrimaryKey(uid);
+        String originalUserName=user.getUserName();
+        String originalEmail=user.getEmail();
+        if(!originalUserName.equals(record.getUserName())){
+            User checkName = userMapper.selectByUserName(record.getUserName());
+            if (checkName != null) {
+                return Result.error("Username already exists");
+            }
+        }
+       if(!originalEmail.equals(record.getEmail())){
+           User checkEmail = userMapper.selectByEmail(record.getEmail());
+           if (checkEmail != null) {
+               return Result.error("Email already exists");
+           }
+       }
         try {
-            userMapper.updateByPrimaryKey(record);
+            userMapper.updateByPrimaryKeySelective(record);
         } catch (Exception e) {
             return Result.error("Failed to update user information");
         }
