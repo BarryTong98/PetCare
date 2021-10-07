@@ -3,9 +3,7 @@ package au.edu.sydney.web.controller;
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.entity.pojo.User;
 import au.edu.sydney.web.service.UserService;
-import com.alibaba.fastjson.JSONObject;
 import io.swagger.annotations.ApiOperation;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
@@ -44,7 +42,7 @@ public class UserController {
 
     @ApiOperation("update user information")
     @PutMapping("/update")
-    public Result update(@PathVariable int id, @RequestBody User record) {
+    public Result update(@RequestBody User record) {
         return userService.updateUser(record);
     }
 }
