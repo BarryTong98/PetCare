@@ -123,7 +123,8 @@
         uo.service_time,
         uo.create_time,
         s.service_name,
-        sp.service_provider_name
+        sp.service_provider_name,
+        sp.image_url
         from
         user_order uo,
         service s,
@@ -146,7 +147,8 @@
         uo.service_time,
         uo.create_time,
         s.service_name,
-        sp.service_provider_name
+        sp.service_provider_name,
+        sp.image_url
         from
         user_order uo,
         service s,
@@ -170,7 +172,8 @@
                uo.service_time,
                uo.create_time,
                s.service_name,
-               sp.service_provider_name
+               sp.service_provider_name,
+               sp.image_url
         from user_order uo,
              service s,
              service_provider sp
