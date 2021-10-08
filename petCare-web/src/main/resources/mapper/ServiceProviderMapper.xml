@@ -278,6 +278,9 @@
             <if test="filter10!=null">
                 or service_content LIKE "%"#{filter10}"%"
             </if>
+            <if test="filter11!=null">
+                or service_content LIKE "%"#{filter10}"%"
+            </if>
         </where>
         ))
         UNION
@@ -320,6 +323,9 @@
                 or service_content LIKE "%"#{filter9}"%"
             </if>
             <if test="filter10!=null">
+                or service_content LIKE "%"#{filter10}"%"
+            </if>
+            <if test="filter11!=null">
                 or service_content LIKE "%"#{filter10}"%"
             </if>
         </where>
