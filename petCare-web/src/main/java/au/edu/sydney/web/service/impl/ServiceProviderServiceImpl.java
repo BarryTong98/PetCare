@@ -56,7 +56,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
     @Override
     public Result search(String region, int filter, String keyword) {
         String binary = Integer.toBinaryString(filter);
-        while (binary.length() < 11) {
+        while (binary.length() < 12) {
             binary = "0" + binary;
         }
         HashMap<String, String> map = new HashMap<>();
