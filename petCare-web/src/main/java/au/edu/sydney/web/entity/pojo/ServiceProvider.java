@@ -9,10 +9,10 @@ public class ServiceProvider {
     @ApiModelProperty(value = "服务提供者ID")
     private Integer spid;
 
-    @ApiModelProperty(value = "服务提供者名")
+    @ApiModelProperty(value = "服务提供者名 搜索匹配字段")
     private String serviceProviderName;
 
-    @ApiModelProperty(value = "地址")
+    @ApiModelProperty(value = "地址 搜索匹配字段")
     private String address;
 
     @ApiModelProperty(value = "联系电话")
@@ -22,7 +22,7 @@ public class ServiceProvider {
     private Integer type;
 
     @ApiModelProperty(value = "提供的具体服务内容 搜索匹配字段  \n" +
-            "健康: 医院 绝育 体检 疫苗 美容：美容 洗澡 驱虫 洁牙")
+            "健康: 医院 绝育 体检 疫苗 美容：美容 洗澡 驱虫 洁牙 托管: 托管 乐园 训练 ")
     private String serviceContent;
 
     @ApiModelProperty(value = "平均价格")

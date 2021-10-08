@@ -89,7 +89,7 @@ CREATE TABLE `service` (
   `service_provider_id` INT(10) NOT NULL,
 	`service_name` VARCHAR(50) DEFAULT NULL,
   `price` DOUBLE(8,2) DEFAULT NULL,
-	`status` INT(2) NOT NULL COMMENT '1 可预定 0 已预订',
+	`isBoarding` INT(2) NOT NULL COMMENT '1 可预定 0 已预订',
 	`service_date` date DEFAULT NULL,
 	`service_time` VARCHAR(50) DEFAULT NULL, 
   PRIMARY KEY (`sid`),
@@ -99,9 +99,9 @@ CREATE TABLE `service` (
 -- ----------------------------
 -- Records of service
 -- ----------------------------
-INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `status`,`service_date`,`service_time`) VALUES (1, 'pet medical check-ups', 200,1,'2021-09-14','9am - 11am');
-INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `status`,`service_date`,`service_time`) VALUES (1, 'pet vaccination', 100,0,'2021-09-16','1pm - 3pm');
-INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `status`,`service_date`,`service_time`) VALUES (2, 'pet grooming hospital', 80,1,'2021-09-16','1pm - 3pm');
+INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `isBoarding`,`service_date`,`service_time`) VALUES (1, 'pet medical check-ups', 200,1,'2021-09-14','9am - 11am');
+INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `isBoarding`,`service_date`,`service_time`) VALUES (1, 'pet vaccination', 100,0,'2021-09-16','1pm - 3pm');
+INSERT INTO `service`(`service_provider_id`,`service_name`,`price`, `isBoarding`,`service_date`,`service_time`) VALUES (2, 'pet grooming hospital', 80,1,'2021-09-16','1pm - 3pm');
 
 
 
@@ -114,7 +114,7 @@ CREATE TABLE `user_order` (
   `service_id` INT(10) NOT NULL,
 	`user_id` INT(10) NOT NULL,
   `amount` DOUBLE(8,2) DEFAULT NULL,
-	`status` INT(2) NOT NULL DEFAULT '1' COMMENT '1 未开始 2 已完成 3  已取消',
+	`isBoarding` INT(2) NOT NULL DEFAULT '1' COMMENT '1 未开始 2 已完成 3  已取消',
 	`service_time` VARCHAR(50) DEFAULT NULL,
 	`create_time` TIMESTAMP DEFAULT NOW(), 
   PRIMARY KEY (`oid`),
@@ -125,9 +125,9 @@ CREATE TABLE `user_order` (
 -- ----------------------------
 -- Records of user order
 -- ----------------------------
-INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_time`) VALUES (1, 1,200,2,'14 November 2021 9am');
-INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_time`) VALUES (2, 1,100,1,'16 November 2021 1pm-3pm');
-INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`status`,`service_time`) VALUES (3, 2,80,3,'16 November 2021 1pm-3pm');
+INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`isBoarding`,`service_time`) VALUES (1, 1,200,2,'14 November 2021 9am');
+INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`isBoarding`,`service_time`) VALUES (2, 1,100,1,'16 November 2021 1pm-3pm');
+INSERT INTO `user_order`(`service_id`,`user_id`, `amount`,`isBoarding`,`service_time`) VALUES (3, 2,80,3,'16 November 2021 1pm-3pm');
 
 
 

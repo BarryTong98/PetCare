@@ -21,8 +21,8 @@ public class Service {
     @ApiModelProperty(value = "（预期）价格")
     private Double price;
 
-    @ApiModelProperty(value = "状态 1 可预定 0 已预订")
-    private Integer status;
+    @ApiModelProperty(value = "是否是托管服务 1 是 0 否")
+    private Integer isBoarding;
 
     @ApiModelProperty(value = "服务日期")
     private Date serviceDate;
@@ -62,12 +62,12 @@ public class Service {
         this.price = price;
     }
 
-    public Integer getStatus() {
-        return status;
+    public Integer getIsBoarding() {
+        return isBoarding;
     }
 
-    public void setStatus(Integer status) {
-        this.status = status;
+    public void setIsBoarding(Integer isBoarding) {
+        this.isBoarding = isBoarding;
     }
 
     public Date getServiceDate() {
