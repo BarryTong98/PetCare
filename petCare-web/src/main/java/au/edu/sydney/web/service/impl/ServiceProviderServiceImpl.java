@@ -62,7 +62,8 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         HashMap<String, String> map = new HashMap<>();
 
         HashMap<Integer, String> filters = new HashMap<>();
-        filters.put(10, "hospital");//医院
+        filters.put(11, "hospital");//医院
+        filters.put(10,"disease");//疾病治疗
         filters.put(9, "sterilization");//绝育
         filters.put(8, "medical");//体检
         filters.put(7, "vaccination");//疫苗
