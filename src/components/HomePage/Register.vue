@@ -1,11 +1,11 @@
 <template>
   <div class="now">
-    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm" >
+    <el-form :model="ruleForm" status-icon :rules="rules" ref="ruleForm" label-width="100px" class="demo-ruleForm">
       <el-form-item label="Email" prop="email">
         <el-input v-model="ruleForm.email" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="Password" prop="pass">
-        <el-input v-model="ruleForm.pass" autocomplete="off"></el-input>
+        <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="Comfirm" prop="checkPass">
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
@@ -28,48 +28,10 @@
 </template>
 
 <script>
+import axios from 'axios'
+
 export default {
-  data() {
-    var validateEmail = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please Enter Your Email'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('email')
-        }
-        callback()
-      }
-    };
-    var validateUsername = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please Enter Your Username'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('username')
-        }
-        callback()
-      }
-    };
-    var validatePhone = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please Enter Your Phone Number'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('phone')
-        }
-        callback()
-      }
-    };
-    var validatePass = (rule, value, callback) => {
-      if (value === '') {
-        callback(new Error('Please Enter Your Account'))
-      } else {
-        if (this.ruleForm.checkPass !== '') {
-          this.$refs.ruleForm.validateField('checkPass')
-        }
-        callback()
-      }
-    };
+  data () {
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please Enter Your Password Again'));
@@ -80,7 +42,7 @@ export default {
       }
     };
     return {
-      gender:'',
+      gender: '',
       radio: 'male',
       ruleForm: {
         email: '',
@@ -89,35 +51,54 @@ export default {
         username: '',
         phone: '',
       },
-      rules: {
-        email: [
-          { validator: validateEmail, trigger: 'blur' }
+      rules:{
+        username:[
+          { required: true, message: 'Please Input Username', trigger: 'blur' }
         ],
-        pass: [
-          { validator: validatePass, trigger: 'blur' }
+        pass:[
+          { required: true, message: 'Please Input Password', trigger: 'blur' }
         ],
         checkPass: [
           { validator: validatePass2, trigger: 'blur' }
         ],
-        username: [
-          { validator: validateUsername, trigger: 'blur' }
+        phone:[
+          { required: true, message: 'Please Input Phone Number', trigger: 'blur' },
         ],
-        phone: [
-          { validator: validatePhone, trigger: 'blur' }
+        email:[
+          { required: true, message: 'Please Input Email', trigger: 'blur' },
+          { type: 'email', message: 'Email format is incorrect', trigger: ['blur', 'change'] }
         ],
       }
-    };
+    }
   },
   methods: {
-    submitForm(formName) {
+    submitForm (formName) {
+      let _this = this
       this.$refs[formName].validate((valid) => {
         if (valid) {
-          alert('submit!');
+          console.log(formName)
+          axios.post('http://110.40.184.115:8080/user/register', {
+            email: this.ruleForm.email,
+            password: this.ruleForm.pass  ,
+            phoneNumber: this.ruleForm.phone,
+            userName: this.ruleForm.username,
+          }).then(function (response) {
+            if (response.data.code === 200) {
+              alert('Resister Successfully')
+               _this.$router.push('/home')
+            }
+            if (response.data.code === 999) {
+              alert('Account Already Exist')
+            }
+            console.log(response.data)
+          }).catch(function (err) {
+            console.log(err)
+          })
         } else {
-          console.log('error submit!!');
-          return false;
+          console.log('error submit!!')
+          return false
         }
-      });
+      })
     },
   }
 }
@@ -125,16 +106,19 @@ export default {
 
 <style scoped>
 
-.el-form-item{
+.el-form-item {
+  color: #f8977a;
   margin-left: 5%;
 }
 
-.el-input{
+.el-input {
   width: 80%;
 }
-.now{
+
+.now {
   margin-top: 5%;
 }
+
 .btn-quality {
   width: 22vw;
   height: 4.6vw;
@@ -153,10 +137,10 @@ export default {
   margin-top: 1%;
   margin-bottom: 2vw;
 }
-.el-form-item{
+
+.el-form-item {
   font-family: PPWoodland-Bold;
 }
-
 
 
 </style>

@@ -110,18 +110,6 @@ export default {
     GoogleLogin
   },
   methods: {
-    // submitForm (formName) {
-    //   this.$refs[formName].validate((valid) => {
-    //     if (valid) {
-    //      console.log(formName)
-    //       alert('submit!')
-    //     } else {
-    //       console.log(formName)
-    //       alert.log('Error')
-    //       return false
-    //     }
-    //   })
-    // },
     submitForm() {
       let _this = this;
       if(this.ruleForm.pass ==='' || this.ruleForm.checkPass ===''){
@@ -141,12 +129,13 @@ export default {
         ).then(function(response){
           if(response.data.code === 200){
             alert('Login Successfully')
+            window.sessionStorage.setItem("token", response.data.message)
             _this.$router.push('/home')
           }
           if(response.data.code === 999){
             alert('Account or Password Error')
           }
-          console.log(response.data);
+          console.log(response);
         }).catch(function(error){
           alert('Account or Password Error')
           console.log(error);

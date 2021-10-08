@@ -33,6 +33,7 @@
 <script>
 import Register from '@/components/HomePage/Register'
 export default {
+  name:'hello',
   components: { Register }
 }
 </script>
