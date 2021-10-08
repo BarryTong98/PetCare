@@ -5,7 +5,7 @@
     <id column="sid" jdbcType="INTEGER" property="sid" />
     <result column="service_provider_id" jdbcType="INTEGER" property="serviceProviderId" />
     <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
-    <result column="price" jdbcType="DOUBLE" property="price" />
+    <result column="price" jdbcType="VARCHAR" property="price" />
     <result column="is_boarding" jdbcType="INTEGER" property="isBoarding" />
     <result column="service_date" jdbcType="DATE" property="serviceDate" />
     <result column="service_time" jdbcType="VARCHAR" property="serviceTime" />
@@ -36,7 +36,7 @@
       price, is_boarding, service_date,
       service_time)
     values (#{sid,jdbcType=INTEGER}, #{serviceProviderId,jdbcType=INTEGER}, #{serviceName,jdbcType=VARCHAR}, 
-      #{price,jdbcType=DOUBLE}, #{isBoarding,jdbcType=INTEGER}, #{serviceDate,jdbcType=DATE},
+      #{price,jdbcType=VARCHAR}, #{isBoarding,jdbcType=INTEGER}, #{serviceDate,jdbcType=DATE},
       #{serviceTime,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Service">
@@ -75,7 +75,7 @@
         #{serviceName,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        #{price,jdbcType=DOUBLE},
+        #{price,jdbcType=VARCHAR},
       </if>
       <if test="isBoarding != null">
         #{isBoarding,jdbcType=INTEGER},
@@ -98,7 +98,7 @@
         service_name = #{serviceName,jdbcType=VARCHAR},
       </if>
       <if test="price != null">
-        price = #{price,jdbcType=DOUBLE},
+        price = #{price,jdbcType=VARCHAR},
       </if>
       <if test="isBoarding != null">
         is_boarding = #{isBoarding,jdbcType=INTEGER},
@@ -116,7 +116,7 @@
     update service
     set service_provider_id = #{serviceProviderId,jdbcType=INTEGER},
       service_name = #{serviceName,jdbcType=VARCHAR},
-      price = #{price,jdbcType=DOUBLE},
+      price = #{price,jdbcType=VARCHAR},
       is_boarding = #{isBoarding,jdbcType=INTEGER},
       service_date = #{serviceDate,jdbcType=DATE},
       service_time = #{serviceTime,jdbcType=VARCHAR}
