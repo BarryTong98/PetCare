@@ -32,17 +32,16 @@
         <router-link to="/reset" style="margin-left: 52%">Forget your password?</router-link>
       </el-form-item>
       <el-form-item>
-        <el-button class="btn-quality" type="primary" @click="submitForm('ruleForm')">Login</el-button>
-        <!--<el-button class="btn-quality" @click="resetForm('ruleForm')">重置</el-button>-->
+        <el-button class="btn-quality" type="primary" @click="submitForm">Login</el-button>
       </el-form-item>
     </el-form>
   </div>
 </template>
 <script>
 import GoogleLogin from 'vue-google-login'
+import axios from 'axios'
 //new
 export default {
-  name: 'App',
   props: {
     params: Object,
     // It gets called if the action (login/logout) is successful.
@@ -111,15 +110,48 @@ export default {
     GoogleLogin
   },
   methods: {
-    submitForm (formName) {
-      this.$refs[formName].validate((valid) => {
-        if (valid) {
-          alert('submit!')
-        } else {
-          console.log('error submit!!')
-          return false
-        }
-      })
+    // submitForm (formName) {
+    //   this.$refs[formName].validate((valid) => {
+    //     if (valid) {
+    //      console.log(formName)
+    //       alert('submit!')
+    //     } else {
+    //       console.log(formName)
+    //       alert.log('Error')
+    //       return false
+    //     }
+    //   })
+    // },
+    submitForm() {
+      let _this = this;
+      if(this.ruleForm.pass ==='' || this.ruleForm.checkPass ===''){
+        alert('Account & Passwrod is Empty');
+      }else{
+        //?username=z&password=y
+        axios(
+            {
+              method: 'get',
+              url: 'http://110.40.184.115:8080/login/login?username='+this.ruleForm.pass+'&password='+this.ruleForm.checkPass,
+              //url: 'http://110.40.184.115:8080/login/login',
+              data:{
+                account: this.ruleForm.pass,
+                password: this.ruleForm.checkPass
+              }
+            }
+        ).then(function(response){
+          if(response.data.code === 200){
+            alert('Login Successfully')
+            _this.$router.push('/home')
+          }
+          if(response.data.code === 999){
+            alert('Account or Password Error')
+          }
+          console.log(response.data);
+        }).catch(function(error){
+          alert('Account or Password Error')
+          console.log(error);
+        });
+      }
     },
     onSuccess (googleUser) {
       console.log(googleUser)

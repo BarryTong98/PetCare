@@ -22,7 +22,6 @@
       </el-form-item>
       <el-form-item>
         <el-button class="btn-quality" type="primary" @click="submitForm('ruleForm')">Register</el-button>
-        <!--<el-button class="btn-quality" @click="resetForm('ruleForm')">重置</el-button>-->
       </el-form-item>
     </el-form>
   </div>

@@ -9,6 +9,8 @@ import './assets/style/font.less'
 //导入字体图标
 import './assets/fonts/iconfont.css'
 import axios from 'axios'
+import VueAxios from "vue-axios";
+
 import { LoaderPlugin,GoogleLogin } from 'vue-google-login';
 
 Vue.use(LoaderPlugin, {
@@ -23,8 +25,14 @@ Vue.use(GoogleLogin)
 
 Vue.config.productionTip = false
 //配置请求的根路径
-axios.defaults.baseURL = 'http://127.0.0.1:8888/api/private/v1/'
+axios.defaults.baseURL = 'http://110.40.184.115:8080'
 Vue.prototype.$http = axios
+Vue.use(axios,VueAxios)
+// axios({
+//   url: 'http://110.40.184.115:8080/serviceProvider/search/sydney/16?keyword='
+// }).then(res=> {
+//   console.log(res);
+// })
 
 new Vue({
   router,
