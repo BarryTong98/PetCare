@@ -16,7 +16,7 @@
       <el-col  :span="4" :offset="1">
         <el-upload id="uploadImg"
           class="avatar-uploader"
-          action="http://110.40.184.115:8080/oss/upload?module=avatar&&userName=test1"
+          action="http://110.40.184.115:8080/oss/upload?module=avatar&&userName=TL"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
           :before-upload="beforeAvatarUpload">
