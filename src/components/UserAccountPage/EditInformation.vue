@@ -136,8 +136,8 @@ export default {
                 message: 'Update successfully!',
                 type: 'success'
               });
-              // this.$router.push({path:'/customers',query:{alert:'success'}})
             })
+          _this.$router.go(0);
         } else {
           console.log('error submit!!');
           return false;
