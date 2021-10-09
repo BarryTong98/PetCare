@@ -28,7 +28,7 @@ public class EmailTest {
 
     @Test
     public void verifyCodeTest(){
-        Result result = emailService.verifyCode("947079912@qq.com","50891");
+        Result result = emailService.verifyCode("947079912@qq.com","443875");
         System.out.println(result);
     }
 }

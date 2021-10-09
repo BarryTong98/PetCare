@@ -78,20 +78,20 @@ public class UserServiceImpl implements UserService {
     public Result updateUser(User record) {
         int uid = record.getUid();
         User user = userMapper.selectByPrimaryKey(uid);
-        String originalUserName=user.getUserName();
-        String originalEmail=user.getEmail();
-        if(!originalUserName.equals(record.getUserName())){
+        String originalUserName = user.getUserName();
+        String originalEmail = user.getEmail();
+        if (!originalUserName.equals(record.getUserName())) {
             User checkName = userMapper.selectByUserName(record.getUserName());
             if (checkName != null) {
                 return Result.error("Username already exists");
             }
         }
-       if(!originalEmail.equals(record.getEmail())){
-           User checkEmail = userMapper.selectByEmail(record.getEmail());
-           if (checkEmail != null) {
-               return Result.error("Email already exists");
-           }
-       }
+        if (!originalEmail.equals(record.getEmail())) {
+            User checkEmail = userMapper.selectByEmail(record.getEmail());
+            if (checkEmail != null) {
+                return Result.error("Email already exists");
+            }
+        }
         try {
             userMapper.updateByPrimaryKeySelective(record);
         } catch (Exception e) {
@@ -117,11 +117,11 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Result resetPassword(String password, Integer uid) {
-        if (password == null || uid == null) {
-            return Result.error("Password or uid is empty");
+    public Result resetPassword(String password, String email) {
+        if (password == null || email == null) {
+            return Result.error("Password or email is empty");
         }
-        User user = userMapper.selectByPrimaryKey(uid);
+        User user = userMapper.selectByEmail(email);
         if (user == null) {
             return Result.error("User doesn't exist!");
         }

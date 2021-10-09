@@ -1,6 +1,7 @@
 package au.edu.sydney.web.dao;
 
 import au.edu.sydney.web.entity.pojo.Review;
+import au.edu.sydney.web.entity.vo.ReviewVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -20,7 +21,7 @@ public interface ReviewMapper {
 
     int updateByPrimaryKey(Review record);
 
-    List<Review> selectBySpid(Integer spid);
+    List<ReviewVO> selectBySpid(Integer spid);
 
-    List<Review> selectByUid(Integer uid);
+    List<ReviewVO> selectByUid(Integer uid);
 }

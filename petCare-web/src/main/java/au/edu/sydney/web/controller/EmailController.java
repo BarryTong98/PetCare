@@ -26,8 +26,8 @@ public class EmailController {
     @ApiOperation("获取邮箱验证码")
     @PostMapping("/send")
     public Result sendEmail(@ApiParam(value = "邮箱", required = true)
-                            @RequestBody String email) {
-        return emailService.sendEmailVerificationCode(email);
+                            @RequestBody EmailVerificationREQ emailVerificationREQ) {
+        return emailService.sendEmailVerificationCode(emailVerificationREQ.getEmail());
     }
 
     @ApiOperation("核对验证码")

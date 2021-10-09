@@ -13,8 +13,8 @@ import lombok.Data;
 @ApiModel(value="PasswordREQ", description="密码请求对象")
 public class PasswordREQ {
 
-    @ApiParam("用户id")
-    private Integer userId;
+    @ApiParam("邮箱")
+    private String email;
 
     @ApiParam("密码")
     private String password;

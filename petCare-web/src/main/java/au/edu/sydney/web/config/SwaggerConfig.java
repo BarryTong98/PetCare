@@ -1,6 +1,5 @@
 package au.edu.sydney.web.config;
 
-import au.edu.sydney.web.entity.pojo.*;
 import com.fasterxml.classmate.TypeResolver;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
@@ -16,11 +15,6 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import java.util.ArrayList;
 
-/**
- * @author king
- * @date 2020-09-30 15:02
- * @description
- */
 @Configuration
 @EnableSwagger2  //开启swagger2
 public class SwaggerConfig {
@@ -65,13 +59,13 @@ public class SwaggerConfig {
                 .apis(RequestHandlerSelectors.basePackage("au.edu.sydney.web.controller"))
                 //paths()过滤什么路径,即这里只扫描请求以/kuang开头的接口
                 //.paths(PathSelectors.ant("/kuang/**"))
-                .build()
+                .build();
                 //在models中显示实体类
-                .additionalModels(typeResolver.resolve(User.class))
-                .additionalModels(typeResolver.resolve(Order.class))
-                .additionalModels(typeResolver.resolve(Service.class))
-                .additionalModels(typeResolver.resolve(ServiceProvider.class))
-                .additionalModels(typeResolver.resolve(Review.class));
+                //.additionalModels(typeResolver.resolve(User.class))
+                //.additionalModels(typeResolver.resolve(Order.class))
+                //.additionalModels(typeResolver.resolve(Service.class))
+                //.additionalModels(typeResolver.resolve(ServiceProvider.class))
+                //.additionalModels(typeResolver.resolve(Review.class));
     }
 
     //配置文档信息

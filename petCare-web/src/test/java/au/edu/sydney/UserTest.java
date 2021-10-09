@@ -64,7 +64,7 @@ public class UserTest {
 
     @Test
     public void resetPasswordTest() {
-        Result result = userService.resetPassword("12345678", 1);
+        Result result = userService.resetPassword("12345678","947079912@qq.com" );
         System.out.println(result);
 
     }

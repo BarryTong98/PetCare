@@ -20,5 +20,5 @@ public interface UserService {
 
     Result login(String username, String password);
 
-    Result resetPassword(String password, Integer uid);
+    Result resetPassword(String password, String email);
 }

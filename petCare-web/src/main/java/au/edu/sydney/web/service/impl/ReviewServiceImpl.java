@@ -5,6 +5,7 @@ import au.edu.sydney.web.dao.ReviewMapper;
 import au.edu.sydney.web.dao.ServiceProviderMapper;
 import au.edu.sydney.web.entity.pojo.Review;
 import au.edu.sydney.web.entity.pojo.ServiceProvider;
+import au.edu.sydney.web.entity.vo.ReviewVO;
 import au.edu.sydney.web.service.ReviewService;
 import org.springframework.stereotype.Service;
 
@@ -36,13 +37,13 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public Result getReviewBySpid(int spid) {
-        List<Review> list = reviewMapper.selectBySpid(spid);
+        List<ReviewVO> list = reviewMapper.selectBySpid(spid);
         return Result.ok(list);
     }
 
     @Override
     public Result getReviewByUid(int uid) {
-        List<Review> list = reviewMapper.selectByUid(uid);
+        List<ReviewVO> list = reviewMapper.selectByUid(uid);
         return Result.ok(list);
     }
 

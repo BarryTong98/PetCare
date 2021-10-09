@@ -2,9 +2,7 @@ package au.edu.sydney.web.entity.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.Data;
 
 /**
  * @author Chris
@@ -12,9 +10,7 @@ import lombok.Setter;
  * @description
  */
 @ApiModel(value="emailVerificationREQ", description="邮箱验证post请求对象")
-@AllArgsConstructor
-@Getter
-@Setter
+@Data
 public class EmailVerificationREQ {
     @ApiParam(value = "邮箱", required = true)
     String email;

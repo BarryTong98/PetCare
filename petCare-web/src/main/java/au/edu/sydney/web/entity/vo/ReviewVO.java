@@ -1,15 +1,17 @@
-package au.edu.sydney.web.entity.pojo;
+package au.edu.sydney.web.entity.vo;
 
-import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
 import java.util.Date;
 
-
-@ApiModel(value="Review", description="评论对象")
+/**
+ * @author Chris
+ * @date 2021-10-09 10:00
+ * @description
+ */
 @Data
-public class Review {
+public class ReviewVO {
 
     @ApiModelProperty(value = "评论ID")
     private Integer rid;
@@ -31,4 +33,13 @@ public class Review {
 
     @ApiModelProperty(value = "点赞数")
     private Integer numberOfLikes;
+
+    @ApiModelProperty(value = "用户昵称")
+    private String nickName;
+
+    @ApiModelProperty(value = "用户头像照片url")
+    private String imageUrl;
+
+
 }
+

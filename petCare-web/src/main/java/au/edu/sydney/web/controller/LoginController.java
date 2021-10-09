@@ -30,6 +30,6 @@ public class LoginController {
     @ApiOperation("resetPassword")
     @PutMapping("/reset")
     public Result updatePwd(@RequestBody PasswordREQ passwordREQ) {
-        return userService.resetPassword(passwordREQ.getPassword(), passwordREQ.getUserId());
+        return userService.resetPassword(passwordREQ.getPassword(), passwordREQ.getEmail());
     }
 }

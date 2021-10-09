@@ -124,7 +124,9 @@
         uo.create_time,
         s.service_name,
         sp.service_provider_name,
-        sp.image_url
+        sp.image_url,
+        sp.address,
+        sp.contact_number
         from
         user_order uo,
         service s,
@@ -148,7 +150,9 @@
         uo.create_time,
         s.service_name,
         sp.service_provider_name,
-        sp.image_url
+        sp.image_url,
+        sp.address,
+        sp.contact_number
         from
         user_order uo,
         service s,
@@ -173,7 +177,9 @@
                uo.create_time,
                s.service_name,
                sp.service_provider_name,
-               sp.image_url
+               sp.image_url,
+               sp.address,
+               sp.contact_number
         from user_order uo,
              service s,
              service_provider sp

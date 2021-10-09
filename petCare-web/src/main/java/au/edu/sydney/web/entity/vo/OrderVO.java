@@ -43,5 +43,13 @@ public class OrderVO {
     @ApiModelProperty(value = "商家的图片url")
     private String imageUrl;
 
+    @ApiModelProperty(value = "商家地址")
+    private String address;
+
+    @ApiModelProperty(value = "商家电话")
+    private String contactNumber;
+
+
+
 
 }

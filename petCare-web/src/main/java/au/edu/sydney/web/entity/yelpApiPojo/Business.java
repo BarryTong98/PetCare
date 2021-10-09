@@ -11,11 +11,8 @@ import java.util.List;
  * @date 2021-09-27 16:38
  * @description
  */
-@Setter
-@Getter
-@NoArgsConstructor
-@AllArgsConstructor
-@ToString
+
+@Data
 @ApiModel(value="BusinessPojo", description="yelp商家信息对象")
 public class Business {
 
