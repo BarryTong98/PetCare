@@ -7,7 +7,7 @@
         <result column="service_provider_id" jdbcType="INTEGER" property="serviceProviderId"/>
         <result column="rating" jdbcType="DOUBLE" property="rating"/>
         <result column="content" jdbcType="VARCHAR" property="content"/>
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="create_time" jdbcType="VARCHAR" property="createTime"/>
         <result column="number_of_likes" jdbcType="INTEGER" property="numberOfLikes"/>
     </resultMap>
     <sql id="Base_Column_List">
@@ -61,7 +61,7 @@
       rating, content, create_time, 
       number_of_likes)
     values (#{rid,jdbcType=INTEGER}, #{userId,jdbcType=INTEGER}, #{serviceProviderId,jdbcType=INTEGER}, 
-      #{rating,jdbcType=DOUBLE}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{rating,jdbcType=DOUBLE}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
       #{numberOfLikes,jdbcType=INTEGER})
   </insert>
     <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Review">
@@ -106,7 +106,7 @@
                 #{content,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
-                #{createTime,jdbcType=TIMESTAMP},
+                #{createTime,jdbcType=VARCHAR},
             </if>
             <if test="numberOfLikes != null">
                 #{numberOfLikes,jdbcType=INTEGER},
@@ -129,7 +129,7 @@
                 content = #{content,jdbcType=VARCHAR},
             </if>
             <if test="createTime != null">
-                create_time = #{createTime,jdbcType=TIMESTAMP},
+                create_time = #{createTime,jdbcType=VARCHAR},
             </if>
             <if test="numberOfLikes != null">
                 number_of_likes = #{numberOfLikes,jdbcType=INTEGER},
@@ -143,7 +143,7 @@
       service_provider_id = #{serviceProviderId,jdbcType=INTEGER},
       rating = #{rating,jdbcType=DOUBLE},
       content = #{content,jdbcType=VARCHAR},
-      create_time = #{createTime,jdbcType=TIMESTAMP},
+      create_time = #{createTime,jdbcType=VARCHAR},
       number_of_likes = #{numberOfLikes,jdbcType=INTEGER}
     where rid = #{rid,jdbcType=INTEGER}
   </update>

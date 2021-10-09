@@ -3,8 +3,6 @@ package au.edu.sydney.web.entity.vo;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
-import java.util.Date;
-
 /**
  * @author Chris
  * @date 2021-10-09 10:00
@@ -29,7 +27,7 @@ public class ReviewVO {
     private String content;
 
     @ApiModelProperty(value = "评论发布时间")
-    private Date createTime;
+    private String createTime;
 
     @ApiModelProperty(value = "点赞数")
     private Integer numberOfLikes;
