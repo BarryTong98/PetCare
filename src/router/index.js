@@ -17,6 +17,15 @@ import Reset2 from '@/components/HomePage/Reset2'
 import Search from "@/components/Search";
 import Information from "@/components/Information";
 import orderAdd from "@/components/orderAdd";
+
+import MyAccount from "@/components/UserAccountPage/MyAccount";
+import MyOrderCompleted from "@/components/UserAccountPage/MyOrderCompleted";
+import PersonalInformation from "@/components/UserAccountPage/PersonalInformation";
+import EditInformation from "@/components/UserAccountPage/EditInformation";
+import MyOrderNotStart from "@/components/UserAccountPage/MyOrderNotStart";
+import MyOrderCanceled from "@/components/UserAccountPage/MyOrderCanceled";
+import MyAccountHome from "@/components/UserAccountPage/MyAccountHome";
+
 Vue.use(Router)
 
 const router =  new Router({
@@ -124,7 +133,7 @@ const router =  new Router({
           component:EditInformation,
         },
         {
-          path: '/reset222',
+          path: '/myaccountreset',
           component: Reset2
         },
       ]

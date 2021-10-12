@@ -5,6 +5,7 @@
         <el-button id="edit_button" type="primary" @click="editinfo">Edit</el-button>
       </el-col>
     </el-row>
+    <h2 class="resetH2">Personal information</h2>
     <el-row style="margin-top: 20px">
       <!--用户头像-->
       <el-col :span="2" :offset="9" >
@@ -83,6 +84,13 @@ export default {
 </script>
 
 <style scoped>
+.resetH2 {
+  font-family: PPWoodland-Bold;
+  text-align: center;
+  margin-top: 0%;
+  margin-bottom: 7%;
+}
+
 #userImg{
   width: 100px;
   height: 100px;
@@ -95,6 +103,5 @@ export default {
   background-color: #fa997e;
   border-color: #fa997e;
 }
-
 
 </style>

@@ -22,7 +22,7 @@
     </div>
 
     <!--预定的商家列表-->
-    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in orders">
+    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in storeDisplay">
       <li>
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
@@ -75,6 +75,17 @@
         </el-container>
       </li>
     </ul>
+    <!--分页功能-->
+    <el-pagination hide-on-single-page
+                   style="margin-top: 10px"  class="pagination-store"
+                   :current-page.sync="currentPage"
+                   background
+                   @current-change="handleCurrentChange"
+                   layout="prev, pager, next"
+                   :total="orders.length"
+                   :page-size="storePageSize">
+    </el-pagination>
+
   </div>
 </template>
 
@@ -85,10 +96,37 @@ export default {
     return{
       status:'1',
       searchInfo: '',
-      orders: []
+      orders: [],
+
+      //分页展示个数以及展示商店数组
+      storePageSize: 5,
+      storeDisplay: [],
+      currentPage: 1,
     }
   },
   methods:{
+    //处理分页展示
+    handleCurrentChange(currentPage) {
+      if(this.orders.length === 0){
+        this.countStore = false
+      }
+      else{
+        this.countStore = true
+        this.storeDisplay = []
+        var m = 0
+
+        if (currentPage * this.storePageSize > this.orders.length) {
+          m = this.orders.length
+        } else {
+          m = currentPage * this.storePageSize
+        }
+        for (var i = (currentPage - 1) * this.storePageSize; i < m; i++) {
+          this.storeDisplay.push(JSON.parse(JSON.stringify(this.orders[i])))
+        }
+        console.log("测试测试：");
+      }
+    },
+
     //取消订单
     cancelOrder(){
       alert("请问你确定取消吗？")
@@ -149,12 +187,14 @@ export default {
               _this.orders.push(temporders[item]);
             }
           };
-
+          _this.handleCurrentChange(1);
         });
     },
   },
+
   created() {
-    this.findAll()
+    this.findAll();
+
   },
 }
 </script>

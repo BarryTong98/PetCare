@@ -33,7 +33,7 @@
           <el-menu-item index="/information">
             <i class="el-icon-user-solid myicon" ></i>User Information
           </el-menu-item>
-          <el-menu-item index="/reset222">
+          <el-menu-item index="/myaccountreset">
             <i class="el-icon-edit myicon"></i>Reset Password
           </el-menu-item>
         </el-submenu>
