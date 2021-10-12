@@ -20,6 +20,7 @@ import EditInformation from "@/components/UserAccountPage/EditInformation";
 import MyOrderNotStart from "@/components/UserAccountPage/MyOrderNotStart";
 import MyOrderCanceled from "@/components/UserAccountPage/MyOrderCanceled";
 import MyAccountHome from "@/components/UserAccountPage/MyAccountHome";
+import test from "@/components/UserAccountPage/test";
 Vue.use(Router)
 
 export default new Router({
@@ -109,9 +110,18 @@ export default new Router({
         },
         { path: '/editinfo',
           component:EditInformation,
-        }
+        },
+        {
+          path: '/reset222',
+          component: Reset2
+        },
       ]
     },
+    {
+      path: '/test',
+      component: test
+    }
+    ,
 
   ]
 })

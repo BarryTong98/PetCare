@@ -27,11 +27,11 @@
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
           <el-aside style="width: 200px; padding: 10px;margin: 10px;text-align: center">
-            <img style="width: 100px"></img>
+            <img :src="order.imageUrl" style="width: 200px"></img>
           </el-aside>
 
           <!--预定医院的信息-->
-          <el-col :span="13" style="text-align: left;">
+          <el-col :span="24" style="text-align: left;">
             <div style="margin: 10px;">
               <span
                 style="font-family: Arial;font-size: 18px;font-weight: bolder">{{ order.serviceProviderName }}</span>
@@ -45,7 +45,19 @@
                 <li>
                   <div style="margin-top: 7px">
                     <i class="el-icon-map-location"></i>
-                    <span> Location: {{ order.serviceProviderName }}</span>
+                    <span> Location: {{ order.address }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-service"></i>
+                    <span> Contact number: {{ order.contactNumber }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-bell"></i>
+                    <span> Service name: {{ order.serviceName }}</span>
                   </div>
                 </li>
                 <li>
@@ -56,9 +68,6 @@
                 </li>
               </ul>
             </div>
-          </el-col>
-          <el-col :span="11" style="text-align: center;">
-            <el-button id="evaluate_button" type="primary">Evaluate</el-button>
           </el-col>
         </el-container>
       </li>
@@ -79,7 +88,7 @@ export default {
     //搜索框
     searchOrders() {
       const _this = this;
-      _this.$http.get("http://110.40.184.115:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code=" + 3) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code=" + 3) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
@@ -123,7 +132,7 @@ export default {
     //查找所有订单
     findAll() {
       const _this = this;
-      _this.$http.get("http://110.40.184.115:8080/order/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
           for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
@@ -205,7 +214,7 @@ button {
 
 #evaluate_button {
   margin-top: 45px;
-  width: 100px;
+  width: 120px;
   color: #fff;
   background-color: #fa997e;
   border-color: #fa997e;
