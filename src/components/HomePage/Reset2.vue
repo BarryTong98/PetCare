@@ -112,9 +112,6 @@ export default {
   margin-left: 5%;
 }
 
-.el-input {
-  width: 80%;
-}
 
 .now {
   margin-top: 10%;

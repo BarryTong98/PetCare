@@ -70,7 +70,7 @@
             </div>
           </el-col>
           <el-col :span="2" style="text-align:left;">
-            <el-button icon="el-icon-delete" id="cancel_button" type="danger" @click="cancelOrder">Cancel</el-button>
+            <el-button icon="el-icon-delete" id="cancel_button" type="danger" @click="cancelOrder(order.oid)">Cancel</el-button>
           </el-col>
         </el-container>
       </li>
@@ -102,6 +102,7 @@ export default {
       storePageSize: 5,
       storeDisplay: [],
       currentPage: 1,
+      show:true
     }
   },
   methods:{
@@ -109,6 +110,7 @@ export default {
     handleCurrentChange(currentPage) {
       if(this.orders.length === 0){
         this.countStore = false
+        this.show = false
       }
       else{
         this.countStore = true
@@ -123,15 +125,26 @@ export default {
         for (var i = (currentPage - 1) * this.storePageSize; i < m; i++) {
           this.storeDisplay.push(JSON.parse(JSON.stringify(this.orders[i])))
         }
-        console.log("测试测试：");
       }
     },
 
     //取消订单
-    cancelOrder(){
-      alert("请问你确定取消吗？")
+    cancelOrder(oid) {
       this.status = 3;
+      const _this = this;
+      let updateStatus = {
+        code: 3,
+        orderID: oid
+      }
+      this.$http.put('http://47.96.6.135:8080/order/update', updateStatus)
+        .then((response) => {
+          this.$message({
+            message: 'Update successfully!',
+            type: 'success'
+          });
+        });
     },
+
     //搜索框
     searchOrders() {
       const _this = this;

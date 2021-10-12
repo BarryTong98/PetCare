@@ -70,8 +70,9 @@
               </ul>
             </div>
           </el-col>
+          <!--评价按钮-->
           <el-col :span="2" style="text-align: left;">
-            <el-button icon="el-icon-edit"  id="evaluate_button" type="primary">Evaluate</el-button>
+            <el-button icon="el-icon-edit"  id="evaluate_button" type="primary" @click="evaluate(order.oid)">Evaluate</el-button>
           </el-col>
         </el-container>
       </li>
@@ -105,6 +106,19 @@ export default {
     }
   },
   methods:{
+    //评价
+    evaluate(oid){
+      this.$router.replace('/orderevaluate')
+      // this.$router.push({
+      //   path: '/orderevaluate',
+      //   name: 'OrderDetail',
+      //     params: {
+      //       oid: 1,
+      //       uid: 1
+      //     }
+      //   })
+    },
+
     //处理分页展示
     handleCurrentChange(currentPage) {
       if(this.orders.length === 0){

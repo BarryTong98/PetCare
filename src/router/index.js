@@ -25,6 +25,7 @@ import EditInformation from "@/components/UserAccountPage/EditInformation";
 import MyOrderNotStart from "@/components/UserAccountPage/MyOrderNotStart";
 import MyOrderCanceled from "@/components/UserAccountPage/MyOrderCanceled";
 import MyAccountHome from "@/components/UserAccountPage/MyAccountHome";
+import OrderEvaluate from "@/components/UserAccountPage/OrderEvaluate";
 
 Vue.use(Router)
 
@@ -135,6 +136,10 @@ const router =  new Router({
         {
           path: '/myaccountreset',
           component: Reset2
+        },
+        {
+          path: '/orderevaluate',
+          component: OrderEvaluate
         },
       ]
     },

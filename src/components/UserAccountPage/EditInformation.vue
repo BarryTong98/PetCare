@@ -1,6 +1,5 @@
 <template>
   <div class="edit">
-
     <el-row>
       <el-page-header @back="back2Info" content="Edit Page" title="Back" style="color:#fa997e">
       </el-page-header>
@@ -28,6 +27,7 @@
 
     <!--更新用户信息表单-->
     <el-form
+      status-icon
       :label-position="labelPosition"
       label-width="170px"
       :model="customer"
