@@ -24,6 +24,7 @@
 
     </el-header>
 
+
     <el-main style="text-align: left">
       <!--商家信息-->
       <el-row :gutter="20">
