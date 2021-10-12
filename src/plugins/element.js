@@ -28,6 +28,11 @@ import {
   Scrollbar,
   Pagination,
   Rate, Step, Steps, DatePicker, TimePicker, TimeSelect, Select, Option,
+  Tag,
+  Upload,
+  PageHeader,
+  Descriptions,
+  DescriptionsItem
 } from 'element-ui'
 
 Vue.use(Button)
@@ -74,6 +79,16 @@ Vue.use(Select)
 Vue.use(Option)
 Vue.use(Form)
 
-
+Vue.use(Dropdown)
+Vue.use(DropdownItem)
+Vue.use(DropdownMenu)
+Vue.use(Col)
+Vue.use(Breadcrumb)
+Vue.use(BreadcrumbItem)
+Vue.use(Tag)
+Vue.use(Upload)
+Vue.use(PageHeader)
+Vue.use(Descriptions)
+Vue.use(DescriptionsItem)
 
 Vue.prototype.$message = Message

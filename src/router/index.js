@@ -99,7 +99,36 @@ const router =  new Router({
       path: '/orderAdd/:type/:id/:price',
       name: 'orderAdd',
       component: orderAdd
-    }
+    },
+    {
+      path: '/myaccount',
+      component: MyAccount,
+      redirect:'/myaccounthome',
+      children:[
+        { path: '/myaccounthome',
+          component: MyAccountHome,
+        },
+        { path: '/ordercom',
+          component: MyOrderCompleted,
+        },
+        { path: '/ordernotstart',
+          component: MyOrderNotStart,
+        },
+        { path: '/ordercancel',
+          component: MyOrderCanceled,
+        },
+        { path: '/information',
+          component: PersonalInformation,
+        },
+        { path: '/editinfo',
+          component:EditInformation,
+        },
+        {
+          path: '/reset222',
+          component: Reset2
+        },
+      ]
+    },
 
   ]
 })
