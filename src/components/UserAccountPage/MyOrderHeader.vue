@@ -58,7 +58,8 @@ export default {
     },
     // 退出
     async logout() {
-      this.$message("点击退出");
+      window.sessionStorage.clear()
+      this.$router.push('/home')
     },
     //点击改变路由
     myorder(){

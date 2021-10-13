@@ -24,7 +24,7 @@
             <i class="el-icon-error myicon"></i>Canceled
           </el-menu-item>
           <el-menu-item index="/ordereva">
-            <i class="el-icon-document-checked myicon"></i>Evaluated
+            <i class="el-icon-s-claim myicon"></i>Evaluated
           </el-menu-item>
         </el-submenu>
 
