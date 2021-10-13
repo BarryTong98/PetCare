@@ -160,6 +160,7 @@ export default {
     previous(){
       if(--this.active < 0) this.active = 0;
     },
+
     getDate(value,hh){
       var date= new Date;
       var y = date.getFullYear()

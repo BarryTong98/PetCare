@@ -138,7 +138,8 @@ const router =  new Router({
           component: Reset2
         },
         {
-          path: '/orderevaluate',
+          name:'Evaluate',
+          path: '/orderevaluate/:uid/:oid',
           component: OrderEvaluate
         },
       ]
@@ -154,7 +155,7 @@ router.beforeEach((to, from, next)=>{
   //next是一个函数，表示放行
   //next()放行， next('login')强制跳转
   const tokenStr =  window.sessionStorage.getItem('token');
-  if(to.path ==='/template' && !tokenStr) next('/homelogin')
+  if(to.path ==='/template' || to.path ==='/myaccount'  && !tokenStr) next('/homelogin')
   next()
 })
 

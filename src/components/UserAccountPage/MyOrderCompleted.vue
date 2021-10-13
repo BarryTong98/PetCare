@@ -27,8 +27,8 @@
       <li>
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
-          <el-aside style="width: 200px; padding: 10px;margin: 10px;text-align: center">
-            <img :src="order.imageUrl" style="width: 200px" ></img>
+          <el-aside style="width: 200px;height: 150px;margin: 10px;text-align: center">
+            <img :src="order.imageUrl" style="width: 200px;height: 150px" ></img>
           </el-aside>
 
           <!--预定医院的信息-->
@@ -72,7 +72,10 @@
           </el-col>
           <!--评价按钮-->
           <el-col :span="2" style="text-align: left;">
-            <el-button icon="el-icon-edit"  id="evaluate_button" type="primary" @click="evaluate(order.oid)">Evaluate</el-button>
+            <el-button icon="el-icon-edit"  id="evaluate_button" type="primary"
+                       @click="evaluate(order.serviceProviderName)">
+              Evaluate
+            </el-button>
           </el-col>
         </el-container>
       </li>
@@ -107,16 +110,13 @@ export default {
   },
   methods:{
     //评价
-    evaluate(oid){
-      this.$router.replace('/orderevaluate')
-      // this.$router.push({
-      //   path: '/orderevaluate',
-      //   name: 'OrderDetail',
-      //     params: {
-      //       oid: 1,
-      //       uid: 1
-      //     }
-      //   })
+    evaluate(sid){
+      this.$router.push({
+        name:'Evaluate',
+        query: {
+          serviceProviderId: 1,
+        }
+      });
     },
 
     //处理分页展示

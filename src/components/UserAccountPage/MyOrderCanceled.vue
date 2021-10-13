@@ -26,8 +26,8 @@
       <li>
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
-          <el-aside style="width: 200px; padding: 10px;margin: 10px;text-align: center">
-            <img :src="order.imageUrl" style="width: 200px"></img>
+          <el-aside style="width: 200px;height: 150px;margin: 10px;text-align: center">
+            <img :src="order.imageUrl" style="width: 200px;height: 150px" ></img>
           </el-aside>
 
           <!--预定医院的信息-->
