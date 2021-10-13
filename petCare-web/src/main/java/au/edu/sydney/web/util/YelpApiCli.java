@@ -96,6 +96,9 @@ public class YelpApiCli {
         business.setRating(businessJSONObject.getDouble("rating"));
         business.setPhone(businessJSONObject.getString("display_phone"));
         JSONArray categories = businessJSONObject.getJSONArray("categories");
+        String addressString = businessJSONObject.getJSONObject("location").getString("display_address");
+        addressString = addressString.substring(2, addressString.length() - 2).replace("\"","");
+        business.setAddress(addressString);
         StringBuilder sb = new StringBuilder();
         for (int j = 0; j < categories.size(); j++) {
             sb.append(categories.getJSONObject(j).getString("title")).append(",");
@@ -128,6 +131,9 @@ public class YelpApiCli {
             business.setReview_count(businessJSONObject.getInteger("review_count"));
             business.setRating(businessJSONObject.getDouble("rating"));
             business.setPhone(businessJSONObject.getString("display_phone"));
+            String addressString = businessJSONObject.getJSONObject("location").getString("display_address");
+            addressString = addressString.substring(2, addressString.length() - 2).replace("\"","");
+            business.setAddress(addressString);
             JSONArray categories = businessJSONObject.getJSONArray("categories");
             StringBuilder sb = new StringBuilder();
             for (int j = 0; j < categories.size(); j++) {

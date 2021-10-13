@@ -13,7 +13,7 @@ import java.util.List;
  */
 
 @Data
-@ApiModel(value="BusinessPojo", description="yelp商家信息对象")
+@ApiModel(value = "BusinessPojo", description = "yelp商家信息对象")
 public class Business {
 
     @ApiParam(value = "商家id")
@@ -50,6 +50,9 @@ public class Business {
     private double longitude;
 
     @ApiParam(value = "商家照片地址列表")
-    private List<String>  photos;
+    private List<String> photos;
+
+    @ApiParam(value = "地址")
+    private String address;
 }
 

@@ -19,6 +19,9 @@ public class OrderVO {
     @ApiModelProperty(value = "对应的服务ID")
     private Integer serviceId;
 
+    @ApiModelProperty(value = "对应的服务提供者ID")
+    private Integer spid;
+
     @ApiModelProperty(value = "对应的用户ID")
     private Integer userId;
 
