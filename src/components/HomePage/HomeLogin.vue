@@ -130,7 +130,14 @@ export default {
           if(response.data.code === 200){
             alert('Login Successfully')
             window.sessionStorage.setItem("token", response.data.message)
+            // this.$emit("isToken",true);
             _this.$router.push('/home')
+            // _this.$router.push({
+            //   name:'/home',
+            //   query:{
+            //     isToken: true,
+            //   }
+            // })
           }
           if(response.data.code === 999){
             alert('Account or Password Error')

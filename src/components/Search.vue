@@ -286,10 +286,12 @@ export default {
     }
   },
   methods: {
+    //******************
     logout() {
       window.sessionStorage.clear()
-      this.$router.push('/login')
+      this.$router.push('/homelogin')
     },
+    //******************
 
     //处理Health分类勾选
     handleHealthCheckAllChange(val) {
