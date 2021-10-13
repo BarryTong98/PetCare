@@ -75,7 +75,7 @@ public class OrderServiceImpl implements OrderService {
         if (order == null) {
             return Result.error("No such order");
         }
-        if (code < 1 || code > 3) {
+        if (code < 1 || code > 4) {
             return Result.error("Status code error");
         }
         order.setStatus(code);

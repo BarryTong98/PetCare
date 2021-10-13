@@ -16,6 +16,6 @@ public class OrderREQ {
     @ApiParam("订单id")
     Integer orderID;
 
-    @ApiParam("状态码 1 未开始 2 已完成 3  已取消")
+    @ApiParam("状态码 1 未开始 2 已完成 3 已取消 4已完成评价")
     Integer code;
 }

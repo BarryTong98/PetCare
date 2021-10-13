@@ -41,7 +41,7 @@ public class OrderController {
         return orderService.insert(order);
     }
 
-    @ApiOperation("update order status  1 未开始 2 已完成 3  已取消")
+    @ApiOperation("update order status  1 未开始 2 已完成 3 已取消 4 已完成评价")
     @PutMapping("/update")
     public Result updateStatus(@RequestBody OrderREQ orderREQ) {
         return orderService.updateStatus(orderREQ.getOrderID(), orderREQ.getCode());
@@ -50,7 +50,6 @@ public class OrderController {
     @ApiOperation("search orders according to userId,keyword(service name,service provider name ) and status code")
     @GetMapping("/search")
     public Result searchOrders(@RequestParam Integer userId, @RequestParam(required = false) String keyword, @RequestParam(required = false) Integer code) {
-
         return orderService.searchOrders(userId, keyword, code);
     }
 }
