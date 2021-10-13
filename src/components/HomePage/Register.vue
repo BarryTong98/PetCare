@@ -84,8 +84,32 @@ export default {
             userName: this.ruleForm.username,
           }).then(function (response) {
             if (response.data.code === 200) {
-              alert('Resister Successfully')
-               _this.$router.push('/home')
+              alert('Register Successfully')
+               // _this.$router.push('/home')
+              axios(
+                {
+                  method: 'get',
+                  url: 'http://110.40.184.115:8080/login/login?username='+_this.ruleForm.username+'&password='+_this.ruleForm.pass,
+                  //url: 'http://110.40.184.115:8080/login/login',
+                  data:{
+                    account: _this.ruleForm.username,
+                    password: _this.ruleForm.pass
+                  }
+                }
+              ).then(function(response){
+                if(response.data.code === 200){
+                  alert('Login Successfully')
+                  window.sessionStorage.setItem("token", response.data.message)
+                  _this.$router.push('/home')
+                }
+                if(response.data.code === 999){
+                  alert('Account or Password Error')
+                }
+                console.log(response);
+              }).catch(function(error){
+                alert('Account or Password Error')
+                console.log(error);
+              });
             }
             if (response.data.code === 999) {
               alert('Account Already Exist')

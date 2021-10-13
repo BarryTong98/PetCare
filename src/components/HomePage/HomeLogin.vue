@@ -130,14 +130,7 @@ export default {
           if(response.data.code === 200){
             alert('Login Successfully')
             window.sessionStorage.setItem("token", response.data.message)
-            // this.$emit("isToken",true);
             _this.$router.push('/home')
-            // _this.$router.push({
-            //   name:'/home',
-            //   query:{
-            //     isToken: true,
-            //   }
-            // })
           }
           if(response.data.code === 999){
             alert('Account or Password Error')
@@ -151,9 +144,15 @@ export default {
     },
     onSuccess (googleUser) {
       console.log(googleUser)
-
-      // This only gets the user information: id, name, imageUrl and email
-      console.log(googleUser.getBasicProfile())
+      const profile = user.getBasicProfile(); // 用户登录信息
+      console.log("ID: " + profile.getId());
+      console.log("Full Name: " + profile.getName());
+      console.log("Given Name: " + profile.getGivenName());
+      console.log("Family Name: " + profile.getFamilyName());
+      console.log("Image URL: " + profile.getImageUrl());
+      console.log("Email: " + profile.getEmail());
+      var id_token = user.getAuthResponse().id_token;
+      console.log("ID Token: " + id_token);
     },
   }
 }
