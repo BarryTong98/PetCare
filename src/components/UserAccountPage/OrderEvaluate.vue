@@ -1,10 +1,30 @@
 <template>
 <div>
+  <!--最上面返回按钮-->
   <el-row>
     <el-page-header @back="back2Order" content="Evaluate Page" title="Back" style="color:#fa997e">
     </el-page-header>
   </el-row>
-  <el-button type="primary" @click="evaluate">test</el-button>
+  <!--评价表单-->
+  <el-form :model="ruleForm"
+           :rules="rules"
+           ref="ruleForm"
+           label-width="100px"
+           class="demo-ruleForm">
+    <el-form-item label="Rate:" prop="name">
+      <el-rate
+        v-model="rate"
+        :colors="colors">
+      </el-rate>
+    </el-form-item>
+    <el-form-item label="Comment:" prop="desc">
+      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+    </el-form-item>
+
+    <el-form-item>
+      <el-button type="primary" @click="submitForm('ruleForm')">Evaluate</el-button>
+    </el-form-item>
+  </el-form>
 
 </div>
 </template>
@@ -14,7 +34,22 @@ export default {
   name: "OrderEvaluate",
   data(){
     return{
-      content:'hello',
+      gettime:'',
+      spid:0,
+      oid:0,
+      //rate
+      rate: null,
+      colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
+
+      //评价表单
+      ruleForm: {
+        desc: ''
+      },
+      rules:{
+        desc: [
+          { required: true, message: 'Please input the feedback of this service', trigger: 'blur' }
+        ]
+      }
     }
   },
   methods:{
@@ -23,33 +58,83 @@ export default {
       this.$router.replace('/ordercom')
     },
 
-    //提交评价
-    evaluate(){
-      const _this = this;
-      this.$http.post("http://110.40.184.115:8080/review/add",{
-        content: this.content,
-        createTime:null,
-        numberOfLikes:0,
-        rating: 0,
-        rid: null,
-        serviceProviderId: this.$route.query.serviceProviderId,
-        userId: 1
-      }).then(function(response){
-        console.log("添加："+response.data);
-        if (response.data.success == true){
-          alert("添加成功");
-          //切换路由
-          _this.$router.push("/ordercom");
+    submitForm(formName) {
+      this.$refs[formName].validate((valid) => {
+        if (valid) {
+          //获取当前时间并打印
+          let yy = new Date().getFullYear();
+          let mm = new Date().getMonth()+1;
+          let dd = new Date().getDate();
+          this.gettime = yy+'-'+mm+'-'+dd;
+          console.log(this.gettime);
+
+          //提交数据
+          const _this = this;
+          this.$http.post("http://47.96.6.135:8080/review/add",{
+            content: _this.ruleForm.desc,
+            createTime:_this.gettime,
+            numberOfLikes:40,
+            rating: _this.rate,
+            rid: null,
+            serviceProviderId: _this.spid,
+            userId: 1,
+          }).then(function(response){
+            if (response.data.message == "success"){
+              //切换路由
+              alert("Comment successful!")
+
+              let updateStatus = {
+                code: 4,
+                orderID: _this.oid
+              }
+              _this.$http.put('http://110.40.184.115:8080/order/update', updateStatus)
+                .then((response) => {
+                  _this.$message({
+                    message: 'Change status successfully!',
+                    type: 'success'
+                  });
+                });
+
+            }
+          }).catch(function(err){
+            console.log(err);
+          });
+
+        } else {
+          console.log('error submit!!');
+          return false;
         }
-      }).catch(function(err){
-        console.log(err);
       });
+    },
+    //改变订单状态
+    changeOrderStatus(oid) {
+      this.status = 3;
+      const _this = this;
+      let updateStatus = {
+        code: 3,
+        orderID: oid
+      }
+      this.$http.put('http://47.96.6.135:8080/order/update', updateStatus)
+        .then((response) => {
+          this.$message({
+            message: 'Canceled successfully!',
+            type: 'success'
+          });
+        });
     },
 
   },
+  created() {
+    this.spid = this.$route.query.currentspid;
+    this.oid = this.$route.query.orderid;
+  }
+
 }
 </script>
 
 <style scoped>
-
+.demo-ruleForm{
+  margin-top: 20px;
+  padding: 70px;
+}
 </style>

@@ -26,6 +26,7 @@ import MyOrderNotStart from "@/components/UserAccountPage/MyOrderNotStart";
 import MyOrderCanceled from "@/components/UserAccountPage/MyOrderCanceled";
 import MyAccountHome from "@/components/UserAccountPage/MyAccountHome";
 import OrderEvaluate from "@/components/UserAccountPage/OrderEvaluate";
+import MyOrderEvaluated from "@/components/UserAccountPage/MyOrderEvaluated";
 
 Vue.use(Router)
 
@@ -127,6 +128,9 @@ const router =  new Router({
         { path: '/ordercancel',
           component: MyOrderCanceled,
         },
+        { path: '/ordereva',
+          component: MyOrderEvaluated,
+        },
         { path: '/information',
           component: PersonalInformation,
         },
@@ -139,7 +143,7 @@ const router =  new Router({
         },
         {
           name:'Evaluate',
-          path: '/orderevaluate/:uid/:oid',
+          path: '/orderevaluate/:currentspid/:orderid',
           component: OrderEvaluate
         },
       ]

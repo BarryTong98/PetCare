@@ -1,15 +1,14 @@
 <template>
-<div>
-  <!--面包屑-->
-  <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/myaccount' }">My Account</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/myaccount' }">My Order</el-breadcrumb-item>
-    <el-breadcrumb-item>Completed</el-breadcrumb-item>
-  </el-breadcrumb>
+  <div>
+    <!--面包屑-->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/myaccount' }">My Account</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/myaccount' }">My Order</el-breadcrumb-item>
+      <el-breadcrumb-item>Canceled</el-breadcrumb-item>
+    </el-breadcrumb>
 
-
-  <!--预定订单搜索框-->
+    <!--预定订单搜索框-->
     <div class="search bar1">
       <form>
         <input type="text"
@@ -32,7 +31,7 @@
           </el-aside>
 
           <!--预定医院的信息-->
-          <el-col :span="15" style="text-align: left;">
+          <el-col :span="24" style="text-align: left;">
             <div style="margin: 10px;">
               <span
                 style="font-family: Arial;font-size: 18px;font-weight: bolder">{{ order.serviceProviderName }}</span>
@@ -70,16 +69,6 @@
               </ul>
             </div>
           </el-col>
-          <!--评价按钮-->
-          <el-col :span="2" style="text-align: left;">
-            <el-button icon="el-icon-edit"
-                       id="evaluate_button"
-                       disabled:buttonDis
-                       type="primary"
-                       @click="evaluate(order.spid,order.oid)">
-              Evaluate
-            </el-button>
-          </el-col>
         </el-container>
       </li>
     </ul>
@@ -94,15 +83,15 @@
                    :total="orders.length"
                    :page-size="storePageSize">
     </el-pagination>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
-  name: "MyOrderCompleted",
-  data(){
-    return{
-      searchInfo:'',
+  name: "MyOrderEvaluated",
+  data() {
+    return {
+      searchInfo: '',
       orders: [],
 
       //分页展示个数以及展示商店数组
@@ -111,18 +100,7 @@ export default {
       currentPage: 1,
     }
   },
-  methods:{
-    //评价
-    evaluate(spid,oid){
-      this.$router.push({
-        name:'Evaluate',
-        query: {
-          currentspid: spid,
-          orderid:oid,
-        }
-      });
-    },
-
+  methods: {
     //处理分页展示
     handleCurrentChange(currentPage) {
       if(this.orders.length === 0){
@@ -141,14 +119,13 @@ export default {
         for (var i = (currentPage - 1) * this.storePageSize; i < m; i++) {
           this.storeDisplay.push(JSON.parse(JSON.stringify(this.orders[i])))
         }
-        console.log("测试测试：");
       }
     },
 
     //搜索框
     searchOrders() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code=" + 2) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code="+4) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
@@ -185,28 +162,28 @@ export default {
         console.log("显示所有订单")
       }else{
         this.searchOrders();
+
       }
     },
 
-
     //查找所有订单
-    findAll(){
+    findAll() {
       const _this = this;
       _this.$http.get("http://47.96.6.135:8080/order/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
-          for(var item=0;item< temporders.length;item++){  //遍历对象数组，item表示某个具体的对象
-            if (temporders[item].status == 2){
+          for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+            if (temporders[item].status == 4) {
               console.log(temporders[item])
               _this.orders.push(temporders[item]);
             }
-          };
+          }
         });
       _this.handleCurrentChange(1);
     },
   },
   created() {
-     this.findAll()
+    this.findAll()
   },
 }
 </script>
@@ -273,7 +250,7 @@ button {
   color: #FFFFFF;
 }
 
-#evaluate_button{
+#evaluate_button {
   margin-top: 45px;
   width: 120px;
   color: #fff;

@@ -131,7 +131,6 @@ export default {
     //取消订单
     cancelOrder(oid) {
       this.status = 3;
-      const _this = this;
       let updateStatus = {
         code: 3,
         orderID: oid

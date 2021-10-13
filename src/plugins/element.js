@@ -32,7 +32,7 @@ import {
   Upload,
   PageHeader,
   Descriptions,
-  DescriptionsItem
+  DescriptionsItem,
 } from 'element-ui'
 
 Vue.use(Button)
