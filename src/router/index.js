@@ -17,6 +17,18 @@ import Reset2 from '@/components/HomePage/Reset2'
 import Search from "@/components/Search";
 import Information from "@/components/Information";
 import orderAdd from "@/components/orderAdd";
+
+import MyAccount from "@/components/UserAccountPage/MyAccount";
+import MyOrderCompleted from "@/components/UserAccountPage/MyOrderCompleted";
+import PersonalInformation from "@/components/UserAccountPage/PersonalInformation";
+import EditInformation from "@/components/UserAccountPage/EditInformation";
+import MyOrderNotStart from "@/components/UserAccountPage/MyOrderNotStart";
+import MyOrderCanceled from "@/components/UserAccountPage/MyOrderCanceled";
+import MyAccountHome from "@/components/UserAccountPage/MyAccountHome";
+import OrderEvaluate from "@/components/UserAccountPage/OrderEvaluate";
+import MyOrderEvaluated from "@/components/UserAccountPage/MyOrderEvaluated";
+
+
 Vue.use(Router)
 
 const router =  new Router({
@@ -99,7 +111,44 @@ const router =  new Router({
       path: '/orderAdd/:type/:id/:price',
       name: 'orderAdd',
       component: orderAdd
-    }
+    },
+    {
+      path: '/myaccount',
+      component: MyAccount,
+      redirect:'/myaccounthome',
+      children:[
+        { path: '/myaccounthome',
+          component: MyAccountHome,
+        },
+        { path: '/ordercom',
+          component: MyOrderCompleted,
+        },
+        { path: '/ordernotstart',
+          component: MyOrderNotStart,
+        },
+        { path: '/ordercancel',
+          component: MyOrderCanceled,
+        },
+        { path: '/ordereva',
+          component: MyOrderEvaluated,
+        },
+        { path: '/information',
+          component: PersonalInformation,
+        },
+        { path: '/editinfo',
+          component:EditInformation,
+        },
+        {
+          path: '/myaccountreset',
+          component: Reset2
+        },
+        {
+          name:'Evaluate',
+          path: '/orderevaluate/:currentspid/:orderid',
+          component: OrderEvaluate
+        },
+      ]
+    },
 
   ]
 })
