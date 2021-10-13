@@ -11,6 +11,7 @@ import './assets/fonts/iconfont.css'
 import axios from 'axios'
 import VueAxios from "vue-axios";
 
+
 import { LoaderPlugin,GoogleLogin } from 'vue-google-login';
 
 Vue.use(LoaderPlugin, {

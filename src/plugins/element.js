@@ -29,6 +29,8 @@ import {
   Pagination,
   Rate, Step, Steps, DatePicker, TimePicker, TimeSelect, Select, Option,
 } from 'element-ui'
+import locale from '../../node_modules/element-ui/lib/locale/lang/en'
+
 
 Vue.use(Button)
 Vue.use(Form)
@@ -73,6 +75,8 @@ Vue.use(DatePicker)
 Vue.use(Select)
 Vue.use(Option)
 Vue.use(Form)
+
+Vue.use(DatePicker,{locale})
 
 
 

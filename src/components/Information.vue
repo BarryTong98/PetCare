@@ -33,11 +33,11 @@
             <el-form ref="form">
               <el-form-item class="search-item">
                 <!--商家图片-->
-                <el-col :span=4>
-                  <img :src="store.src" height="208" width="320"/>
+                <el-col :span=7>
+                  <img :src="store.src" height="208" width="100%"/>
                 </el-col>
                 <!--商家名称-->
-                <el-col :span=10 :offset=3>
+                <el-col :span=10 >
                   <div class="store-title">{{ store.name }}</div>
                 </el-col>
                 <!--营业时间-->
@@ -45,7 +45,7 @@
                   <div class="time">{{ store.time }}</div>
                 </el-col>
                 <!--评分-->
-                <el-col :span=5 :offset=3>
+                <el-col :span=5 >
                   <el-rate
                     v-model="store.numStar"
                     disabled
@@ -62,7 +62,7 @@
                   </div>
                 </el-col>
                 <!--商家描述-->
-                <el-col :span=17 :offset=3>
+                <el-col :span=17 >
                   <div class="description">Description:&nbsp;{{
                       store.description
                     }}
@@ -79,7 +79,7 @@
           <!--地址展示-->
           <el-form ref="form" class="display-address">
             <el-form-item>
-              <img src="../assets/img/1.png" height="364" width="560"/>
+              <img src="../assets/img/1.png" height="364" width="100%"/>
               <el-col>
                 <div class="address">Address:&nbsp;{{ store.Address }}</div>
               </el-col>

@@ -162,12 +162,13 @@
               </el-form-item>
               <el-form-item v-if="countStore === true" class="search-item" v-for="item in JSON.parse(JSON.stringify(storeDisplay))">
                 <router-link :to="{name: 'information', params: {id: item.id}}">
+
                   <!--商家图片-->
-                  <el-col :span=4>
-                    <img :src="item.src" height="208" width="320"/>
+                  <el-col :span=7>
+                    <img :src="item.src" height="208" width="100%"/>
                   </el-col>
                   <!--商家姓名-->
-                  <el-col :span=10 :offset=3>
+                  <el-col :span=10>
                     <div class="store-title">{{ item.name }}</div>
                   </el-col>
                   <!--营业时间-->
@@ -175,7 +176,7 @@
                     <div class="time">{{ item.time }}</div>
                   </el-col>
                   <!--评分-->
-                  <el-col :span=5 :offset=3>
+                  <el-col :span=5>
                     <el-rate
                       v-model="item.numStar"
                       disabled
@@ -195,7 +196,7 @@
                     <div class="address">Address:&nbsp;{{ item.Address }}</div>
                   </el-col>
                   <!--描述-->
-                  <el-col :span=17 :offset=3>
+                  <el-col :span=17>
                     <div class="description">
                       {{ item.description }}
                     </div>
@@ -279,7 +280,9 @@ export default {
 
       //储存搜索关键词
       saveKeyword: ' ',
-      saveAddress: ' '
+      saveAddress: ' ',
+
+
     }
   },
   methods: {
@@ -570,6 +573,7 @@ export default {
 
     axios.get("http://47.96.6.135:8080/serviceProvider/search/"+this.$route.params.address+"/" + this.$route.params.checked + "?keyword=" + this.$route.params.keyword).then(
       function (response) {
+        console.log(response)
 
         const reqs = response.data.data
 
@@ -739,6 +743,10 @@ body {
   position: absolute;
   left: 45%;
 
+}
+
+.main {
+  overflow: visible;
 }
 
 a {
