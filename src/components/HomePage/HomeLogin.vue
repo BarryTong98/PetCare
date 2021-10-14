@@ -117,12 +117,13 @@ export default {
       } else {
         axios(
           {
-            method: 'get',
-            url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
-            //url: 'http://47.96.6.135:8080/login/login',
+            method: 'post',
+            //url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
+            url: 'http://47.96.6.135:8080/login/login',
             data: {
-              account: this.ruleForm.pass,
-              password: this.ruleForm.checkPass
+
+              password: this.ruleForm.checkPass,
+              username: this.ruleForm.pass,
             }
           }
         ).then(function (response) {
@@ -149,12 +150,13 @@ export default {
       console.log(googleUser)
       axios(
         {
-          method: 'get',
-          url: 'http://47.96.6.135:8080/login/login?username=' + googleUser.it.Tt + '&password=' + googleUser.it.Tt,
-          //url: 'http://47.96.6.135:8080/login/login',
+          method: 'post',
+          //url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
+          url: 'http://47.96.6.135:8080/login/login',
           data: {
-            account: googleUser.it.Tt,
-            password: googleUser.it.Tt
+
+            password: googleUser.it.Tt,
+            username: googleUser.it.Tt,
           }
         }
       ).then(function (response) {
@@ -175,12 +177,13 @@ export default {
               alert('Register Successfully')
               axios(
                 {
-                  method: 'get',
-                  url: 'http://47.96.6.135:8080/login/login?username='+googleUser.it.Tt+'&password='+googleUser.it.Tt,
-                  //url: 'http://47.96.6.135:8080/login/login',
-                  data:{
-                    account: googleUser.it.Tt,
-                    password: googleUser.it.Tt
+                  method: 'post',
+                  //url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
+                  url: 'http://47.96.6.135:8080/login/login',
+                  data: {
+
+                    password: googleUser.it.Tt,
+                    username: googleUser.it.Tt,
                   }
                 }
               ).then(function(response){

@@ -88,11 +88,11 @@ export default {
               // _this.$router.push('/home')
               axios(
                 {
-                  method: 'get',
-                  url: 'http://47.96.6.135:8080/login/login?username='+_this.ruleForm.pass+'&password='+_this.ruleForm.checkPass,
-                  //url: 'http://47.96.6.135:8080/login/login',
+                  method: 'post',
+                  //url: 'http://47.96.6.135:8080/login/login?username='+_this.ruleForm.pass+'&password='+_this.ruleForm.checkPass,
+                  url: 'http://47.96.6.135:8080/login/login',
                   data:{
-                    account: _this.ruleForm.pass,
+                    username: _this.ruleForm.pass,
                     password: _this.ruleForm.checkPass
                   }
                 }
