@@ -85,21 +85,22 @@ export default {
           }).then(function (response) {
             if (response.data.code === 200) {
               alert('Register Successfully')
-               // _this.$router.push('/home')
+              // _this.$router.push('/home')
               axios(
                 {
                   method: 'get',
-                  url: 'http://110.40.184.115:8080/login/login?username='+_this.ruleForm.username+'&password='+_this.ruleForm.pass,
-                  //url: 'http://110.40.184.115:8080/login/login',
+                  url: 'http://47.96.6.135:8080/login/login?username='+_this.ruleForm.pass+'&password='+_this.ruleForm.checkPass,
+                  //url: 'http://47.96.6.135:8080/login/login',
                   data:{
-                    account: _this.ruleForm.username,
-                    password: _this.ruleForm.pass
+                    account: _this.ruleForm.pass,
+                    password: _this.ruleForm.checkPass
                   }
                 }
               ).then(function(response){
                 if(response.data.code === 200){
                   alert('Login Successfully')
-                  window.sessionStorage.setItem("token", response.data.message)
+                  window.sessionStorage.setItem("userId", response.data.data.userId)
+                  window.sessionStorage.setItem("token", response.data.data.token)
                   _this.$router.push('/home')
                 }
                 if(response.data.code === 999){

@@ -15,9 +15,11 @@
       <el-col  :span="4" :offset="1">
         <el-upload id="uploadImg"
           class="avatar-uploader"
-          :action="'http://110.40.184.115:8080/oss/upload?module=avatar&&userName='+ this.customer.userName"
+           ref="upload"
+          :action="'http://47.96.6.135:8080//oss/upload?module=avatar&&userName='+ this.customer.userName"
           :show-file-list="false"
           :on-success="handleAvatarSuccess"
+          :auto-upload="false"
           :before-upload="beforeAvatarUpload">
           <img v-if="imageUrl" :src="imageUrl" class="avatar">
           <i v-else class="el-icon-plus avatar-uploader-icon"></i>
@@ -64,6 +66,7 @@ export default {
     return {
       imageUrl: '',
       labelPosition: 'right',
+      userid:0,
       //表单
       customer:{
         userName:'',
@@ -91,21 +94,8 @@ export default {
   },
 
   created() {
-   // this.handle(this.$route.query.id);
+    this.userid =sessionStorage.getItem("userId"),
     this.getInfo();
-  },
-
-  handle(id){
-    let config = {
-      url:'http://localhost:3000/users/'+id,
-      method: 'get',
-    }
-    axios(config)
-      .then((response) => {
-        console.log(response)
-        this.customer = response.data
-        //  console.log(customer)
-      })
   },
 
   methods:{
@@ -118,19 +108,20 @@ export default {
     //这里的uid是乱写的，到时候记得改为从localhost中拿来的uid
     submitForm(formName) {
       const _this = this;
+      this.$refs.upload.submit();
       this.$refs[formName].validate((valid) => {
         if (valid) {
           //  alert('submit!');
           let updateCustomer = {
-            uid:1,
-            email: this.customer.email,
-            userName:this.customer.userName,
-            nickName:this.customer.nickName,
-            phoneNumber:this.customer.phoneNumber,
-            password:this.customer.password,
+            uid:_this.userid,
+            email: _this.customer.email,
+            userName:_this.customer.userName,
+            nickName:_this.customer.nickName,
+            phoneNumber:_this.customer.phoneNumber,
+            password:_this.customer.password,
           }
 
-          _this.$http.put('http://110.40.184.115:8080/user/update',updateCustomer)
+          _this.$http.put('http://47.96.6.135:8080/user/update',updateCustomer)
             .then((response) => {
               this.$message({
                 message: 'Update successfully!',
@@ -168,7 +159,7 @@ export default {
     //获取用户信息
     getInfo(){
       const _this = this;
-      _this.$http.get("http://110.40.184.115:8080/user/" + 1) //userid是1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/user/" + 1) //userid是1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           console.log(response.data.data);
           _this.customer = response.data.data;

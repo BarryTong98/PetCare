@@ -22,7 +22,7 @@
 import axios from 'axios'
 
 export default {
-  data () {
+  data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('Please Enter Your Password'))
@@ -44,6 +44,7 @@ export default {
     }
     return {
       ruleForm: {
+        email: '',
         pass: '',
         checkPass: '',
       },
@@ -63,15 +64,21 @@ export default {
       }
     }
   },
+  created() {
+    this.ruleForm.email = sessionStorage.getItem("email")
+    console.log("email!!!"+sessionStorage.getItem("email"))
+    console.log("email***"+this.ruleForm.email)
+  },
   methods: {
-    submitForm (formName) {
+    submitForm(formName) {
+      var _this = this;
       this.$refs[formName].validate((valid) => {
         let _this = this
         if (valid) {
-          console.log(formName)
-          axios.put('http://110.40.184.115:8080/login/reset', {
+          console.log("!!!!!!"+this.ruleForm.email)
+          axios.put('http://47.96.6.135:8080/login/reset', {
+            email: this.ruleForm.email,
             password: this.ruleForm.pass,
-            userId: 29
           }).then(function (response) {
             if (response.data.code === 200) {
               console.log(response.data)
@@ -92,7 +99,10 @@ export default {
         }
       })
     },
-  }
+  },
+  // beforeDestroy() {
+  //   eventBus.$off('email2');
+  // },
 }
 </script>
 
@@ -106,14 +116,6 @@ export default {
 
 .code {
   float: left;
-}
-
-.el-form-item {
-  margin-left: 5%;
-}
-
-.el-input {
-  width: 80%;
 }
 
 .now {

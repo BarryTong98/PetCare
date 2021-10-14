@@ -93,6 +93,7 @@ export default {
     return {
       searchInfo: '',
       orders: [],
+      userid:1,
 
       //分页展示个数以及展示商店数组
       storePageSize: 5,
@@ -125,7 +126,7 @@ export default {
     //搜索框
     searchOrders() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code="+4) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + _this.userid + "&keyword=" + _this.searchInfo + "&code="+4) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
@@ -169,13 +170,15 @@ export default {
     //查找所有订单
     findAll() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
-          for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
-            if (temporders[item].status == 4) {
-              console.log(temporders[item])
-              _this.orders.push(temporders[item]);
+          if (temporders != null){
+            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+              if (temporders[item].status == 4) {
+                console.log(temporders[item])
+                _this.orders.push(temporders[item]);
+              }
             }
           }
         });
@@ -183,6 +186,7 @@ export default {
     },
   },
   created() {
+    this.userid =sessionStorage.getItem("userId"),
     this.findAll()
   },
 }

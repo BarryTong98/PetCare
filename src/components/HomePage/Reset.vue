@@ -89,7 +89,6 @@ export default {
         }
       }, 1000)
       let _this = this
-      console.log(this.ruleForm.pass)
       axios.post('http://47.96.6.135:8080/email/send', {
         email: this.ruleForm.pass,
         verificationCode: "123",
@@ -111,7 +110,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           let _this = this
-          console.log(this.ruleForm.pass)
+
           axios.post('http://110.40.184.115:8080/email/verify', {
             email: this.ruleForm.pass,
             verificationCode: this.ruleForm.checkPass
@@ -119,9 +118,9 @@ export default {
             if (response.data.code === 200) {
               console.log(response.data)
               alert('Code Is Correct')
+              window.sessionStorage.setItem("email",_this.ruleForm.pass);
               _this.$router.push('/reset2')
-              _this.totalTime = response.data.code;
-              console.log(_this.totalTime)
+              // _this.totalTime = response.data.code;
             }
             if (response.data.code === 999) {
               console.log(response.data)
@@ -137,7 +136,8 @@ export default {
         }
       })
     },
-  }
+  },
+
 }
 </script>
 

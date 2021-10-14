@@ -9,8 +9,10 @@
     <el-row style="margin-top: 20px">
       <!--用户头像-->
       <el-col :span="2" :offset="9" >
-        <div id="userImg">
-          <img :src="user.imageUrl" alt="" style="width: 100px; height: 100px"></img>
+        <div id="userImg" >
+          <img :src="user.imageUrl" alt="" style="width: 100px; height: 100px"/>
+<!--          <img v-if="user.imageUrl" :src="user.imageUrl" style="width: 100px; height: 100px"/>-->
+<!--          <img v-if="!user.imageUrl" src="/Users/lin/WebstormProjects/PetCare/src/assets/d.png" style="width: 100px; height: 100px"/>-->
         </div>
       </el-col>
       <!--上传图片-->
@@ -60,6 +62,7 @@ export default {
   data() {
     return {
       user: {},
+      userid:0,
     };
   },
   methods:{
@@ -69,7 +72,7 @@ export default {
 
     getInfo(){
       const _this = this;
-      _this.$http.get("http://110.40.184.115:8080/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           console.log(response.data.data);
           _this.user = response.data.data;
@@ -78,6 +81,7 @@ export default {
   },
 
   created() {
+    this.userid =sessionStorage.getItem("userId"),
     this.getInfo()
   },
 }

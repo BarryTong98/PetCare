@@ -1,15 +1,15 @@
 <template>
-<div>
-  <!--面包屑-->
-  <el-breadcrumb separator-class="el-icon-arrow-right">
-    <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/myaccount' }">My Account</el-breadcrumb-item>
-    <el-breadcrumb-item :to="{ path: '/myaccount' }">My Order</el-breadcrumb-item>
-    <el-breadcrumb-item>Completed</el-breadcrumb-item>
-  </el-breadcrumb>
+  <div>
+    <!--面包屑-->
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/myaccount' }">My Account</el-breadcrumb-item>
+      <el-breadcrumb-item :to="{ path: '/myaccount' }">My Order</el-breadcrumb-item>
+      <el-breadcrumb-item>Completed</el-breadcrumb-item>
+    </el-breadcrumb>
 
 
-  <!--预定订单搜索框-->
+    <!--预定订单搜索框-->
     <div class="search bar1">
       <form>
         <input type="text"
@@ -28,7 +28,7 @@
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
           <el-aside style="width: 200px;height: 150px;margin: 10px;text-align: center">
-            <img :src="order.imageUrl" style="width: 200px;height: 150px" ></img>
+            <img :src="order.imageUrl" style="width: 200px;height: 150px"></img>
           </el-aside>
 
           <!--预定医院的信息-->
@@ -94,16 +94,17 @@
                    :total="orders.length"
                    :page-size="storePageSize">
     </el-pagination>
-</div>
+  </div>
 </template>
 
 <script>
 export default {
   name: "MyOrderCompleted",
-  data(){
-    return{
-      searchInfo:'',
+  data() {
+    return {
+      searchInfo: '',
       orders: [],
+      userid: 1,
 
       //分页展示个数以及展示商店数组
       storePageSize: 5,
@@ -111,24 +112,23 @@ export default {
       currentPage: 1,
     }
   },
-  methods:{
+  methods: {
     //评价
-    evaluate(spid,oid){
+    evaluate(spid, oid) {
       this.$router.push({
-        name:'Evaluate',
+        name: 'Evaluate',
         query: {
           currentspid: spid,
-          orderid:oid,
+          orderid: oid,
         }
       });
     },
 
     //处理分页展示
     handleCurrentChange(currentPage) {
-      if(this.orders.length === 0){
+      if (this.orders.length === 0) {
         this.countStore = false
-      }
-      else{
+      } else {
         this.countStore = true
         this.storeDisplay = []
         var m = 0
@@ -148,7 +148,7 @@ export default {
     //搜索框
     searchOrders() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + 1 + "&keyword=" + _this.searchInfo + "&code=" + 2) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + _this.userid + "&keyword=" + _this.searchInfo + "&code=" + 2) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
@@ -165,9 +165,9 @@ export default {
                 }
               })
             }
-          }else {
+          } else {
             //如果输入的内容不匹配，则清空列表
-            while(_this.orders.length > 0) {
+            while (_this.orders.length > 0) {
               _this.orders.pop();
             }
             console.log("失败")
@@ -176,37 +176,41 @@ export default {
     },
 
     //搜索之前先判断一下搜索框中有没有输入内容，如果没有输入内容就显示所有订单
-    checKSearch(){
-      if (this.searchInfo == ''){
-        while(this.orders.length > 0) {
+    checKSearch() {
+      if (this.searchInfo == '') {
+        while (this.orders.length > 0) {
           this.orders.pop();
         }
         this.findAll();
         console.log("显示所有订单")
-      }else{
+      } else {
         this.searchOrders();
       }
     },
 
 
     //查找所有订单
-    findAll(){
+    findAll() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/user/" + 1) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
-          for(var item=0;item< temporders.length;item++){  //遍历对象数组，item表示某个具体的对象
-            if (temporders[item].status == 2){
-              console.log(temporders[item])
-              _this.orders.push(temporders[item]);
+          if (temporders != null) {
+            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+              if (temporders[item].status == 2) {
+                console.log(temporders[item])
+                _this.orders.push(temporders[item]);
+              }
             }
-          };
+          }
+          ;
         });
       _this.handleCurrentChange(1);
     },
   },
   created() {
-     this.findAll()
+    this.userid = sessionStorage.getItem("userId"),
+      this.findAll()
   },
 }
 </script>
@@ -273,7 +277,7 @@ button {
   color: #FFFFFF;
 }
 
-#evaluate_button{
+#evaluate_button {
   margin-top: 45px;
   width: 120px;
   color: #fff;
