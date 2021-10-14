@@ -1,6 +1,7 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
+import au.edu.sydney.web.entity.req.LoginREQ;
 import au.edu.sydney.web.entity.req.PasswordREQ;
 import au.edu.sydney.web.service.UserService;
 import io.swagger.annotations.ApiOperation;
@@ -22,9 +23,9 @@ public class LoginController {
     private UserService userService;
 
     @ApiOperation("login")
-    @GetMapping("/login")
-    public Result login(@RequestParam String username, @RequestParam String password) {
-        return userService.login(username, password);
+    @PostMapping("/login")
+    public Result login(@RequestBody LoginREQ loginREQ) {
+        return userService.login(loginREQ.getUsername(), loginREQ.getPassword());
     }
 
     @ApiOperation("resetPassword")
