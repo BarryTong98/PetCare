@@ -14,6 +14,8 @@ public interface UserService {
 
     Result insert(User user);
 
+    Result insertGoogleUser(User user);
+
     Result selectUidByUserName(String userName);
 
     Result updateUser(User record);

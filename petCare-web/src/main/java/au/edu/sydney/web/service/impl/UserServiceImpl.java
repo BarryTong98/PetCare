@@ -1,14 +1,19 @@
 package au.edu.sydney.web.service.impl;
 
 import au.edu.sydney.base.Result;
+import au.edu.sydney.util.JwtUtil;
 import au.edu.sydney.web.dao.UserMapper;
 import au.edu.sydney.web.entity.pojo.User;
 import au.edu.sydney.web.service.UserService;
+import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 /**
  * @author Chris
@@ -22,6 +27,12 @@ public class UserServiceImpl implements UserService {
 
     @Resource
     private UserMapper userMapper;
+
+    @Resource
+    private JwtUtil jwtUtil;
+
+    @Resource
+    private RedisTemplate redisTemplate;
 
     @Override
     public Result findAll() {
@@ -59,6 +70,21 @@ public class UserServiceImpl implements UserService {
             userMapper.insertSelective(user);
         } catch (Exception e) {
             return Result.error("Failed to register user");
+        }
+        return Result.ok();
+    }
+
+    @Override
+    public Result insertGoogleUser(User user) {
+        if (user.getUserName() == null) {
+            return Result.error("Username can not be empty");
+        }
+        String password = new BCryptPasswordEncoder().encode(user.getPassword());
+        user.setPassword(password);
+        try {
+            userMapper.insertSelective(user);
+        } catch (Exception e) {
+            return Result.error("Failed to insert Google user");
         }
         return Result.ok();
     }
@@ -113,7 +139,12 @@ public class UserServiceImpl implements UserService {
         if (!flag) {
             return Result.error("Username and password don't match");
         }
-        return Result.ok("Login success");
+        String token = jwtUtil.createJWT(String.valueOf(user.getUid()));
+        redisTemplate.opsForValue().set("TOKEN_" + user.getUid(), token, 1, TimeUnit.DAYS);
+        Map<String, String> map = new HashMap<>();
+        map.put("token", token);
+        map.put("userId", String.valueOf(user.getUid()));
+        return Result.ok(map);
     }
 
     @Override

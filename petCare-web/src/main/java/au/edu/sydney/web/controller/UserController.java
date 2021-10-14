@@ -40,6 +40,12 @@ public class UserController {
         return userService.insert(user);
     }
 
+    @ApiOperation("GoogleUserRegister")
+    @PostMapping("/register/google")
+    public Result GoogleUserInsert(@RequestBody User user) {
+        return userService.insertGoogleUser(user);
+    }
+
     @ApiOperation("update user information")
     @PutMapping("/update")
     public Result update(@RequestBody User record) {
