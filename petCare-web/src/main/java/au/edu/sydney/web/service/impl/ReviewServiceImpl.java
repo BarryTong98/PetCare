@@ -3,9 +3,9 @@ package au.edu.sydney.web.service.impl;
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.ReviewMapper;
 import au.edu.sydney.web.dao.ServiceProviderMapper;
-import au.edu.sydney.web.entity.pojo.Review;
-import au.edu.sydney.web.entity.pojo.ServiceProvider;
-import au.edu.sydney.web.entity.vo.ReviewVO;
+import au.edu.sydney.web.pojo.entity.Review;
+import au.edu.sydney.web.pojo.entity.ServiceProvider;
+import au.edu.sydney.web.pojo.vo.ReviewVO;
 import au.edu.sydney.web.service.ReviewService;
 import org.springframework.stereotype.Service;
 

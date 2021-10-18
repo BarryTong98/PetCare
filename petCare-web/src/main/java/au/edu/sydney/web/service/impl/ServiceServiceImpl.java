@@ -3,7 +3,6 @@ package au.edu.sydney.web.service.impl;
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.ServiceMapper;
 import au.edu.sydney.web.service.ServiceService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -22,7 +21,7 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public Result getServiceById(int id) {
-        au.edu.sydney.web.entity.pojo.Service service = serviceMapper.selectByPrimaryKey(id);
+        au.edu.sydney.web.pojo.entity.Service service = serviceMapper.selectByPrimaryKey(id);
         if (service == null) {
             return Result.error("Service doesn't exist!");
         }

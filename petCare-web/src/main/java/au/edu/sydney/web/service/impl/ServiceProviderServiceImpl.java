@@ -2,10 +2,10 @@ package au.edu.sydney.web.service.impl;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.ServiceProviderMapper;
-import au.edu.sydney.web.entity.pojo.ServiceProvider;
-import au.edu.sydney.web.entity.yelpApiPojo.Business;
+import au.edu.sydney.web.pojo.entity.ServiceProvider;
+import au.edu.sydney.web.pojo.yelpAPIEntity.Business;
 import au.edu.sydney.web.service.ServiceProviderService;
-import au.edu.sydney.web.util.YelpApiCli;
+import au.edu.sydney.web.util.YelpAPICli;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -24,7 +24,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
     ServiceProviderMapper serviceProviderMapper;
 
     @Resource
-    YelpApiCli yelpApiCli;
+    YelpAPICli yelpApiCli;
 
     @Override
     public Result getServiceProviderById(int id) {

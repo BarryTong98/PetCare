@@ -3,7 +3,7 @@ package au.edu.sydney.web.service.impl;
 import au.edu.sydney.base.Result;
 import au.edu.sydney.util.JwtUtil;
 import au.edu.sydney.web.dao.UserMapper;
-import au.edu.sydney.web.entity.pojo.User;
+import au.edu.sydney.web.pojo.entity.User;
 import au.edu.sydney.web.service.UserService;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;

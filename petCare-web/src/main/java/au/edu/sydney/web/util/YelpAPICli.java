@@ -1,7 +1,7 @@
 package au.edu.sydney.web.util;
 
 
-import au.edu.sydney.web.entity.yelpApiPojo.Business;
+import au.edu.sydney.web.pojo.yelpAPIEntity.Business;
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
@@ -25,14 +25,14 @@ import java.util.Map;
  */
 @Slf4j
 @Component
-public class YelpApiCli {
+public class YelpAPICli {
 
     private static final String baseURL = "https://api.yelp.com/v3/businesses/";
     private static final String ApiKey = "u-7Cog_F20Wa7WhRFyDKAIOLAFW13pvIt9cEHXBxLLLJM8ps8uQM6EvJKV2HXDJUO20sAyo2VEzqWS4T3jKILuaK2mNqT5I_cbd0N67KV_07sd0ZxatjDYv_fytNYXYx";
 
     Map<String, String> params;
 
-    public YelpApiCli() {
+    public YelpAPICli() {
         params = new HashMap<>();
         params.put("categories", "pets,All");
     }

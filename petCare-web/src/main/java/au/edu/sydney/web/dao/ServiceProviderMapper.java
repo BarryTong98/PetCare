@@ -1,6 +1,6 @@
 package au.edu.sydney.web.dao;
 
-import au.edu.sydney.web.entity.pojo.ServiceProvider;
+import au.edu.sydney.web.pojo.entity.ServiceProvider;
 
 import java.util.List;
 import java.util.Map;

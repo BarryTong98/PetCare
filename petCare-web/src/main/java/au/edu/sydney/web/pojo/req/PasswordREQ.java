@@ -1,4 +1,4 @@
-package au.edu.sydney.web.entity.req;
+package au.edu.sydney.web.pojo.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
@@ -10,12 +10,12 @@ import lombok.Data;
  * @description
  */
 @Data
-@ApiModel(value="PasswordREQ", description="密码请求对象")
+@ApiModel(value="PasswordREQ", description="password request object")
 public class PasswordREQ {
 
-    @ApiParam("邮箱")
+    @ApiParam("email")
     private String email;
 
-    @ApiParam("密码")
+    @ApiParam("password")
     private String password;
 }

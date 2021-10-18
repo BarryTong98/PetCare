@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="au.edu.sydney.web.dao.ServiceProviderMapper">
-    <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <resultMap id="BaseResultMap" type="au.edu.sydney.web.pojo.entity.ServiceProvider">
         <id column="spid" jdbcType="INTEGER" property="spid"/>
         <result column="service_provider_name" jdbcType="VARCHAR" property="serviceProviderName"/>
         <result column="address" jdbcType="VARCHAR" property="address"/>
@@ -36,7 +36,7 @@
         from service_provider
         where spid = #{spid,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <insert id="insert" parameterType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         insert into service_provider (spid, service_provider_name, address,
                                       contact_number, type, service_content,
                                       average_price, description, sales,
@@ -50,7 +50,7 @@
                 #{latitude,jdbcType=VARCHAR}, #{longitude,jdbcType=VARCHAR}, #{imageUrl,jdbcType=VARCHAR},
                 #{recommend,jdbcType=INTEGER})
     </insert>
-    <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <insert id="insertSelective" parameterType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         insert into service_provider
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="spid != null">
@@ -153,7 +153,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         update service_provider
         <set>
             <if test="serviceProviderName != null">
@@ -204,7 +204,7 @@
         </set>
         where spid = #{spid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         update service_provider
         set service_provider_name = #{serviceProviderName,jdbcType=VARCHAR},
             address               = #{address,jdbcType=VARCHAR},
@@ -223,20 +223,20 @@
             recommend             = #{recommend,jdbcType=INTEGER}
         where spid = #{spid,jdbcType=INTEGER}
     </update>
-    <select id="getRecommendProviders" resultType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <select id="getRecommendProviders" resultType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         SELECT *
         FROM service_provider
         where recommend = 1
     </select>
 
     <select id="getServiceProviderByType" parameterType="java.lang.Integer"
-            resultType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+            resultType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         SELECT *
         FROM service_provider
         where type = #{type,jdbcType=INTEGER}
     </select>
 
-    <select id="searchByKeyword" parameterType="map" resultType="au.edu.sydney.web.entity.pojo.ServiceProvider">
+    <select id="searchByKeyword" parameterType="map" resultType="au.edu.sydney.web.pojo.entity.ServiceProvider">
         (SELECT *
         FROM service_provider
         WHERE (service_provider_name LIKE

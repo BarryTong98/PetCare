@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="au.edu.sydney.web.dao.ReviewMapper">
-    <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.Review">
+    <resultMap id="BaseResultMap" type="au.edu.sydney.web.pojo.entity.Review">
         <id column="rid" jdbcType="INTEGER" property="rid"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
         <result column="service_provider_id" jdbcType="INTEGER" property="serviceProviderId"/>
@@ -20,7 +20,7 @@
         where rid = #{rid,jdbcType=INTEGER}
     </select>
 
-    <select id="selectBySpid" parameterType="java.lang.Integer" resultType="au.edu.sydney.web.entity.vo.ReviewVO">
+    <select id="selectBySpid" parameterType="java.lang.Integer" resultType="au.edu.sydney.web.pojo.vo.ReviewVO">
     select
     r.rid,
     r.user_id,
@@ -36,7 +36,7 @@
     where r.service_provider_id = #{spid,jdbcType=INTEGER} and r.user_id=u.uid
   </select>
 
-    <select id="selectByUid" parameterType="java.lang.Integer" resultType="au.edu.sydney.web.entity.vo.ReviewVO">
+    <select id="selectByUid" parameterType="java.lang.Integer" resultType="au.edu.sydney.web.pojo.vo.ReviewVO">
         select
         r.rid,
         r.user_id,
@@ -56,7 +56,7 @@
     delete from review
     where rid = #{rid,jdbcType=INTEGER}
   </delete>
-    <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.Review">
+    <insert id="insert" parameterType="au.edu.sydney.web.pojo.entity.Review">
     insert into review (rid, user_id, service_provider_id, 
       rating, content, create_time, 
       number_of_likes)
@@ -64,7 +64,7 @@
       #{rating,jdbcType=DOUBLE}, #{content,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR},
       #{numberOfLikes,jdbcType=INTEGER})
   </insert>
-    <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Review">
+    <insert id="insertSelective" parameterType="au.edu.sydney.web.pojo.entity.Review">
         insert into review
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="rid != null">
@@ -113,7 +113,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.Review">
+    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.pojo.entity.Review">
         update review
         <set>
             <if test="userId != null">
@@ -137,7 +137,7 @@
         </set>
         where rid = #{rid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.Review">
+    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.pojo.entity.Review">
     update review
     set user_id = #{userId,jdbcType=INTEGER},
       service_provider_id = #{serviceProviderId,jdbcType=INTEGER},

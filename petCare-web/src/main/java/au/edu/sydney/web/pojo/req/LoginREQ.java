@@ -1,4 +1,4 @@
-package au.edu.sydney.web.entity.req;
+package au.edu.sydney.web.pojo.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
@@ -10,7 +10,7 @@ import lombok.Data;
  * @Version 1.0
  */
 @Data
-@ApiModel(value = "LoginREQ", description = "登录请求对象")
+@ApiModel(value = "LoginREQ", description = "Login request object")
 public class LoginREQ {
 
     @ApiParam("username")

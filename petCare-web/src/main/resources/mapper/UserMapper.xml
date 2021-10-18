@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="au.edu.sydney.web.dao.UserMapper">
-    <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.User">
+    <resultMap id="BaseResultMap" type="au.edu.sydney.web.pojo.entity.User">
         <id column="uid" jdbcType="INTEGER" property="uid"/>
         <result column="user_name" jdbcType="VARCHAR" property="userName"/>
         <result column="nick_name" jdbcType="VARCHAR" property="nickName"/>
@@ -25,7 +25,7 @@
         from user
         where uid = #{uid,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.User">
+    <insert id="insert" parameterType="au.edu.sydney.web.pojo.entity.User">
         insert into user (uid, user_name, nick_name,
                           password, phone_number, email,
                           image_url)
@@ -33,7 +33,7 @@
                 #{password,jdbcType=VARCHAR}, #{phoneNumber,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR},
                 #{imageUrl,jdbcType=VARCHAR})
     </insert>
-    <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.User">
+    <insert id="insertSelective" parameterType="au.edu.sydney.web.pojo.entity.User">
         insert into user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="uid != null">
@@ -82,7 +82,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.User">
+    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.pojo.entity.User">
         update user
         <set>
             <if test="userName != null">
@@ -106,7 +106,7 @@
         </set>
         where uid = #{uid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.User">
+    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.pojo.entity.User">
         update user
         set user_name    = #{userName,jdbcType=VARCHAR},
             nick_name    = #{nickName,jdbcType=VARCHAR},
@@ -116,21 +116,21 @@
             image_url    = #{imageUrl,jdbcType=VARCHAR}
         where uid = #{uid,jdbcType=INTEGER}
     </update>
-    <select id="findAll" resultType="au.edu.sydney.web.entity.pojo.User">
+    <select id="findAll" resultType="au.edu.sydney.web.pojo.entity.User">
         SELECT *
         FROM user
     </select>
-    <select id="queryAllByUserName" parameterType="string" resultType="au.edu.sydney.web.entity.pojo.User">
+    <select id="queryAllByUserName" parameterType="string" resultType="au.edu.sydney.web.pojo.entity.User">
         SELECT *
         FROM user
         where user_name like CONCAT('%', #{userName}, '%')
     </select>
-    <select id="selectByUserName" parameterType="string" resultType="au.edu.sydney.web.entity.pojo.User">
+    <select id="selectByUserName" parameterType="string" resultType="au.edu.sydney.web.pojo.entity.User">
         SELECT *
         FROM user
         where user_name = #{userName,jdbcType=VARCHAR}
     </select>
-    <select id="selectByEmail" parameterType="string" resultType="au.edu.sydney.web.entity.pojo.User">
+    <select id="selectByEmail" parameterType="string" resultType="au.edu.sydney.web.pojo.entity.User">
         SELECT *
         FROM user
         where email = #{email,jdbcType=VARCHAR}

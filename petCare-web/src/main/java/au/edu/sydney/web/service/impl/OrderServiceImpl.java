@@ -4,9 +4,9 @@ import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.OrderMapper;
 import au.edu.sydney.web.dao.ServiceMapper;
 import au.edu.sydney.web.dao.UserMapper;
-import au.edu.sydney.web.entity.pojo.Order;
-import au.edu.sydney.web.entity.pojo.User;
-import au.edu.sydney.web.entity.vo.OrderVO;
+import au.edu.sydney.web.pojo.entity.Order;
+import au.edu.sydney.web.pojo.entity.User;
+import au.edu.sydney.web.pojo.vo.OrderVO;
 import au.edu.sydney.web.service.OrderService;
 import org.springframework.stereotype.Service;
 
@@ -54,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
         if (user == null) {
             return Result.error("No such user!");
         }
-        au.edu.sydney.web.entity.pojo.Service service = serviceMapper.selectByPrimaryKey(order.getServiceId());
+        au.edu.sydney.web.pojo.entity.Service service = serviceMapper.selectByPrimaryKey(order.getServiceId());
         if (service == null) {
             return Result.error("No such service!");
         }

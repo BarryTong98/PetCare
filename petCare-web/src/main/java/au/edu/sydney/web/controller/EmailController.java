@@ -1,7 +1,7 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.entity.req.EmailVerificationREQ;
+import au.edu.sydney.web.pojo.req.EmailVerificationREQ;
 import au.edu.sydney.web.service.EmailService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

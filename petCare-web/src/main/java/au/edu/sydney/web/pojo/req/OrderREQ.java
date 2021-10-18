@@ -1,4 +1,4 @@
-package au.edu.sydney.web.entity.req;
+package au.edu.sydney.web.pojo.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;
@@ -10,12 +10,12 @@ import lombok.Data;
  * @description
  */
 @Data
-@ApiModel(value="OrderREQ", description="订单请求对象")
+@ApiModel(value="OrderREQ", description="order request object")
 public class OrderREQ {
 
-    @ApiParam("订单id")
+    @ApiParam("order id")
     Integer orderID;
 
-    @ApiParam("状态码 1 未开始 2 已完成 3 已取消 4已完成评价")
+    @ApiParam("Status code (1 Not started 2 Completed 3 Cancelled 4 Evaluation completed)")
     Integer code;
 }

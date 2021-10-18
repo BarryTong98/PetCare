@@ -2,7 +2,7 @@ package au.edu.sydney.web.service.impl;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.UserMapper;
-import au.edu.sydney.web.entity.pojo.User;
+import au.edu.sydney.web.pojo.entity.User;
 import au.edu.sydney.web.service.EmailService;
 import au.edu.sydney.web.util.VerCodeGenerateUtil;
 import org.springframework.beans.factory.annotation.Autowired;

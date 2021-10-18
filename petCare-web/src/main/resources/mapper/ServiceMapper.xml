@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="au.edu.sydney.web.dao.ServiceMapper">
-  <resultMap id="BaseResultMap" type="au.edu.sydney.web.entity.pojo.Service">
+  <resultMap id="BaseResultMap" type="au.edu.sydney.web.pojo.entity.Service">
     <id column="sid" jdbcType="INTEGER" property="sid" />
     <result column="service_provider_id" jdbcType="INTEGER" property="serviceProviderId" />
     <result column="service_name" jdbcType="VARCHAR" property="serviceName" />
@@ -31,7 +31,7 @@
     delete from service
     where sid = #{sid,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="au.edu.sydney.web.entity.pojo.Service">
+  <insert id="insert" parameterType="au.edu.sydney.web.pojo.entity.Service">
     insert into service (sid, service_provider_id, service_name, 
       price, is_boarding, service_date,
       service_time)
@@ -39,7 +39,7 @@
       #{price,jdbcType=VARCHAR}, #{isBoarding,jdbcType=INTEGER}, #{serviceDate,jdbcType=DATE},
       #{serviceTime,jdbcType=VARCHAR})
   </insert>
-  <insert id="insertSelective" parameterType="au.edu.sydney.web.entity.pojo.Service">
+  <insert id="insertSelective" parameterType="au.edu.sydney.web.pojo.entity.Service">
     insert into service
     <trim prefix="(" suffix=")" suffixOverrides=",">
       <if test="sid != null">
@@ -88,7 +88,7 @@
       </if>
     </trim>
   </insert>
-  <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.entity.pojo.Service">
+  <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.pojo.entity.Service">
     update service
     <set>
       <if test="serviceProviderId != null">
@@ -112,7 +112,7 @@
     </set>
     where sid = #{sid,jdbcType=INTEGER}
   </update>
-  <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.entity.pojo.Service">
+  <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.pojo.entity.Service">
     update service
     set service_provider_id = #{serviceProviderId,jdbcType=INTEGER},
       service_name = #{serviceName,jdbcType=VARCHAR},

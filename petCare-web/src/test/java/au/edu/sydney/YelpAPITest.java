@@ -1,6 +1,6 @@
 package au.edu.sydney;
 
-import au.edu.sydney.web.util.YelpApiCli;
+import au.edu.sydney.web.util.YelpAPICli;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,7 +17,7 @@ import org.springframework.test.context.junit4.SpringRunner;
 public class YelpAPITest {
 
     @Autowired
-    YelpApiCli yelpApiCli;
+    YelpAPICli yelpApiCli;
 
     @Test
     public void getServiceProviders() {

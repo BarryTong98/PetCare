@@ -12,27 +12,27 @@ import java.io.Serializable;
  * @date 2021-09-14 19:10
  */
 @Data
-@ApiModel(value="Result", description="封装请求结果")
+@ApiModel(value="Result", description="request result object")
 public class Result implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
     // business status of response
-    @ApiModelProperty(value = "响应码 200 成功 999 错误")
+    @ApiModelProperty(value = "response code 200 success 999 error")
     private Integer code;
 
     // response message
-    @ApiModelProperty(value = "响应消息")
+    @ApiModelProperty(value = "response message")
     private String message;
 
     // response data
-    @ApiModelProperty(value = "返回的数据")
+    @ApiModelProperty(value = "response data")
     private Object data;
 
     /**
      * whether success
      */
-    @ApiModelProperty(value = "标示符")
+    @ApiModelProperty(value = "flag")
     private Boolean flag;
 
     public Result(Integer code, String message, Object data) {
