@@ -32,7 +32,7 @@ public class EmailServiceImpl implements EmailService {
     private RedisTemplate redisTemplate;
 
     /**
-     * 从配置文件中获取发件人
+     * Get the sender from the configuration file
      */
     @Value("${spring.mail.username}")
     private String sender;

@@ -11,9 +11,9 @@ import lombok.Getter;
 @AllArgsConstructor
 public enum ResultEnum {
 
-    // 成功
+    // success
     SUCCESS(200, "success"),
-    // 错误
+    // fail
     ERROR(999, "fail");
 
     private Integer code;

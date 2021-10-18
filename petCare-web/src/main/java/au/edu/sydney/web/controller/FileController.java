@@ -8,11 +8,11 @@ import au.edu.sydney.web.pojo.entity.User;
 import au.edu.sydney.web.service.FileService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.annotation.Resource;
 import java.io.IOException;
 import java.io.InputStream;
 
@@ -21,10 +21,10 @@ import java.io.InputStream;
 @RequestMapping("/oss")
 public class FileController {
 
-    @Autowired
+    @Resource
     private FileService fileService;
 
-    @Autowired
+    @Resource
     private UserMapper userMapper;
 
     @ApiOperation("file upload")

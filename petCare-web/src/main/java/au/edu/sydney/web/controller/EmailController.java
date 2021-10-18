@@ -23,14 +23,14 @@ public class EmailController {
     EmailService emailService;
 
 
-    @ApiOperation("获取邮箱验证码")
+    @ApiOperation("get email verification code")
     @PostMapping("/send")
-    public Result sendEmail(@ApiParam(value = "邮箱", required = true)
+    public Result sendEmail(@ApiParam(value = "email address", required = true)
                             @RequestBody EmailVerificationREQ emailVerificationREQ) {
         return emailService.sendEmailVerificationCode(emailVerificationREQ.getEmail());
     }
 
-    @ApiOperation("核对验证码")
+    @ApiOperation("verify the verification code")
     @PostMapping("/verify")
     public Result checkCode(
             @RequestBody EmailVerificationREQ emailVerificationREQ) {

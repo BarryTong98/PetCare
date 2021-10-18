@@ -41,7 +41,7 @@ public class OrderController {
         return orderService.insert(order);
     }
 
-    @ApiOperation("update order status  1 未开始 2 已完成 3 已取消 4 已完成评价")
+    @ApiOperation("update order status  1:not start, 2:completed, 3:canceled 4:evaluated")
     @PutMapping("/update")
     public Result updateStatus(@RequestBody OrderREQ orderREQ) {
         return orderService.updateStatus(orderREQ.getOrderID(), orderREQ.getCode());

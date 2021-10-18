@@ -13,8 +13,8 @@ public class VerCodeGenerateUtil {
     private static final Random RANDOM = new SecureRandom();
 
     /**
-     * 生成6位随机数字
-     * @return 返回6位数字验证码
+     * Generate 6-digit random numbers
+     * @return Return 6-digit verification code
      */
     public static String generateVerCode() {
         char[] nonceChars = new char[6];

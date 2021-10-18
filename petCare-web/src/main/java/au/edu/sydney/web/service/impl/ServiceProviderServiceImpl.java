@@ -62,18 +62,18 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         HashMap<String, String> map = new HashMap<>();
 
         HashMap<Integer, String> filters = new HashMap<>();
-        filters.put(11, "hospital");//医院
-        filters.put(10, "disease");//疾病治疗
-        filters.put(9, "sterilization");//绝育
-        filters.put(8, "medical");//体检
-        filters.put(7, "vaccination");//疫苗
-        filters.put(6, "groom");//美容
-        filters.put(5, "washing");//洗澡
-        filters.put(4, "repellent");//驱虫
-        filters.put(3, "teeth");//洁牙
-        filters.put(2, "hosting");//托管
-        filters.put(1, "training");//训练
-        filters.put(0, "playground");//乐园
+        filters.put(11, "hospital");
+        filters.put(10, "disease");
+        filters.put(9, "sterilization");
+        filters.put(8, "medical");
+        filters.put(7, "vaccination");
+        filters.put(6, "groom");
+        filters.put(5, "washing");
+        filters.put(4, "repellent");
+        filters.put(3, "teeth");
+        filters.put(2, "hosting");
+        filters.put(1, "training");
+        filters.put(0, "playground");
 
         map.put("keyword", keyword);
         for (int i = 0; i < binary.length(); i++) {
