@@ -87,7 +87,7 @@ export default {
                 code: 4,
                 orderID: _this.oid
               }
-              _this.$http.put('http://110.40.184.115:8080/order/update', updateStatus)
+              _this.$http.put('http://47.96.6.135:8080/order/update', updateStatus)
                 .then((response) => {
                   _this.$message({
                     message: 'Change status successfully!',

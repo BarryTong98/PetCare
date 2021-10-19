@@ -31,7 +31,7 @@
           </el-aside>
 
           <!--预定医院的信息-->
-          <el-col :span="24" style="text-align: left;">
+          <el-col :span="15" style="text-align: left;">
             <div style="margin: 10px;">
               <span
                 style="font-family: Arial;font-size: 18px;font-weight: bolder">{{ order.serviceProviderName }}</span>
@@ -39,7 +39,7 @@
                 <li>
                   <div style="margin-top: 7px">
                     <i class="el-icon-date"></i>
-                    <span> Date: {{ order.serviceTime }}</span>
+                    <span> Order create time: {{ order.createTime }}</span>
                   </div>
                 </li>
                 <li>
@@ -58,6 +58,12 @@
                   <div style="margin-top: 7px">
                     <i class="el-icon-bell"></i>
                     <span> Service name: {{ order.serviceName }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-watch"></i>
+                    <span> Service time: {{ order.serviceTime }}</span>
                   </div>
                 </li>
                 <li>
@@ -102,6 +108,13 @@ export default {
     }
   },
   methods: {
+    //转化时间格式
+    //2021-10-03T22:48:29.000+0000 --> 2021-10-03 22:48:29
+    convertTime(date) {
+      var dateee = new Date(date).toJSON();
+      return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+    },
+
     //处理分页展示
     handleCurrentChange(currentPage) {
       if(this.orders.length === 0){
@@ -182,6 +195,10 @@ export default {
             }
           }
         });
+      //遍历orders数组,把createTime改格式
+      for (var i = 0; i < _this.orders.length; i++) {
+        _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
+      }
       _this.handleCurrentChange(1);
     },
   },

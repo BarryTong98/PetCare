@@ -27,11 +27,11 @@
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
           <el-aside style="width: 200px;height: 150px;margin: 10px;text-align: center">
-            <img :src="order.imageUrl" style="width: 200px;height: 150px" ></img>
+            <img :src="order.imageUrl" style="width: 200px;height: 150px"></img>
           </el-aside>
 
           <!--预定医院的信息-->
-          <el-col :span="24" style="text-align: left;">
+          <el-col :span="15" style="text-align: left;">
             <div style="margin: 10px;">
               <span
                 style="font-family: Arial;font-size: 18px;font-weight: bolder">{{ order.serviceProviderName }}</span>
@@ -39,7 +39,7 @@
                 <li>
                   <div style="margin-top: 7px">
                     <i class="el-icon-date"></i>
-                    <span> Date: {{ order.serviceTime }}</span>
+                    <span> Order create time: {{ order.createTime }}</span>
                   </div>
                 </li>
                 <li>
@@ -58,6 +58,12 @@
                   <div style="margin-top: 7px">
                     <i class="el-icon-bell"></i>
                     <span> Service name: {{ order.serviceName }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
+                    <i class="el-icon-watch"></i>
+                    <span> Service time: {{ order.serviceTime }}</span>
                   </div>
                 </li>
                 <li>
@@ -93,7 +99,7 @@ export default {
     return {
       searchInfo: '',
       orders: [],
-      userid:sessionStorage.getItem("userId"),
+      userid: sessionStorage.getItem("userId"),
 
       //分页展示个数以及展示商店数组
       storePageSize: 5,
@@ -102,12 +108,18 @@ export default {
     }
   },
   methods: {
+    //转化时间格式
+    //2021-10-03T22:48:29.000+0000 --> 2021-10-03 22:48:29
+    convertTime(date) {
+      var dateee = new Date(date).toJSON();
+      return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+    },
+
     //处理分页展示
     handleCurrentChange(currentPage) {
-      if(this.orders.length === 0){
+      if (this.orders.length === 0) {
         this.countStore = false
-      }
-      else{
+      } else {
         this.countStore = true
         this.storeDisplay = []
         var m = 0
@@ -143,9 +155,9 @@ export default {
                 }
               })
             }
-          }else {
+          } else {
             //如果输入的内容不匹配，则清空列表
-            while(_this.orders.length > 0) {
+            while (_this.orders.length > 0) {
               _this.orders.pop();
             }
             console.log("失败")
@@ -154,14 +166,14 @@ export default {
     },
 
     //搜索之前先判断一下搜索框中有没有输入内容，如果没有输入内容就显示所有订单
-    checKSearch(){
-      if (this.searchInfo == ''){
-        while(this.orders.length > 0) {
+    checKSearch() {
+      if (this.searchInfo == '') {
+        while (this.orders.length > 0) {
           this.orders.pop();
         }
         this.findAll();
         console.log("显示所有订单")
-      }else{
+      } else {
         this.searchOrders();
 
       }
@@ -170,10 +182,10 @@ export default {
     //查找所有订单
     findAll() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid)
         .then(function (response) {
           let temporders = response.data.data;
-          if (temporders != null){
+          if (temporders != null) {
             for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
               if (temporders[item].status == 3) {
                 console.log(temporders[item])
@@ -181,13 +193,17 @@ export default {
               }
             }
           }
+          //遍历orders数组,把createTime改格式
+          for (var i = 0; i < _this.orders.length; i++) {
+            _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
+          }
+          _this.handleCurrentChange(1);
         });
-      _this.handleCurrentChange(1);
     },
   },
   created() {
     console.log(this.userid),
-    this.findAll()
+      this.findAll()
   }
 }
 </script>
