@@ -18,8 +18,24 @@
         <router-link :to="{name: 'search', params: {keyword: input1, address: input2, checked: 4095}}">
           <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
         </router-link>
-        <el-button style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton" @click="logout">Login
+        <el-button v-if="!isToken" style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton"
+                   @click="login">Login
         </el-button>
+        <el-col v-else :span="2">
+          <el-dropdown @command="handleCommand" style="margin-left: 400%">
+            <el-button type="primary"
+                       style="color: #fff;
+                       background-color: #fa997e;
+                       border-color: #fa997e;">
+              My Account<i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="order">My orders</el-dropdown-item>
+              <el-dropdown-item command="information">Personal information</el-dropdown-item>
+              <el-dropdown-item command="logout">Logout</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-col>
       </div>
 
     </el-header>
@@ -133,6 +149,7 @@ export default {
 
       type: 0,
       id: 0,
+      yelp: false,
       price: '',
       active: 0,
       value1: '',
@@ -148,10 +165,36 @@ export default {
         petType: '',
         caseDescription: ''
       },
+      isToken: false
 
     }
   },
   methods: {
+
+    logout() {
+      window.sessionStorage.clear()
+      this.$router.push('/home')
+    },
+
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse
+    },
+    handleCommand(command) {
+      if (command == "order") {
+        this.myorder()
+      } else if (command == "information") {
+        this.information()
+      } else {
+        this.logout()
+      }
+    },
+    myorder() {
+      this.$router.replace('/ordernotstart')
+    },
+    information() {
+      this.$router.replace('/information')
+    },
+
     next() {
       if (++this.active > 2){
         this.submitOrder()
@@ -298,18 +341,31 @@ export default {
             console.log(response)
             if (response.data.code === 200) {
               alert('Add Order Successfully')
-              that.$router.push({name:'information', params: {id: that.id}})
+              that.$router.push({name:'information', params: {id: that.id, yelp: that.yelp}})
             }
           })
         }
       }
-    }
+    },
+
+
+
   },
   created() {
+    const token = sessionStorage.getItem("token")
+    console.log("token:" + token)
+    console.log(token === null)
+    if(token === null){
+      this.isToken = false
+    }else{
+      this.isToken = true
+    }
+    console.log(this.isToken)
     if(this.type === 0){
       this.type = this.$route.params.type
       this.price = this.$route.params.price
       this.id = this.$route.params.id
+      this.yelp = this.$route.params.yelp
     }
 
   }

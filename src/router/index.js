@@ -108,7 +108,7 @@ const router =  new Router({
       component: Information
     },
     {
-      path: '/orderAdd/:type/:id/:price',
+      path: '/orderAdd/:type/:id/:price/:yelp',
       name: 'orderAdd',
       component: orderAdd
     },

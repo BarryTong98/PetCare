@@ -77,7 +77,7 @@ export default {
       this.$refs[formName].validate((valid) => {
         if (valid) {
           console.log(formName)
-          axios.post('http://110.40.184.115:8080/user/register', {
+          axios.post('http://47.96.6.135:8080/user/register', {
             email: this.ruleForm.email,
             password: this.ruleForm.pass  ,
             phoneNumber: this.ruleForm.phone,

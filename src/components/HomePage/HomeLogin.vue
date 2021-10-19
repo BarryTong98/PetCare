@@ -131,7 +131,7 @@ export default {
             alert('Login Successfully')
             window.sessionStorage.setItem("userId", response.data.data.userId)
             window.sessionStorage.setItem("token", response.data.data.token)
-            _this.$router.push('/home')
+            _this.$router.go(-1)
           }
           if (response.data.code === 999) {
             alert('Account or Password Error')
@@ -164,10 +164,10 @@ export default {
           alert('Login Successfully')
           window.sessionStorage.setItem("userId", response.data.data.userId)
           window.sessionStorage.setItem("token", response.data.data.token)
-          _this.$router.push('/home')
+          _this.$router.go(-1)
         }
         if (response.data.code === 999) {
-          axios.post('http://110.40.184.115:8080/user/register', {
+          axios.post('http://47.96.6.135:8080/user/register', {
             email: googleUser.it.Tt,
             password: googleUser.it.Tt  ,
             phoneNumber: googleUser.it.Tt,
@@ -191,7 +191,7 @@ export default {
                   alert('Login Successfully')
                   window.sessionStorage.setItem("userId", response.data.data.userId)
                   window.sessionStorage.setItem("token", response.data.data.token)
-                  _this.$router.push('/home')
+                  _this.$router.go(-1)
                 }
                 console.log(response);
               }).catch(function(error){

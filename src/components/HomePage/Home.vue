@@ -230,7 +230,6 @@ export default {
     }
   },
   created() {
-    console.log("RUNRUNRURN")
    const token = sessionStorage.getItem("token")
     console.log("token:" + token)
     console.log(token === null)

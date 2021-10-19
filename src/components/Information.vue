@@ -18,8 +18,24 @@
         <router-link :to="{name: 'search', params: {keyword: input1, address: input2, checked: 4095}}">
           <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
         </router-link>
-        <el-button style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton" @click="logout">Login
+        <el-button v-if="!isToken" style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton"
+                   @click="login">Login
         </el-button>
+        <el-col v-else :span="2">
+          <el-dropdown @command="handleCommand" style="margin-left: 400%">
+            <el-button type="primary"
+                       style="color: #fff;
+                       background-color: #fa997e;
+                       border-color: #fa997e;">
+              My Account<i class="el-icon-arrow-down el-icon--right"></i>
+            </el-button>
+            <el-dropdown-menu slot="dropdown">
+              <el-dropdown-item command="order">My orders</el-dropdown-item>
+              <el-dropdown-item command="information">Personal information</el-dropdown-item>
+              <el-dropdown-item command="logout">Logout</el-dropdown-item>
+            </el-dropdown-menu>
+          </el-dropdown>
+        </el-col>
       </div>
 
     </el-header>
@@ -138,12 +154,17 @@
                 </div>
               </el-col>
               <el-col :span=4>
-                <router-link
-                  :to="{name: 'orderAdd', params: {type: itemFeature.featureType, id: itemFeature.featureId, price: itemFeature.featurePrice}}">
+                <router-link v-if="isToken"
+                  :to="{name: 'orderAdd', params: {type: itemFeature.featureType, id: itemFeature.featureId, price: itemFeature.featurePrice, yelp: yelp}}">
                   <el-button type="primary">
                     Book
                   </el-button>
                 </router-link>
+
+                  <el-button v-else @click="jumpToLogin" type="primary">
+                    Book
+                  </el-button>
+
               </el-col>
             </el-form-item>
 
@@ -286,6 +307,8 @@ export default {
         shadowSize: [41, 41]
       },
       yelp: false,
+
+      isToken: false
     }
   },
 
@@ -299,6 +322,35 @@ export default {
   },
 
   methods: {
+
+    logout() {
+      window.sessionStorage.clear()
+      this.$router.go(0);
+      //this.$router.push('/home')
+    },
+    login(){
+      this.$router.push('/homelogin')
+    },
+
+    toggleCollapse() {
+      this.isCollapse = !this.isCollapse
+    },
+    handleCommand(command) {
+      if (command == "order") {
+        this.myorder()
+      } else if (command == "information") {
+        this.information()
+      } else {
+        this.logout()
+      }
+    },
+    myorder() {
+      this.$router.replace('/ordernotstart')
+    },
+    information() {
+      this.$router.replace('/information')
+    },
+
     //处理订单功能分页
     handleCurrentChange(currentPage) {
       this.countOrder = true
@@ -364,12 +416,25 @@ export default {
         comment: comment
       }
       this.store.comments.push(JSON.parse(JSON.stringify(newArr)))
-    }
+    },
+    jumpToLogin(){
+      alert("You have to login!")
+      this.$router.push('/homelogin')
+    },
+
   },
   created() {
 
+    const token = sessionStorage.getItem("token")
+
+    if(token === null){
+      this.isToken = false
+    }else{
+      this.isToken = true
+    }
+
     var that = this
-    if (this.$route.params.yelp === false) {
+    if (this.$route.params.yelp === false || this.$route.params.yelp === "false") {
       this.yelp = false
       axios.get("http://47.96.6.135:8080/serviceProvider/" + this.$route.params.id).then(
         function (response) {
@@ -412,14 +477,16 @@ export default {
       )
     } else {
       this.yelp = true
+      console.log(this.yelp)
       axios.get("http://47.96.6.135:8080/serviceProvider/yelp/" + this.$route.params.id).then(
         function (response) {
-          console.log(response)
           const reqs = response.data.data
           that.setStore(reqs.image_url, reqs.name, '', reqs.rating, '', '', reqs.address, '', reqs.latitude, reqs.longitude, reqs.url)
         }
       )
     }
+
+
 
 
   }

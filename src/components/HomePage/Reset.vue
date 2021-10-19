@@ -111,7 +111,7 @@ export default {
         if (valid) {
           let _this = this
 
-          axios.post('http://110.40.184.115:8080/email/verify', {
+          axios.post('http://47.96.6.135:8080/email/verify', {
             email: this.ruleForm.pass,
             verificationCode: this.ruleForm.checkPass
           }).then(function (response) {
