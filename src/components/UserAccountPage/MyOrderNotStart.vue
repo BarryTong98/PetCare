@@ -27,7 +27,7 @@
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
           <el-aside style="width: 200px;height: 150px;margin: 10px;text-align: center">
-            <img :src="order.imageUrl" style="width: 200px;height: 150px" ></img>
+            <img :src="order.imageUrl" style="width: 200px;height: 150px"></img>
           </el-aside>
 
           <!--预定医院的信息-->
@@ -39,7 +39,7 @@
                 <li>
                   <div style="margin-top: 7px">
                     <i class="el-icon-date"></i>
-                    <span> Date: {{ order.serviceTime }}</span>
+                    <span> Order create time: {{ order.createTime }}</span>
                   </div>
                 </li>
                 <li>
@@ -62,6 +62,12 @@
                 </li>
                 <li>
                   <div style="margin-top: 7px">
+                    <i class="el-icon-watch"></i>
+                    <span> Service time: {{ order.serviceTime }}</span>
+                  </div>
+                </li>
+                <li>
+                  <div style="margin-top: 7px">
                     <i class="el-icon-s-finance"></i>
                     <span> Price: ${{ order.amount }}</span>
                   </div>
@@ -70,14 +76,15 @@
             </div>
           </el-col>
           <el-col :span="2" style="text-align:left;">
-            <el-button icon="el-icon-delete" id="cancel_button" type="danger" @click="cancelOrder(order.oid)">Cancel</el-button>
+            <el-button icon="el-icon-delete" id="cancel_button" type="danger" @click="cancelOrder(order.oid)">Cancel
+            </el-button>
           </el-col>
         </el-container>
       </li>
     </ul>
     <!--分页功能-->
     <el-pagination hide-on-single-page
-                   style="margin-top: 10px"  class="pagination-store"
+                   style="margin-top: 10px" class="pagination-store"
                    :current-page.sync="currentPage"
                    background
                    @current-change="handleCurrentChange"
@@ -92,28 +99,34 @@
 <script>
 export default {
   name: "MyOrderNotStart",
-  data(){
-    return{
-      status:'1',
+  data() {
+    return {
+      status: '1',
       searchInfo: '',
       orders: [],
-      userid:1,
+      userid: 1,
 
       //分页展示个数以及展示商店数组
       storePageSize: 5,
       storeDisplay: [],
       currentPage: 1,
-      show:true
+      show: true
     }
   },
-  methods:{
+  methods: {
+    //转化时间格式
+    //2021-10-03T22:48:29.000+0000 --> 2021-10-03 22:48:29
+    convertTime(date) {
+      var dateee = new Date(date).toJSON();
+      return new Date(+new Date(dateee) + 8 * 3600 * 1000).toISOString().replace(/T/g, ' ').replace(/\.[\d]{3}Z/, '')
+    },
+
     //处理分页展示
     handleCurrentChange(currentPage) {
-      if(this.orders.length === 0){
+      if (this.orders.length === 0) {
         this.countStore = false
         this.show = false
-      }
-      else{
+      } else {
         this.countStore = true
         this.storeDisplay = []
         var m = 0
@@ -165,9 +178,9 @@ export default {
                 }
               })
             }
-          }else {
+          } else {
             //如果输入的内容不匹配，则清空列表
-            while(_this.orders.length > 0) {
+            while (_this.orders.length > 0) {
               _this.orders.pop();
             }
             console.log("失败")
@@ -176,40 +189,45 @@ export default {
     },
 
     //搜索之前先判断一下搜索框中有没有输入内容，如果没有输入内容就显示所有订单
-    checKSearch(){
-      if (this.searchInfo == ''){
-        while(this.orders.length > 0) {
+    checKSearch() {
+      if (this.searchInfo == '') {
+        while (this.orders.length > 0) {
           this.orders.pop();
         }
         this.findAll();
         console.log("显示所有订单")
-      }else{
+      } else {
         this.searchOrders();
 
       }
     },
 
-    findAll(){
+    findAll() {
       const _this = this;
       _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
-          if (temporders != null){
-            for(var item=0;item< temporders.length;item++){  //遍历对象数组，item表示某个具体的对象
-              if (temporders[item].status == 1){
+          if (temporders != null) {
+            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+              if (temporders[item].status == 1) {
                 console.log(temporders[item])
                 _this.orders.push(temporders[item]);
               }
             }
+          }
+          //遍历orders数组,把createTime改格式
+          for (var i = 0; i < _this.orders.length; i++) {
+            _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
           }
           _this.handleCurrentChange(1);
         });
     },
   },
 
+
   created() {
-    this.userid =sessionStorage.getItem("userId"),
-    this.findAll()
+    this.userid = sessionStorage.getItem("userId"),
+      this.findAll()
   },
 }
 </script>
@@ -276,14 +294,15 @@ button {
   color: #FFFFFF;
 }
 
-#evaluate_button{
+#evaluate_button {
   margin-top: 70px;
   width: 120px;
   color: #fff;
   background-color: #fa997e;
   border-color: #fa997e;
 }
-#cancel_button{
+
+#cancel_button {
   margin-top: 70px;
   width: 120px;
 }

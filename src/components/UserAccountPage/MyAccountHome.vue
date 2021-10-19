@@ -1,7 +1,9 @@
 <template>
 <div>
   <el-col :span="12">
-    <h1>Welcome to user center!</h1>
+    <p class="first">
+      Welcome to user account center!
+    </p>
   </el-col>
   <el-col :span="12">
     <img src="/img/pet.0293da85.png" alt="missing">
@@ -20,4 +22,12 @@ export default {
 img{
   width: 600px;
 }
+
+.first {
+  margin-left: 2%;
+  margin-top: 30%;
+  font-size: 4vw;
+  font-family: 'PPWoodland-Bold';
+}
+
 </style>

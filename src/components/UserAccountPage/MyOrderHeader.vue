@@ -72,7 +72,7 @@ export default {
     //获取用户信息，得到头像url
     getInfo(){
       const _this = this;
-      _this.$http.get("http://110.40.184.115:8080/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           console.log(response.data.data);
           _this.user = response.data.data;
