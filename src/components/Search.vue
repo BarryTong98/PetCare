@@ -25,6 +25,14 @@
     </el-header>
 
     <el-main style="text-align: left">
+      <el-row :gutter="20">
+        <el-col :span=18 :offset=3>
+          <span class="description0" v-if="yelp === true">
+            All these service providers come from Yelp
+          </span>
+        </el-col>
+      </el-row>
+
 
       <!--分类导航-->
       <el-row :gutter="20">
@@ -102,7 +110,8 @@
                 <el-divider></el-divider>
                 <!-- 提交更改 -->
                 <el-col :span="2" :offset="2">
-                  <router-link :to="{name: 'search', params: {keyword: saveKeyword, address: saveAddress, checked: changeCheckNum()}}">
+                  <router-link
+                    :to="{name: 'search', params: {keyword: saveKeyword, address: saveAddress, checked: changeCheckNum()}}">
                     <el-button type="primary">
                       Submit the change
                     </el-button>
@@ -123,28 +132,28 @@
               <el-form-item>
                 <div>
                   <!--默认推荐-->
-                  <el-col :span=2 :offset=16>
-                    <el-link :underline="false" :type="type1" @click="changeRecommendRating">Recommend</el-link>
+                  <el-col :span=3 :offset=12>
+                    <el-link class="display-title" :underline="false" :type="type1" @click="changeRecommendRating">Recommend</el-link>
                   </el-col>
                   <!--按照评分排序-->
-                  <el-col :span=2>
-                    <el-link :underline="false" :type="type2" @click="changeRankRating">
+                  <el-col :span=3>
+                    <el-link class="display-title" :underline="false" :type="type2" @click="changeRankRating">
                       Rating
                       <i class="el-icon-arrow-down" v-if="rankRating"></i>
                       <i class="el-icon-arrow-up" v-if="!rankRating"></i>
                     </el-link>
                   </el-col>
                   <!--按照销量排序-->
-                  <el-col :span=2>
-                    <el-link :underline="false" :type="type3" @click="changeRankVolume">
+                  <el-col :span=3>
+                    <el-link class="display-title" :underline="false" :type="type3" @click="changeRankVolume">
                       Volume
                       <i class="el-icon-arrow-down" v-if="rankVolume"></i>
                       <i class="el-icon-arrow-up" v-if="!rankVolume"></i>
                     </el-link>
                   </el-col>
                   <!--按照价格排序-->
-                  <el-col :span=2>
-                    <el-link :underline="false" :type="type4" @click="changeRankPrice">
+                  <el-col :span=3>
+                    <el-link class="display-title" :underline="false" :type="type4" @click="changeRankPrice">
                       Price
                       <i class="el-icon-arrow-down" v-if="rankPrice"></i>
                       <i class="el-icon-arrow-up" v-if="!rankPrice"></i>
@@ -160,21 +169,28 @@
                   No relevant Service Provider was found
                 </div>
               </el-form-item>
-              <el-form-item v-if="countStore === true" class="search-item" v-for="item in JSON.parse(JSON.stringify(storeDisplay))">
-                <router-link :to="{name: 'information', params: {id: item.id}}">
+              <el-form-item v-if="countStore === true" class="search-item"
+                            v-for="item in JSON.parse(JSON.stringify(storeDisplay))">
+                <router-link :to="{name: 'information', params: {yelp: yelp, id: item.id}}">
 
                   <!--商家图片-->
-                  <el-col :span=7>
+                  <el-col :span=6>
                     <img :src="item.src" height="208" width="100%"/>
                   </el-col>
-                  <!--商家姓名-->
-                  <el-col :span=10>
-                    <div class="store-title">{{ item.name }}</div>
+                  <el-col :span=17>
+                    <div>
+                      <!--商家姓名-->
+                      <span class="store-title">
+                        {{ item.name }}
+                      </span>
+                      <!--营业时间-->
+                      <span class="time">
+                        {{ item.time }}
+                      </span>
+                    </div>
+
                   </el-col>
-                  <!--营业时间-->
-                  <el-col :span=6 :offset=1>
-                    <div class="time">{{ item.time }}</div>
-                  </el-col>
+
                   <!--评分-->
                   <el-col :span=5>
                     <el-rate
@@ -186,18 +202,21 @@
                     </el-rate>
                   </el-col>
                   <!--价格和销量-->
-                  <el-col :span=6>
-                    <div class="priceAndvolume">Average
-                      Price:&nbsp;${{ item.price }}&nbsp;&nbsp;{{ item.volume }}times/month
+                  <el-col :span=12>
+                    <div class="priceAndvolume" v-if="item.price !== ''">Average
+                      Price:&nbsp;${{ item.price }}&nbsp;&nbsp;&nbsp;&nbsp;{{ item.volume }}times/month
                     </div>
                   </el-col>
                   <!--地址-->
-                  <el-col :span=6>
+                  <el-col :span=17>
                     <div class="address">Address:&nbsp;{{ item.Address }}</div>
                   </el-col>
                   <!--描述-->
                   <el-col :span=17>
                     <div class="description">
+                      <span v-if="item.description !== ''">
+                        Description: &nbsp;
+                      </span>
                       {{ item.description }}
                     </div>
                   </el-col>
@@ -228,7 +247,7 @@
 import axios from "axios";
 
 const healthOptions = ['Hospital', 'Disease', 'Sterilization', 'Medical', 'Vaccination'];
-const groomingOptions = ['Groom', 'Washing', 'Repellent','Teeth'];
+const groomingOptions = ['Groom', 'Washing', 'Repellent', 'Teeth'];
 const boardingOptions = ['Hosting', 'Training', 'Playground'];
 export default {
   data() {
@@ -240,9 +259,9 @@ export default {
       countStore: true,
 
       type1: "primary",
-      type2:"",
-      type3:"",
-      type4:"",
+      type2: "",
+      type3: "",
+      type4: "",
 
       //控制health筛选
       checkHealthAll: false,
@@ -282,6 +301,7 @@ export default {
       saveKeyword: ' ',
       saveAddress: ' ',
 
+      yelp: false
 
     }
   },
@@ -324,7 +344,7 @@ export default {
       this.isBoardingIndeterminate = checkedCount > 0 && checkedCount < this.boardingFilters.length;
     },
 
-    changeRecommendRating(){
+    changeRecommendRating() {
       this.storeArr.sort(function (a, b) {
         var x = a['numStar'] * a['volume'];
         var y = b['numStar'] * b['volume'];
@@ -462,10 +482,9 @@ export default {
 
     //处理分页展示
     handleCurrentChange(currentPage) {
-      if(this.storeArr.length === 0){
+      if (this.storeArr.length === 0) {
         this.countStore = false
-      }
-      else{
+      } else {
         this.countStore = true
         this.storeDisplay = []
         var m = 0
@@ -573,7 +592,7 @@ export default {
     this.saveKeyword = this.$route.params.keyword
     this.saveAddress = this.$route.params.address
 
-    axios.get("http://47.96.6.135:8080/serviceProvider/search/"+this.$route.params.address+"/" + this.$route.params.checked + "?keyword=" + this.$route.params.keyword).then(
+    axios.get("http://47.96.6.135:8080/serviceProvider/search/" + this.$route.params.address + "/" + this.$route.params.checked + "?keyword=" + this.$route.params.keyword).then(
       function (response) {
         console.log(response)
 
@@ -583,9 +602,11 @@ export default {
 
           var mStore = reqs[i]
           if (response.data.code === 200) {
-            that.addStoreArr(mStore.spid,mStore.imageUrl, mStore.serviceProviderName, mStore.businessHours, mStore.rating, mStore.averagePrice, mStore.sales, mStore.address, mStore.description)
+            that.yelp = false
+            that.addStoreArr(mStore.spid, mStore.imageUrl, mStore.serviceProviderName, mStore.businessHours, mStore.rating, mStore.averagePrice, mStore.sales, mStore.address, mStore.description)
           } else if (response.data.code === 201) {
-            that.addStoreArr(mStore.id,mStore.image_url, mStore.name, mStore.time, mStore.rating, mStore.averagePrice, mStore.sales, mStore.address, mStore.description)
+            that.yelp = true
+            that.addStoreArr(mStore.id, mStore.image_url, mStore.name, '', mStore.rating, '', '', mStore.address, '')
           }
 
         }
@@ -700,11 +721,15 @@ body {
 }
 
 .store-title {
-  font-size: 40px;
+  margin-top: 10px;
+  font-size: 20px;
 }
 
 .time {
-  font-size: 16px;
+  margin-left: 40px;
+  margin-top: 10px;
+  font-size: 12px;
+  color: #666666;
 }
 
 .search-item {
@@ -714,27 +739,27 @@ body {
 }
 
 /deep/ .el-rate__icon {
-  font-size: 30px;
+  font-size: 15px;
 
 }
 
 /deep/ .el-rate__text {
-  font-size: 30px;
+  font-size: 15px;
 }
 
 /deep/ .el-rate {
-  margin-top: 40px;
+  margin-top: 12px;
 }
 
 
 .priceAndvolume {
-  font-size: 16px;
-  margin-top: 35px;
+  font-size: 8px;
+  color: #333333;
 }
 
 .address {
   font-size: 10px;
-  margin-top: 32px;
+  color: #666666;
 }
 
 .checkFilter {
@@ -756,12 +781,24 @@ a {
   color: black;
 }
 
-.noFound{
+.noFound {
   position: absolute;
   left: 38%;
   color: #999999;
 }
 
+.description {
+  font-size: 8px;
+  color: #9E9C9C;
+}
+.description0 {
+  margin-left: 35px;
+  font-size: 13px;
+  color: #9E9C9C;
+}
 
+.display-title{
+  font-size: 10px;
+}
 
 </style>
