@@ -12,6 +12,7 @@
     "core-js": "^3.6.5",
     "element-ui": "^2.4.5",
     "google": "^2.1.0",
+    "leaflet": "^1.7.1",
     "less-loader": "^7.3.0",
     "vue": "^2.6.11",
     "vue-axios": "^3.3.7",
@@ -20,7 +21,8 @@
     "vue-google-signin-button-directive": "^1.0.3",
     "vue-meta": "^2.4.0",
     "vue-router": "^3.2.0",
-    "vue2-google-maps": "^0.10.7"
+    "vue2-google-maps": "^0.10.7",
+    "vue2-leaflet": "^2.7.1"
   },
   "devDependencies": {
     "@vue/cli-plugin-babel": "~4.5.0",

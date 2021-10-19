@@ -103,7 +103,7 @@ const router =  new Router({
       component: Search
     },
     {
-      path: '/information/:id',
+      path: '/information/:yelp/:id',
       name: 'information',
       component: Information
     },
