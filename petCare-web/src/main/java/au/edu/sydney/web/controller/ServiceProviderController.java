@@ -49,4 +49,12 @@ public class ServiceProviderController {
         keyword = request.getParameter("keyword");
         return serviceProviderService.search(region, filter, keyword);
     }
+
+    @ApiOperation("get business detail from yelp")
+    @GetMapping("/yelp/{id}")
+    public Result getYelpBusinessDeatail(@PathVariable String id) {
+        return serviceProviderService.getYelpBusinessDetail(id);
+    }
+
+
 }

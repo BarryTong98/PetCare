@@ -90,4 +90,17 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         }
         return Result.ok(serviceProviderList);
     }
+
+    @Override
+    public Result getYelpBusinessDetail(String id) {
+        if (id == null) {
+            return Result.error("business id can not be empty");
+        }
+        Business businessDetails = yelpApiCli.getServiceProviderDetails(id);
+        if (businessDetails == null) {
+            return Result.error("no such business");
+        }
+
+        return Result.ok(businessDetails);
+    }
 }

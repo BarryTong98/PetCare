@@ -16,4 +16,6 @@ public interface ServiceProviderService {
     Result getRecommendedServiceProvider();
 
     Result search(String region,int filter,String keyword);
+
+    Result getYelpBusinessDetail(String id);
 }
