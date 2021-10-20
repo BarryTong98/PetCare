@@ -32,7 +32,7 @@ import {
   Upload,
   PageHeader,
   Descriptions,
-  DescriptionsItem,
+  DescriptionsItem, Loading,
 } from 'element-ui'
 import locale from '../../node_modules/element-ui/lib/locale/lang/en'
 
@@ -93,6 +93,7 @@ Vue.use(Descriptions)
 Vue.use(DescriptionsItem)
 
 Vue.use(DatePicker,{locale})
+Vue.use(Loading)
 
 
 

@@ -418,12 +418,23 @@ export default {
       this.store.comments.push(JSON.parse(JSON.stringify(newArr)))
     },
     jumpToLogin(){
-      alert("You have to login!")
+      this.$message({
+        message: 'You have not login!',
+        type: 'warning'
+      });
+
       this.$router.push('/homelogin')
     },
 
   },
   created() {
+
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    });
 
     const token = sessionStorage.getItem("token")
 
@@ -475,6 +486,7 @@ export default {
         }, function (err) {
         }
       )
+      loading.close()
     } else {
       this.yelp = true
       console.log(this.yelp)
@@ -484,10 +496,8 @@ export default {
           that.setStore(reqs.image_url, reqs.name, '', reqs.rating, '', '', reqs.address, '', reqs.latitude, reqs.longitude, reqs.url)
         }
       )
+      loading.close()
     }
-
-
-
 
   }
 }

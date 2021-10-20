@@ -82,8 +82,8 @@
             <el-menu-item-group>
               <el-menu-item index="1-1">
                 <router-link
-                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Hospital')}}">
-                  Hospital
+                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Veterinarians')}}">
+                  Veterinarians
                 </router-link>
               </el-menu-item>
               <el-menu-item index="1-2">
@@ -100,8 +100,8 @@
               </el-menu-item>
               <el-menu-item index="1-4">
                 <router-link
-                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Medical')}}">
-                  Medical
+                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Check-ups')}}">
+                  Check-ups
                 </router-link>
               </el-menu-item>
               <el-menu-item index="1-5">
@@ -149,14 +149,14 @@
               </el-menu-item>
               <el-menu-item index="1-3">
                 <router-link
-                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Repellent')}}">
-                  Repellent
+                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Deworming')}}">
+                  Deworming
                 </router-link>
               </el-menu-item>
               <el-menu-item index="1-4">
                 <router-link
-                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Teeth')}}">
-                  Teeth
+                  :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: changeCheckNum('Cleaning')}}">
+                  Cleaning
                 </router-link>
               </el-menu-item>
             </el-menu-item-group>
@@ -290,13 +290,13 @@ export default {
         Sterilization = "1"
         Medical = "1"
         Vaccination = "1"
-      } else if (value === "Hospital") {
+      } else if (value === "Veterinarians") {
         Hospital = "1"
       } else if (value === "Disease") {
         Disease = "1"
       } else if (value === "Sterilization") {
         Sterilization = "1"
-      } else if (value === "Medical") {
+      } else if (value === "Check-ups") {
         Medical = "1"
       } else if (value === "Vaccination") {
         Vaccination = "1"
@@ -309,9 +309,9 @@ export default {
         Groom = "1"
       } else if (value === "Washing") {
         Washing = "1"
-      } else if (value === "Repellent") {
+      } else if (value === "Deworming") {
         Repellent = "1"
-      } else if (value === "Teeth") {
+      } else if (value === "Cleaning") {
         Teeth = "1"
       } else if (value === "Boarding") {
         Hosting = "1"

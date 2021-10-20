@@ -41,7 +41,7 @@
     </el-header>
 
     <el-main style="text-align: left">
-      <el-row :gutter="20">
+      <el-row :gutter="20" >
         <el-col :span=18 :offset=3>
           <span class="description0" v-if="yelp === true">
             All these service providers come from Yelp
@@ -262,8 +262,8 @@
 <script>
 import axios from "axios";
 
-const healthOptions = ['Hospital', 'Disease', 'Sterilization', 'Medical', 'Vaccination'];
-const groomingOptions = ['Groom', 'Washing', 'Repellent', 'Teeth'];
+const healthOptions = ['Veterinarians', 'Disease', 'Sterilization', 'Check-ups', 'Vaccination'];
+const groomingOptions = ['Groom', 'Washing', 'Deworming', 'Cleaning'];
 const boardingOptions = ['Hosting', 'Training', 'Playground'];
 export default {
   data() {
@@ -318,7 +318,8 @@ export default {
       saveAddress: ' ',
 
       yelp: false,
-      isToken: false
+      isToken: false,
+
 
     }
   },
@@ -483,7 +484,7 @@ export default {
         binaryArr[i] = binary[binary.length - (i + 1)]
       }
       if (binaryArr[0] === "1") {
-        this.checkedHealth.push("Hospital")
+        this.checkedHealth.push("Veterinarians")
       }
       if (binaryArr[1] === "1") {
         this.checkedHealth.push("Disease")
@@ -492,7 +493,7 @@ export default {
         this.checkedHealth.push("Sterilization")
       }
       if (binaryArr[3] === "1") {
-        this.checkedHealth.push("Medical")
+        this.checkedHealth.push("Check-ups")
       }
       if (binaryArr[4] === "1") {
         this.checkedHealth.push("Vaccination")
@@ -504,10 +505,10 @@ export default {
         this.checkedGrooming.push("Washing")
       }
       if (binaryArr[7] === "1") {
-        this.checkedGrooming.push("Repellent")
+        this.checkedGrooming.push("Deworming")
       }
       if (binaryArr[8] === "1") {
-        this.checkedGrooming.push("Teeth")
+        this.checkedGrooming.push("Cleaning")
       }
       if (binaryArr[9] === "1") {
         this.checkedBoarding.push("Hosting")
@@ -561,28 +562,28 @@ export default {
 
     //改变勾选筛选项，改变传递数值
     changeCheckNum() {
-      var Hospital = "0"
+      var Veterinarians = "0"
       var Disease = "0"
       var Sterilization = "0"
-      var Medical = "0"
+      var Check_ups = "0"
       var Vaccination = "0"
       var Groom = "0"
       var Washing = "0"
-      var Repellent = "0"
-      var Teeth = "0"
+      var Deworming = "0"
+      var Cleaning = "0"
       var Hosting = "0"
       var Training = "0"
       var Playground = "0"
 
       for (var i = 0; i < JSON.parse(JSON.stringify(this.checkedHealth)).length; i++) {
-        if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Hospital") {
-          Hospital = "1"
+        if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Veterinarians") {
+          Veterinarians = "1"
         } else if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Disease") {
           Disease = "1"
         } else if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Sterilization") {
           Sterilization = "1"
-        } else if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Medical") {
-          Medical = "1"
+        } else if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Check-ups") {
+          Check_ups = "1"
         } else if (JSON.parse(JSON.stringify(this.checkedHealth))[i] === "Vaccination") {
           Vaccination = "1"
         }
@@ -592,10 +593,10 @@ export default {
           Groom = "1"
         } else if (JSON.parse(JSON.stringify(this.checkedGrooming))[i] === "Washing") {
           Washing = "1"
-        } else if (JSON.parse(JSON.stringify(this.checkedGrooming))[i] === "Repellent") {
-          Repellent = "1"
-        } else if (JSON.parse(JSON.stringify(this.checkedGrooming))[i] === "Teeth") {
-          Teeth = "1"
+        } else if (JSON.parse(JSON.stringify(this.checkedGrooming))[i] === "Deworming") {
+          Deworming = "1"
+        } else if (JSON.parse(JSON.stringify(this.checkedGrooming))[i] === "Cleaning") {
+          Cleaning = "1"
         }
       }
       for (var i = 0; i < JSON.parse(JSON.stringify(this.checkedBoarding)).length; i++) {
@@ -607,7 +608,7 @@ export default {
           Playground = "1"
         }
       }
-      var binary = Playground + Training + Hosting + Teeth + Repellent + Washing + Groom + Vaccination + Medical + Sterilization + Disease + Hospital;
+      var binary = Playground + Training + Hosting + Cleaning + Deworming + Washing + Groom + Vaccination + Check_ups + Sterilization + Disease + Veterinarians;
       return parseInt(binary, 2)
 
     },
@@ -620,6 +621,12 @@ export default {
   },
 
   created() {
+    const loading = this.$loading({
+      lock: true,
+      text: 'Loading',
+      spinner: 'el-icon-loading',
+      background: 'rgba(0, 0, 0, 0.7)'
+    });
 
     const token = sessionStorage.getItem("token")
     console.log("token:" + token)
@@ -657,11 +664,13 @@ export default {
           } else if (response.data.code === 201) {
             that.yelp = true
             that.addStoreArr(mStore.id, mStore.image_url, mStore.name, '', mStore.rating, '', '', mStore.address, '')
+
           }
 
         }
         that.changeRecommendRating()
         that.handleCurrentChange(1)
+        loading.close()
 
       }, function (err) {
       }

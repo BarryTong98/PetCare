@@ -281,11 +281,11 @@ export default {
           var dateString = y.toString() + "-" + m.toString() + "-" + d.toString()
           var time = ''
           if(this.value2 ==='option1') time = '08: 30 -- 09:30'
-          else if(this.value2 ==='option2') time = '09: 30 -- 10:30'
-          else if(this.value2 ==='option3') time = '10: 30 -- 11:30'
-          else if(this.value2 ==='option4') time = '14: 30 -- 15:30'
-          else if(this.value2 ==='option5') time = '15: 30 -- 16:30'
-          else if(this.value2 ==='option6') time = '16: 30 -- 17:30'
+          else if(this.value2 ==='option2') time = '09:30 -- 10:30'
+          else if(this.value2 ==='option3') time = '10:30 -- 11:30'
+          else if(this.value2 ==='option4') time = '14:30 -- 15:30'
+          else if(this.value2 ==='option5') time = '15:30 -- 16:30'
+          else if(this.value2 ==='option6') time = '16:30 -- 17:30'
           var serviceTime = dateString + " " + time
           console.log(this.price.split('/')[0])
           var nowDate = new Date()
