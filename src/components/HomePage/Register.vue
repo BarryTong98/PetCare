@@ -84,7 +84,10 @@ export default {
             userName: this.ruleForm.username,
           }).then(function (response) {
             if (response.data.code === 200) {
-              alert('Register Successfully')
+              _this.$message({
+                message: 'Register Successfully',
+                type: 'success'
+              });
               // _this.$router.push('/home')
               axios(
                 {
@@ -98,22 +101,34 @@ export default {
                 }
               ).then(function(response){
                 if(response.data.code === 200){
-                  alert('Login Successfully')
+                  _this.$message({
+                    message: 'Login Successfully',
+                    type: 'success'
+                  });
                   window.sessionStorage.setItem("userId", response.data.data.userId)
                   window.sessionStorage.setItem("token", response.data.data.token)
                   _this.$router.push('/home')
                 }
                 if(response.data.code === 999){
-                  alert('Account or Password Error')
+                  _this.$message({
+                    message: 'Account or Password Error',
+                    type: 'error'
+                  });
                 }
                 console.log(response);
               }).catch(function(error){
-                alert('Account or Password Error')
+                _this.$message({
+                  message: 'Account or Password Error',
+                  type: 'error'
+                });
                 console.log(error);
               });
             }
             if (response.data.code === 999) {
-              alert('Account Already Exist')
+              _this.$message({
+                message: 'Account Already Exist',
+                type: 'error'
+              });
             }
             console.log(response.data)
           }).catch(function (err) {

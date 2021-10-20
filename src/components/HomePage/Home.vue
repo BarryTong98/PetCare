@@ -245,9 +245,12 @@ export default {
       this.$router.push('/home')
     },
     logout() {
+      this.$message({
+        message: 'Logout Successfully',
+        type: 'success'
+      });
       window.sessionStorage.clear()
       this.$router.go(0);
-      //this.$router.push('/home')
     },
     login(){
       this.$router.push('/homelogin')

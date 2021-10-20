@@ -42,22 +42,6 @@ import GoogleLogin from 'vue-google-login'
 import axios from 'axios'
 //new
 export default {
-  props: {
-    params: Object,
-    // It gets called if the action (login/logout) is successful.
-    onSuccess: Function,
-    // It gets called if the action (login/logout) fails.
-    onFailure: Function,
-    // It determines if the button is for logging in or for logging out.
-    // By default is false so you only need to add it for the logout button
-    logoutButton: Boolean,
-    // Optional, if provided will call gapi.signin2.render with the provided params and render a button with google UI
-    // https://developers.google.com/identity/sign-in/web/reference#gapisignin2renderid-options
-    renderParams: Object,
-    // If you are logged in it will return the current user when the component mounts
-    // The object it's the same as onSuccess
-    onCurrentUser: Function,
-  },
   data() {
     var validatePass = (rule, value, callback) => {
       if (value === '') {
@@ -94,16 +78,17 @@ export default {
             trigger: 'blur'
           }
         ],
-        params: {
-          client_id: '870223928949-0h13cc4egdup97kjmjp2d9e39io95lc7.apps.googleusercontent.com'
-        },
-        // only needed if you want to render the button with the google ui
-        renderParams: {
-          width: 250,
-          height: 50,
-          longtitle: true
-        },
-      }
+      },
+      params: {
+        client_id: '870223928949-lo403pvt8k0rp70rbqrb6n66pp4j2krf.apps.googleusercontent.com'
+        //'870223928949-0h13cc4egdup97kjmjp2d9e39io95lc7.apps.googleusercontent.com'
+      },
+      // only needed if you want to render the button with the google ui
+      renderParams: {
+        width: 250,
+        height: 50,
+        longtitle: true
+      },
     }
   },
   components: {
@@ -121,24 +106,33 @@ export default {
             //url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
             url: 'http://47.96.6.135:8080/login/login',
             data: {
-
               password: this.ruleForm.checkPass,
               username: this.ruleForm.pass,
             }
           }
         ).then(function (response) {
+
           if (response.data.code === 200) {
-            alert('Login Successfully')
+            _this.$message({
+              message: 'Login Successfully',
+              type: 'success'
+            });
             window.sessionStorage.setItem("userId", response.data.data.userId)
             window.sessionStorage.setItem("token", response.data.data.token)
-            _this.$router.go(-1)
+            _this.$router.push('/home')
           }
           if (response.data.code === 999) {
-            alert('Account or Password Error')
+            _this.$message({
+              message: 'Account or Password Error',
+              type: 'error'
+            });
           }
           console.log(response);
         }).catch(function (error) {
-          alert('Account or Password Error')
+          _this.$message({
+            message: 'Account or Password Error',
+            type: 'error'
+          });
           console.log(error);
         });
       }
@@ -146,55 +140,60 @@ export default {
     onSuccess(googleUser) {
       let _this = this;
       console.log("Success")
-      console.log(googleUser.it.Tt)
-      console.log(googleUser)
+      console.log(googleUser.getBasicProfile().getEmail())
       axios(
         {
           method: 'post',
-          //url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
           url: 'http://47.96.6.135:8080/login/login',
           data: {
-
-            password: googleUser.it.Tt,
-            username: googleUser.it.Tt,
+            password: googleUser.getBasicProfile().getEmail(),
+            username: googleUser.getBasicProfile().getEmail(),
           }
         }
       ).then(function (response) {
         if (response.data.code === 200) {
-          alert('Login Successfully')
+          _this.$message({
+            message: 'Login Successfully',
+            type: 'success'
+          });
           window.sessionStorage.setItem("userId", response.data.data.userId)
           window.sessionStorage.setItem("token", response.data.data.token)
-          _this.$router.go(-1)
+          _this.$router.push('/home')
         }
         if (response.data.code === 999) {
           axios.post('http://47.96.6.135:8080/user/register', {
-            email: googleUser.it.Tt,
-            password: googleUser.it.Tt  ,
-            phoneNumber: googleUser.it.Tt,
-            userName: googleUser.it.Tt,
+            email: googleUser.getBasicProfile().getEmail(),
+            password: googleUser.getBasicProfile().getEmail(),
+            phoneNumber: googleUser.getBasicProfile().getEmail(),
+            userName: googleUser.getBasicProfile().getEmail(),
           }).then(function (response) {
             if (response.data.code === 200) {
-              alert('Register Successfully')
+              _this.$message({
+                message: 'Register Successfully',
+                type: 'success'
+              });
               axios(
                 {
                   method: 'post',
                   //url: 'http://47.96.6.135:8080/login/login?username=' + this.ruleForm.pass + '&password=' + this.ruleForm.checkPass,
                   url: 'http://47.96.6.135:8080/login/login',
                   data: {
-
-                    password: googleUser.it.Tt,
-                    username: googleUser.it.Tt,
+                    password: googleUser.getBasicProfile().getEmail(),
+                    username: googleUser.getBasicProfile().getEmail(),
                   }
                 }
-              ).then(function(response){
-                if(response.data.code === 200){
-                  alert('Login Successfully')
+              ).then(function (response) {
+                if (response.data.code === 200) {
+                  _this.$message({
+                    message: 'Login Successfully',
+                    type: 'success'
+                  });
                   window.sessionStorage.setItem("userId", response.data.data.userId)
                   window.sessionStorage.setItem("token", response.data.data.token)
-                  _this.$router.go(-1)
+                  _this.$router.push('/home')
                 }
                 console.log(response);
-              }).catch(function(error){
+              }).catch(function (error) {
                 console.log(error);
               });
             }
