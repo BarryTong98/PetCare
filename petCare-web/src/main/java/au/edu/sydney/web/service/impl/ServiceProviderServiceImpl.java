@@ -59,9 +59,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         while (binary.length() < 12) {
             binary = "0" + binary;
         }
-        System.out.println("binary"+binary);
         HashMap<String, String> map = new HashMap<>();
-
         HashMap<Integer, String> filters = new HashMap<>();
         filters.put(11, "hospital");
         filters.put(10, "disease");
@@ -75,15 +73,12 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         filters.put(2, "hosting");
         filters.put(1, "training");
         filters.put(0, "playground");
-
         map.put("keyword", keyword);
         for (int i = 0; i < binary.length(); i++) {
             if (binary.charAt(i) == '1') {
                 map.put("filter" + i, filters.get(i));
             }
         }
-        System.out.println(filters.toString());
-        System.out.println(map.toString());
         List<ServiceProvider> serviceProviderList = serviceProviderMapper.searchByKeyword(map);
         if (serviceProviderList.isEmpty()) {
             List<Business> serviceProviders = yelpApiCli.getServiceProviders(keyword, region);
