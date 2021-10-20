@@ -279,7 +279,7 @@
                 or service_content LIKE "%"#{filter10}"%"
             </if>
             <if test="filter11!=null">
-                or service_content LIKE "%"#{filter10}"%"
+                or service_content LIKE "%"#{filter11}"%"
             </if>
         </where>
         ))
@@ -326,7 +326,7 @@
                 or service_content LIKE "%"#{filter10}"%"
             </if>
             <if test="filter11!=null">
-                or service_content LIKE "%"#{filter10}"%"
+                or service_content LIKE "%"#{filter11}"%"
             </if>
         </where>
         )))

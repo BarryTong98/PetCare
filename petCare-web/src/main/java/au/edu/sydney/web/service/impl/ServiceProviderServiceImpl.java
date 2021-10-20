@@ -59,6 +59,7 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
         while (binary.length() < 12) {
             binary = "0" + binary;
         }
+        System.out.println("binary"+binary);
         HashMap<String, String> map = new HashMap<>();
 
         HashMap<Integer, String> filters = new HashMap<>();
@@ -81,6 +82,8 @@ public class ServiceProviderServiceImpl implements ServiceProviderService {
                 map.put("filter" + i, filters.get(i));
             }
         }
+        System.out.println(filters.toString());
+        System.out.println(map.toString());
         List<ServiceProvider> serviceProviderList = serviceProviderMapper.searchByKeyword(map);
         if (serviceProviderList.isEmpty()) {
             List<Business> serviceProviders = yelpApiCli.getServiceProviders(keyword, region);
