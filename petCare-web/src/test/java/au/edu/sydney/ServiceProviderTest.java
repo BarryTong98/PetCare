@@ -2,7 +2,7 @@ package au.edu.sydney;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.ServiceProviderMapper;
-import au.edu.sydney.web.pojo.entity.ServiceProvider;
+import au.edu.sydney.web.domain.entity.ServiceProvider;
 import au.edu.sydney.web.service.ServiceProviderService;
 import org.junit.Assert;
 import org.junit.Test;

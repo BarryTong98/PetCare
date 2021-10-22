@@ -1,7 +1,7 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.pojo.entity.User;
+import au.edu.sydney.web.domain.entity.User;
 import au.edu.sydney.web.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

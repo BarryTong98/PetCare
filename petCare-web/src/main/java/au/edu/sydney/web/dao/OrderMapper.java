@@ -1,7 +1,7 @@
 package au.edu.sydney.web.dao;
 
-import au.edu.sydney.web.pojo.entity.Order;
-import au.edu.sydney.web.pojo.vo.OrderVO;
+import au.edu.sydney.web.domain.entity.Order;
+import au.edu.sydney.web.domain.vo.OrderVO;
 
 import java.util.List;
 

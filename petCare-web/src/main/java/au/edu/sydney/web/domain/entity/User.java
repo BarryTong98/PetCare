@@ -1,4 +1,4 @@
-package au.edu.sydney.web.pojo.entity;
+package au.edu.sydney.web.domain.entity;
 
 
 import io.swagger.annotations.ApiModel;

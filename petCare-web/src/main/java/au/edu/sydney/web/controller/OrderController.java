@@ -1,8 +1,8 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.pojo.entity.Order;
-import au.edu.sydney.web.pojo.req.OrderREQ;
+import au.edu.sydney.web.domain.entity.Order;
+import au.edu.sydney.web.domain.req.OrderREQ;
 import au.edu.sydney.web.service.OrderService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

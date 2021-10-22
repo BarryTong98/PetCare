@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="au.edu.sydney.web.dao.OrderMapper">
-    <resultMap id="BaseResultMap" type="au.edu.sydney.web.pojo.entity.Order">
+    <resultMap id="BaseResultMap" type="au.edu.sydney.web.domain.entity.Order">
         <id column="oid" jdbcType="INTEGER" property="oid"/>
         <result column="service_id" jdbcType="INTEGER" property="serviceId"/>
         <result column="user_id" jdbcType="INTEGER" property="userId"/>
@@ -22,7 +22,7 @@
         from user_order
         where oid = #{oid,jdbcType=INTEGER}
     </delete>
-    <insert id="insert" parameterType="au.edu.sydney.web.pojo.entity.Order">
+    <insert id="insert" parameterType="au.edu.sydney.web.domain.entity.Order">
         insert into user_order (oid, service_id, user_id,
                                 amount, status, service_time,
                                 create_time)
@@ -30,7 +30,7 @@
                 #{amount,jdbcType=DOUBLE}, #{status,jdbcType=INTEGER}, #{serviceTime,jdbcType=VARCHAR},
                 #{createTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" parameterType="au.edu.sydney.web.pojo.entity.Order">
+    <insert id="insertSelective" parameterType="au.edu.sydney.web.domain.entity.Order">
         insert into user_order
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="oid != null">
@@ -79,7 +79,7 @@
             </if>
         </trim>
     </insert>
-    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.pojo.entity.Order">
+    <update id="updateByPrimaryKeySelective" parameterType="au.edu.sydney.web.domain.entity.Order">
         update user_order
         <set>
             <if test="serviceId != null">
@@ -103,7 +103,7 @@
         </set>
         where oid = #{oid,jdbcType=INTEGER}
     </update>
-    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.pojo.entity.Order">
+    <update id="updateByPrimaryKey" parameterType="au.edu.sydney.web.domain.entity.Order">
         update user_order
         set service_id   = #{serviceId,jdbcType=INTEGER},
             user_id      = #{userId,jdbcType=INTEGER},
@@ -113,7 +113,7 @@
             create_time  = #{createTime,jdbcType=TIMESTAMP}
         where oid = #{oid,jdbcType=INTEGER}
     </update>
-    <select id="searchOrders" resultType="au.edu.sydney.web.pojo.vo.OrderVO">
+    <select id="searchOrders" resultType="au.edu.sydney.web.domain.vo.OrderVO">
         select
         uo.oid,
         uo.service_id,
@@ -169,7 +169,7 @@
         </if>
     </select>
 
-    <select id="getOrderByUid" parameterType="Integer" resultType="au.edu.sydney.web.pojo.vo.OrderVO">
+    <select id="getOrderByUid" parameterType="Integer" resultType="au.edu.sydney.web.domain.vo.OrderVO">
         select uo.oid,
                uo.service_id,
                uo.user_id,

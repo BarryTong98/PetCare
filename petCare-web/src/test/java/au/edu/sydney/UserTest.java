@@ -2,7 +2,7 @@ package au.edu.sydney;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.UserMapper;
-import au.edu.sydney.web.pojo.entity.User;
+import au.edu.sydney.web.domain.entity.User;
 import au.edu.sydney.web.service.impl.UserServiceImpl;
 import org.junit.Test;
 import org.junit.runner.RunWith;

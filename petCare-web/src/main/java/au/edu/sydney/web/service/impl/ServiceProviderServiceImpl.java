@@ -2,8 +2,8 @@ package au.edu.sydney.web.service.impl;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.ServiceProviderMapper;
-import au.edu.sydney.web.pojo.entity.ServiceProvider;
-import au.edu.sydney.web.pojo.yelpAPIEntity.Business;
+import au.edu.sydney.web.domain.entity.ServiceProvider;
+import au.edu.sydney.web.domain.yelpAPIEntity.Business;
 import au.edu.sydney.web.service.ServiceProviderService;
 import au.edu.sydney.web.util.YelpAPICli;
 import org.springframework.stereotype.Service;

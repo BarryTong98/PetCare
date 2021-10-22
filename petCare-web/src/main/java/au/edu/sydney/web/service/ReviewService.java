@@ -1,7 +1,7 @@
 package au.edu.sydney.web.service;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.pojo.entity.Review;
+import au.edu.sydney.web.domain.entity.Review;
 
 /**
  * @author Chris

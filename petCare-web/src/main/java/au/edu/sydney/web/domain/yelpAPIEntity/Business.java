@@ -1,4 +1,4 @@
-package au.edu.sydney.web.pojo.yelpAPIEntity;
+package au.edu.sydney.web.domain.yelpAPIEntity;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;

@@ -1,4 +1,4 @@
-package au.edu.sydney.web.pojo.req;
+package au.edu.sydney.web.domain.req;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiParam;

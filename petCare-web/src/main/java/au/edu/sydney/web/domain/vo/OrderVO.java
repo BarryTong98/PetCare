@@ -1,4 +1,4 @@
-package au.edu.sydney.web.pojo.vo;
+package au.edu.sydney.web.domain.vo;
 
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;

@@ -21,7 +21,7 @@ public class ServiceServiceImpl implements ServiceService {
 
     @Override
     public Result getServiceById(int id) {
-        au.edu.sydney.web.pojo.entity.Service service = serviceMapper.selectByPrimaryKey(id);
+        au.edu.sydney.web.domain.entity.Service service = serviceMapper.selectByPrimaryKey(id);
         if (service == null) {
             return Result.error("Service doesn't exist!");
         }

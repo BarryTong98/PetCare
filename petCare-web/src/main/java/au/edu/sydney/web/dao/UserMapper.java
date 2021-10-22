@@ -1,6 +1,6 @@
 package au.edu.sydney.web.dao;
 
-import au.edu.sydney.web.pojo.entity.User;
+import au.edu.sydney.web.domain.entity.User;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;

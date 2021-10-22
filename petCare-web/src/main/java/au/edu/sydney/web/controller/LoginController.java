@@ -1,8 +1,8 @@
 package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
-import au.edu.sydney.web.pojo.req.LoginREQ;
-import au.edu.sydney.web.pojo.req.PasswordREQ;
+import au.edu.sydney.web.domain.req.LoginREQ;
+import au.edu.sydney.web.domain.req.PasswordREQ;
 import au.edu.sydney.web.service.UserService;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.web.bind.annotation.*;

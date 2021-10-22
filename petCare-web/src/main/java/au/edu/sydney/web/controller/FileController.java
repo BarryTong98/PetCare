@@ -4,7 +4,7 @@ package au.edu.sydney.web.controller;
 
 import au.edu.sydney.base.Result;
 import au.edu.sydney.web.dao.UserMapper;
-import au.edu.sydney.web.pojo.entity.User;
+import au.edu.sydney.web.domain.entity.User;
 import au.edu.sydney.web.service.FileService;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;

@@ -1,7 +1,7 @@
 package au.edu.sydney.web.dao;
 
-import au.edu.sydney.web.pojo.entity.Review;
-import au.edu.sydney.web.pojo.vo.ReviewVO;
+import au.edu.sydney.web.domain.entity.Review;
+import au.edu.sydney.web.domain.vo.ReviewVO;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
