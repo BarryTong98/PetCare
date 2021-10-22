@@ -37,7 +37,6 @@ import axios from 'axios'
 import VueAxios from "vue-axios";
 
 
-import { LoaderPlugin,GoogleLogin } from 'vue-google-login';
 
 Vue.use(LoaderPlugin, {
   client_id: '870223928949-0h13cc4egdup97kjmjp2d9e39io95lc7.apps.googleusercontent.com'

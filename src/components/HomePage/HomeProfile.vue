@@ -7,9 +7,15 @@
       <!--<p>-->
       <!--  We’re here for you, via video calls, house visits and medication delivery.-->
       <!--</p>-->
-      <button class="btn-quality" onclick="window.location.href='http://localhost:8080/#/template'">
+      <router-link v-if="isToken" :to="{name: 'search', params: {keyword: ' ', address: 'Sydney', checked: 4095}}">
+        <button class="btn-quality">
+          Get started
+        </button>
+      </router-link>
+      <el-button class="btn-quality" v-else @click="jumpToLogin" type="primary">
         Get started
-      </button>
+      </el-button>
+
     </div>
     <img src="../../assets/img/pet.png" alt="missing">
   </div>
@@ -17,7 +23,33 @@
 
 <script>
 export default {
-  name: 'HomeProfile'
+  name: 'HomeProfile',
+  data(){
+    return{
+      isToken: false
+    }
+  },
+  methods:{
+    jumpToLogin(){
+      this.$message({
+        message: 'You have not login!',
+        type: 'warning'
+      });
+
+      this.$router.push('/homelogin')
+    }
+  },
+  created() {
+    const token = sessionStorage.getItem("token")
+    console.log("token:" + token)
+    console.log(token === null)
+    if(token === null){
+      this.isToken = false
+    }else{
+      this.isToken = true
+    }
+    console.log(this.isToken)
+  },
 }
 </script>
 

@@ -95,11 +95,17 @@ export default {
       }).then(function (response) {
         if (response.data.code === 200) {
           console.log(response.data)
-          alert('Email Sent Successfully')
+          _this.$message({
+            message: 'Email Sent Successfully',
+            type: 'success'
+          });
         }
         else if (response.data.code === 999) {
           console.log(response.data)
-          alert('User Does Not Exists')
+          _this.$message({
+            message: 'User Does Not Exists',
+            type: 'error'
+          });
         }
       }).catch(function (err) {
         console.log(err)
@@ -117,14 +123,20 @@ export default {
           }).then(function (response) {
             if (response.data.code === 200) {
               console.log(response.data)
-              alert('Code Is Correct')
+              _this.$message({
+                message: 'Code Is Correct',
+                type: 'success'
+              });
               window.sessionStorage.setItem("email",_this.ruleForm.pass);
               _this.$router.push('/reset2')
               // _this.totalTime = response.data.code;
             }
             if (response.data.code === 999) {
               console.log(response.data)
-              alert('Wrong Code')
+              _this.$message({
+                message: 'Wrong Code',
+                type: 'error'
+              });
             }
             console.log(response.data)
           }).catch(function (err) {

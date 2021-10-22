@@ -66,8 +66,6 @@ export default {
   },
   created() {
     this.ruleForm.email = sessionStorage.getItem("email")
-    console.log("email!!!"+sessionStorage.getItem("email"))
-    console.log("email***"+this.ruleForm.email)
   },
   methods: {
     submitForm(formName) {
@@ -82,12 +80,18 @@ export default {
           }).then(function (response) {
             if (response.data.code === 200) {
               console.log(response.data)
-              alert('Reset Successfully')
+              _this.$message({
+                message: 'Reset Successfully',
+                type: 'success'
+              });
               _this.$router.push('/home')
             }
             if (response.data.code === 999) {
               console.log(response.data)
-              alert('User doesn\'t exist!')
+              _this.$message({
+                message: 'User doesn\'t exist!',
+                type: 'error'
+              });
             }
             console.log(response.data)
           }).catch(function (err) {
@@ -100,9 +104,6 @@ export default {
       })
     },
   },
-  // beforeDestroy() {
-  //   eventBus.$off('email2');
-  // },
 }
 </script>
 
