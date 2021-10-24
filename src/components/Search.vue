@@ -162,7 +162,7 @@
                   <!--按照销量排序-->
                   <el-col :span=3>
                     <el-link class="display-title" :underline="false" :type="type3" @click="changeRankVolume">
-                      Volume
+                      Sales
                       <i class="el-icon-arrow-down" v-if="rankVolume"></i>
                       <i class="el-icon-arrow-up" v-if="!rankVolume"></i>
                     </el-link>
