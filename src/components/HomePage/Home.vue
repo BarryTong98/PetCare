@@ -10,10 +10,10 @@
       </div>
       <div class="searchInput" style="font-family: PPWoodland-Bold">
         <el-button class="twoinput" type="primary">Find</el-button>
-        <el-input placeholder="Search" v-model="input1">
+        <el-input placeholder="Search..." v-model="input1">
         </el-input>
         <el-button class="twoinput" type="primary">Near</el-button>
-        <el-input placeholder="Location" v-model="input2" >
+        <el-input placeholder="Sydney" v-model="input2" >
         </el-input>
         <router-link :to="{name: 'search', params: {keyword: input1, address: input2, checked: 4095}}">
           <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
@@ -223,8 +223,8 @@ export default {
   },
   data() {
     return {
-      input1: ' ',
-      input2: ' ',
+      input1: '',
+      input2: '',
       isCollapse: true,
       isToken: false,
     }
