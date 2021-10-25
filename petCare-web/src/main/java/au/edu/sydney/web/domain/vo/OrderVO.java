@@ -1,5 +1,6 @@
 package au.edu.sydney.web.domain.vo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Data;
 
@@ -35,6 +36,7 @@ public class OrderVO {
     private String serviceTime;
 
     @ApiModelProperty(value = "Order creation time")
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss",timezone = "GMT+8")
     private Date createTime;
 
     @ApiModelProperty(value = "service name")

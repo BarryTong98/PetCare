@@ -31,9 +31,6 @@ public class EmailServiceImpl implements EmailService {
     @Autowired
     private RedisTemplate redisTemplate;
 
-    /**
-     * Get the sender from the configuration file
-     */
     @Value("${spring.mail.username}")
     private String sender;
 
@@ -46,8 +43,6 @@ public class EmailServiceImpl implements EmailService {
         if (user == null) {
             return Result.error("User doesn't exists");
         }
-
-
         String verCode = VerCodeGenerateUtil.generateVerCode();
         SimpleMailMessage message = new SimpleMailMessage();
         message.setSubject("security code");
@@ -60,7 +55,6 @@ public class EmailServiceImpl implements EmailService {
             mailSender.send(message);
         } catch (Exception e) {
             return Result.error("Send email failed");
-
         }
         try {
             redisTemplate.opsForValue().set("petCare:email:code:" + email, verCode, 5, TimeUnit.MINUTES);
@@ -68,15 +62,11 @@ public class EmailServiceImpl implements EmailService {
         } catch (Exception e) {
             return Result.error("Fail to save code to redis");
         }
-
         return Result.ok("Send email successfully");
-
-
     }
 
     @Override
     public Result verifyCode(String email, String code) {
-
         User user = getUserByEmail(email);
         if (user == null) {
             return Result.error("User doesn't exists");

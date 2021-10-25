@@ -20,7 +20,6 @@ public class FileServiceImpl implements FileService {
      */
     @Override
     public String upload(InputStream inputStream, String module, String fileName) {
-
         OSS ossClient = new OSSClientBuilder().build(
                 OssProperties.ENDPOINT,
                 OssProperties.KEY_ID,
@@ -35,13 +34,10 @@ public class FileServiceImpl implements FileService {
         fileName = UUID.randomUUID().toString() + fileName.substring(fileName.lastIndexOf("."));
         //module/2021/10/01/filename
         String key = module + "/" + folder + "/" + fileName;
-
         ossClient.putObject(OssProperties.BUCKET_NAME, key, inputStream);
-
         ossClient.shutdown();
 
         return "https://" + OssProperties.BUCKET_NAME + "." + OssProperties.ENDPOINT + "/" + key;
-
     }
 
     /**

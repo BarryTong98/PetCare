@@ -37,10 +37,8 @@ public class YelpAPICli {
         params.put("categories", "pets,All");
     }
 
-
     @Autowired
     private OkHttpClient okHttpClient;
-
 
     public List<Business> getServiceProviders(String term, String location) {
         StringBuilder sb = new StringBuilder(baseURL + "search");
@@ -56,18 +54,11 @@ public class YelpAPICli {
             }
         }
 
-
         Request.Builder builder = new Request.Builder();
         builder.addHeader("Authorization", "Bearer " + ApiKey);
         Request request = builder.url(sb.toString()).build();
-        log.info("do get request and url[{}]", sb.toString());
-        //log.info(builder.head().toString());
         String serviceProvidersJSON = execute(request);
-        List<Business> businesses = businessesJsonToList(serviceProvidersJSON);
-        for (Business business : businesses) {
-            System.out.println(business);
-        }
-        return businesses;
+        return businessesJsonToList(serviceProvidersJSON);
     }
 
 
@@ -76,11 +67,8 @@ public class YelpAPICli {
         Request.Builder builder = new Request.Builder();
         builder.addHeader("Authorization", "Bearer " + ApiKey);
         Request request = builder.url(sb.toString()).build();
-        log.info("do get request and url[{}]", sb.toString());
-        log.info(builder.head().toString());
         String serviceProvider = execute(request);
-        Business business = businessJsonToObject(serviceProvider);
-        return business;
+        return businessJsonToObject(serviceProvider);
 
     }
 
