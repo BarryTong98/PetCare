@@ -165,7 +165,8 @@ export default {
         petType: '',
         caseDescription: ''
       },
-      isToken: false
+      isToken: false,
+      userId: 0
 
     }
   },
@@ -270,7 +271,10 @@ export default {
         if(
           this.value1 ==='' || this.value2 === '' || this.form.petType === '' || this.form.petName === '' || this.form.caseDescription === ''
         ){
-          alert('Your information is incomplete')
+          this.$message({
+            message: 'Your information is incomplete',
+            type: 'warning'
+          });
           this.active = 0
         }
         else {
@@ -288,19 +292,21 @@ export default {
           else if(this.value2 ==='option6') time = '16:30 -- 17:30'
           var serviceTime = dateString + " " + time
           console.log(this.price.split('/')[0])
-          var nowDate = new Date()
+
 
           axios.post("http://47.96.6.135:8080/order/add",{
             amount: that.price.split('/')[0],
-            createTime: nowDate,
             serviceId: that.id,
             serviceTime: serviceTime,
             status: 1,
-            userId: 1
+            userId: that.userId
           }).then(function (response){
             console.log(response)
             if (response.data.code === 200) {
-              alert('Add Order Successfully')
+              that.$message({
+                message: 'Add Order Successfully',
+                type: 'success'
+              });
               that.$router.push({name:'information', params: {id: that.id}})
             }
           })
@@ -311,7 +317,10 @@ export default {
         if(
           this.value1 ==='' || this.form.petType === '' || this.form.petName === '' || this.form.caseDescription === ''
         ){
-          alert('Your information is incomplete')
+          this.$message({
+            message: 'Your information is incomplete',
+            type: 'warning'
+          });
           this.active = 0
         }
         else {
@@ -335,11 +344,14 @@ export default {
             serviceId: that.id,
             serviceTime: dateString0,
             status: 1,
-            userId: 1
+            userId: that.userId
           }).then(function (response){
             console.log(response)
             if (response.data.code === 200) {
-              alert('Add Order Successfully')
+              that.$message({
+                message: 'Add Order Successfully',
+                type: 'success'
+              });
               that.$router.push({name:'information', params: {id: that.id, yelp: that.yelp}})
             }
           })
@@ -352,6 +364,9 @@ export default {
   },
   created() {
     const token = sessionStorage.getItem("token")
+    const userId = sessionStorage.getItem("userId")
+    this.userId = userId
+    console.log("userId: "+ userId)
     console.log("token:" + token)
     console.log(token === null)
     if(token === null){
