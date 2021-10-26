@@ -166,7 +166,8 @@ export default {
         caseDescription: ''
       },
       isToken: false,
-      userId: 0
+      userId: 0,
+      serviceProviderId: ' '
 
     }
   },
@@ -307,7 +308,7 @@ export default {
                 message: 'Add Order Successfully',
                 type: 'success'
               });
-              that.$router.push({name:'information', params: {id: that.id}})
+              that.$router.push({name:'information', params: {id: that.serviceProviderId, yelp: that.yelp}})
             }
           })
         }
@@ -352,7 +353,7 @@ export default {
                 message: 'Add Order Successfully',
                 type: 'success'
               });
-              that.$router.push({name:'information', params: {id: that.id, yelp: that.yelp}})
+              that.$router.push({name:'information', params: {id: that.serviceProviderId, yelp: that.yelp}})
             }
           })
         }
@@ -380,6 +381,17 @@ export default {
       this.price = this.$route.params.price
       this.id = this.$route.params.id
       this.yelp = this.$route.params.yelp
+      var that = this
+      axios.get("http://47.96.6.135:8080/service/" + this.id).then(
+        function (response){
+          const reqs = response.data
+          console.log(reqs)
+          that.serviceProviderId = reqs.data.serviceProviderId
+          console.log(that.serviceProviderId)
+        },function(err){
+
+        }
+      )
     }
 
   }
