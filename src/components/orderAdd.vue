@@ -328,11 +328,10 @@ export default {
           var dateString0 = dateString1 + " --> " + dateString2
           var days = (date2 -date1) / (1000*60*60*24)
           var amount = this.price.split('/')[0] * days
-          var nowDate0 = new Date()
+          //var nowDate0 = new Date()
 
           axios.post("http://47.96.6.135:8080/order/add",{
             amount: amount,
-            createTime: nowDate0,
             serviceId: that.id,
             serviceTime: dateString0,
             status: 1,
