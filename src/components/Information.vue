@@ -464,8 +464,9 @@ export default {
             that.countOrder = false
           } else {
             for (var i = 0; i < reqs.length; i++) {
+              console.log(reqs)
               var mFeature = reqs[i]
-              that.setStoreAddOrder(mFeature.serviceName, mFeature.price, mFeature.isBoarding, mFeature.serviceProviderId)
+              that.setStoreAddOrder(mFeature.serviceName, mFeature.price, mFeature.isBoarding, mFeature.sid)
             }
             that.handleCurrentChange(1)
           }
