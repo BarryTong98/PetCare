@@ -23,7 +23,7 @@
     </div>
 
     <!--预定的商家列表-->
-    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in orders">
+    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in storeDisplay">
       <li>
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
@@ -90,9 +90,8 @@
       </li>
     </ul>
     <!--分页功能-->
-    <el-pagination style="margin-top: 10px"
-                   class="pagination-store"
-                   hide-on-single-page
+    <el-pagination hide-on-single-page
+                   style="margin-top: 10px" class="pagination-store"
                    :current-page.sync="currentPage"
                    background
                    @current-change="handleCurrentChange"
@@ -116,6 +115,7 @@ export default {
       storePageSize: 5,
       storeDisplay: [],
       currentPage: 1,
+      show: true
     }
   },
   methods: {
@@ -141,6 +141,7 @@ export default {
     handleCurrentChange(currentPage) {
       if (this.orders.length === 0) {
         this.countStore = false
+        this.show = false
       } else {
         this.countStore = true
         this.storeDisplay = []
@@ -154,7 +155,6 @@ export default {
         for (var i = (currentPage - 1) * this.storePageSize; i < m; i++) {
           this.storeDisplay.push(JSON.parse(JSON.stringify(this.orders[i])))
         }
-        console.log("测试测试：");
       }
     },
 
@@ -205,26 +205,25 @@ export default {
     //查找所有订单
     findAll() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid)
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
             for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
               if (temporders[item].status == 2) {
-                console.log(temporders[item])
                 _this.orders.push(temporders[item]);
               }
             }
           }
-          ;
+          //遍历orders数组,把createTime改格式
+          for (var i = 0; i < _this.orders.length; i++) {
+            _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
+          }
+          _this.handleCurrentChange(1);
         });
-      //遍历orders数组,把createTime改格式
-      for (var i = 0; i < _this.orders.length; i++) {
-        _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
-      }
-      _this.handleCurrentChange(1);
     },
   },
+
   created() {
     this.userid = sessionStorage.getItem("userId"),
       this.findAll()

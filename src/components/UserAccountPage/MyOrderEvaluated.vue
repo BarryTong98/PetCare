@@ -22,7 +22,7 @@
     </div>
 
     <!--预定的商家列表-->
-    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in orders">
+    <ul style="margin-left: 60px;margin-right: 60px" v-for="order in storeDisplay">
       <li>
         <el-container style="box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.1)">
           <!--医院图片-->
