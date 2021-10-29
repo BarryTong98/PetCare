@@ -105,6 +105,7 @@ export default {
       storePageSize: 5,
       storeDisplay: [],
       currentPage: 1,
+      show: true
     }
   },
   methods: {
@@ -119,6 +120,8 @@ export default {
     handleCurrentChange(currentPage) {
       if (this.orders.length === 0) {
         this.countStore = false
+        this.show = false
+        this.storeDisplay = []
       } else {
         this.countStore = true
         this.storeDisplay = []
@@ -144,23 +147,17 @@ export default {
           if (temporders != null) {
             _this.orders.length = 0;
             for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
-              console.log(temporders[item])
-              temporders.forEach(function (element) {
-                console.log(element);
-                //把得到的jason转化为字符串
-                const newstr = JSON.stringify(element);
-                if (newstr.search(_this.searchInfo)) {
-                  _this.orders.push(temporders[item]);
-                  console.log("成功")
-                }
-              })
+              _this.orders.push(temporders[item]);
             }
+            _this.handleCurrentChange(1);
+
           } else {
             //如果输入的内容不匹配，则清空列表
             while (_this.orders.length > 0) {
               _this.orders.pop();
             }
-            console.log("失败")
+            _this.handleCurrentChange(1);
+            console.log("失败" + _this.orders.length)
           }
         });
     },

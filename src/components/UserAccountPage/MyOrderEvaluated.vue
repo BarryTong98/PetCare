@@ -105,6 +105,7 @@ export default {
       storePageSize: 5,
       storeDisplay: [],
       currentPage: 1,
+      show: true
     }
   },
   methods: {
@@ -119,6 +120,8 @@ export default {
     handleCurrentChange(currentPage) {
       if(this.orders.length === 0){
         this.countStore = false
+        this.show = false
+        this.storeDisplay = []
       }
       else{
         this.countStore = true
@@ -139,34 +142,29 @@ export default {
     //搜索框
     searchOrders() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + _this.userid + "&keyword=" + _this.searchInfo + "&code="+4) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/search?userId="
+        + _this.userid
+        + "&keyword="
+        + _this.searchInfo
+        + "&code=" + 4)
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
             _this.orders.length = 0;
-            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
-              console.log(temporders[item])
-              temporders.forEach(function (element) {
-                console.log(element);
-                //把得到的jason转化为字符串
-                const newstr = JSON.stringify(element);
-                if (newstr.search(_this.searchInfo)) {
-                  _this.orders.push(temporders[item]);
-                  console.log("成功")
-                }
-              })
+            for (var item = 0; item < temporders.length; item++) {
+              _this.orders.push(temporders[item]);
             }
-          }else {
-            //如果输入的内容不匹配，则清空列表
-            while(_this.orders.length > 0) {
+            _this.handleCurrentChange(1);
+
+          } else {
+            while (_this.orders.length > 0) {
               _this.orders.pop();
             }
-            console.log("失败")
+            _this.handleCurrentChange(1);
           }
         });
     },
 
-    //搜索之前先判断一下搜索框中有没有输入内容，如果没有输入内容就显示所有订单
     checKSearch(){
       if (this.searchInfo == ''){
         while(this.orders.length > 0) {
@@ -183,11 +181,11 @@ export default {
     //查找所有订单
     findAll() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid)
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null){
-            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+            for (var item = 0; item < temporders.length; item++) {
               if (temporders[item].status == 4) {
                 console.log(temporders[item])
                 _this.orders.push(temporders[item]);
