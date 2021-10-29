@@ -191,7 +191,6 @@ export default {
               }
             }
           }
-          //遍历orders数组,把createTime改格式
           for (var i = 0; i < _this.orders.length; i++) {
             _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
           }
