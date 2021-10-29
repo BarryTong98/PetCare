@@ -17,9 +17,6 @@ Vue.component("l-icon", LIcon);
 // 設定預設 icon
 import { Icon } from "leaflet";
 delete Icon.Default.prototype._getIconUrl;
-
-import {LoaderPlugin, GoogleLogin} from 'vue-google-login';
-
 Icon.Default.mergeOptions({
   iconRetinaUrl: require("leaflet/dist/images/marker-icon-2x.png"),
   iconUrl: require("leaflet/dist/images/marker-icon.png"),
@@ -37,6 +34,7 @@ import axios from 'axios'
 import VueAxios from "vue-axios";
 
 
+import { LoaderPlugin,GoogleLogin } from 'vue-google-login';
 
 Vue.use(LoaderPlugin, {
   client_id: '870223928949-0h13cc4egdup97kjmjp2d9e39io95lc7.apps.googleusercontent.com'
@@ -51,7 +49,7 @@ Vue.use(GoogleLogin)
 
 Vue.config.productionTip = false
 //配置请求的根路径
-//axios.defaults.baseURL = 'http://110.40.184.115:8080'
+axios.defaults.baseURL = 'http://110.40.184.115:8080'
 Vue.prototype.$http = axios
 Vue.use(axios,VueAxios)
 // axios({

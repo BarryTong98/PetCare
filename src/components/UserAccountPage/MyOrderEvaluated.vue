@@ -5,7 +5,7 @@
       <el-breadcrumb-item :to="{ path: '/' }">Home</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/myaccount' }">My Account</el-breadcrumb-item>
       <el-breadcrumb-item :to="{ path: '/myaccount' }">My Order</el-breadcrumb-item>
-      <el-breadcrumb-item>Canceled</el-breadcrumb-item>
+      <el-breadcrumb-item>Evaluated</el-breadcrumb-item>
     </el-breadcrumb>
 
     <!--预定订单搜索框-->
@@ -184,20 +184,19 @@ export default {
       _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid)
         .then(function (response) {
           let temporders = response.data.data;
-          if (temporders != null){
-            for (var item = 0; item < temporders.length; item++) {
+          if (temporders != null) {
+            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
               if (temporders[item].status == 4) {
-                console.log(temporders[item])
                 _this.orders.push(temporders[item]);
               }
             }
           }
+          //遍历orders数组,把createTime改格式
+          for (var i = 0; i < _this.orders.length; i++) {
+            _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
+          }
+          _this.handleCurrentChange(1);
         });
-      //遍历orders数组,把createTime改格式
-      for (var i = 0; i < _this.orders.length; i++) {
-        _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
-      }
-      _this.handleCurrentChange(1);
     },
   },
   created() {
