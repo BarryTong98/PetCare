@@ -4,90 +4,109 @@
     <el-header>
       <div>
         <a href="http://localhost:8080/#/welcome">
-          <img class="dogimg" src="../assets/img/dogicon.svg" alt="missing"/>
+          <img class="dogimg" src="../assets/img/dogicon.svg" alt="missing" />
         </a>
         <span class="homeName">Pet Care</span>
       </div>
       <div class="searchInput" style="font-family: PPWoodland-Bold">
         <el-button class="twoinput" type="primary">Find</el-button>
-        <el-input placeholder="Search" v-model="input1">
-        </el-input>
+        <el-input placeholder="Search" v-model="input1"> </el-input>
         <el-button class="twoinput" type="primary">Near</el-button>
-        <el-input placeholder="Location" v-model="input2">
-        </el-input>
-        <router-link :to="{name: 'search', params: {keyword: input1, address: input2, checked: 4095}}">
-          <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
+        <el-input placeholder="Location" v-model="input2"> </el-input>
+        <router-link
+          :to="{
+            name: 'search',
+            params: { keyword: input1, address: input2, checked: 4095 }
+          }"
+        >
+          <el-button
+            class="searchBtn"
+            type="info"
+            icon="el-icon-search"
+          ></el-button>
         </router-link>
-        <el-button v-if="!isToken" style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton"
-                   @click="login">Login
+        <el-button
+          v-if="!isToken"
+          style="margin-right: -55%;margin-left: 55%"
+          type="info"
+          class="signoutButton"
+          @click="login"
+          >Login
         </el-button>
         <el-col v-else :span="2">
           <el-dropdown @command="handleCommand" style="margin-left: 400%">
-            <el-button type="primary"
-                       style="color: #fff;
+            <el-button
+              type="primary"
+              style="color: #fff;
                        background-color: #fa997e;
-                       border-color: #fa997e;">
+                       border-color: #fa997e;"
+            >
               My Account<i class="el-icon-arrow-down el-icon--right"></i>
             </el-button>
             <el-dropdown-menu slot="dropdown">
               <el-dropdown-item command="order">My orders</el-dropdown-item>
-              <el-dropdown-item command="information">Personal information</el-dropdown-item>
+              <el-dropdown-item command="information"
+                >Personal information</el-dropdown-item
+              >
               <el-dropdown-item command="logout">Logout</el-dropdown-item>
             </el-dropdown-menu>
           </el-dropdown>
         </el-col>
       </div>
-
     </el-header>
-
 
     <el-main style="text-align: left">
       <!--商家信息-->
       <el-row :gutter="20">
-        <el-col :span=18 :offset=3>
+        <el-col :span="18" :offset="3">
           <div class="display-information">
             <el-form ref="form">
               <el-form-item class="search-item">
                 <!--商家图片-->
-                <el-col :span=6>
-                  <img :src="store.src" height="208" width="100%"/>
+                <el-col :span="6">
+                  <img :src="store.src" height="208" width="100%" />
                 </el-col>
-                <el-col :span=17>
+                <el-col :span="17">
                   <div>
                     <!--商家名称-->
                     <span class="store-title">
-                      {{ store.name }}
+                      <font size="3"> {{ store.name }} </font>
                     </span>
                     <!--营业时间-->
                     <span class="time">
-                      {{ store.time }}
+                      <font size="3"> {{ store.time }} </font>
                     </span>
                   </div>
                 </el-col>
 
                 <!--评分-->
-                <el-col :span=5>
+                <el-col :span="5">
                   <el-rate
                     v-model="store.numStar"
                     disabled
                     show-score
                     text-color="#ff9900"
-                    score-template="{value}">
+                    score-template="{value}"
+                  >
                   </el-rate>
                 </el-col>
                 <!--价格和销量-->
-                <el-col :span=12>
+                <el-col :span="12">
                   <div v-if="yelp === false" class="priceAndvolume">
-                    Average Price:&nbsp;${{ store.price }}&nbsp;&nbsp;&nbsp;&nbsp;{{ store.volume }}times/month
+                    <font size="3">
+                      Average Price:&nbsp;${{
+                        store.price
+                      }}&nbsp;&nbsp;&nbsp;&nbsp;{{ store.volume }} times/month
+                    </font>
                   </div>
                 </el-col>
                 <!--商家描述-->
-                <el-col :span=17>
+                <el-col :span="17">
                   <div class="description">
                     <span v-if="store.description !== ''">
-                      Description:&nbsp;
+                      <font size="2"> Description:&nbsp; </font>
                     </span>
-                    {{ store.description }}
+                    <font size="2"> {{ store.description }} </font>
                   </div>
                 </el-col>
               </el-form-item>
@@ -97,20 +116,24 @@
       </el-row>
 
       <el-row :gutter="20">
-        <el-col :span=8 :offset=3>
+        <el-col :span="8" :offset="3">
           <!--地址展示-->
           <el-form ref="form" class="display-address">
             <el-form-item>
               <l-map
                 ref="myMap"
                 :zoom="zoom"
-                :center="[store.latitude,store.longitude]"
+                :center="[store.latitude, store.longitude]"
                 :options="options"
-                style="height: 45vh;">
+                style="height: 45vh;"
+              >
                 <!-- 載入圖資 -->
-                <l-tile-layer :url="url" :attribution="attribution"/>
+                <l-tile-layer :url="url" :attribution="attribution" />
                 <!-- 自己所在位置 -->
-                <l-marker ref="location" :lat-lng="[store.latitude,store.longitude]">
+                <l-marker
+                  ref="location"
+                  :lat-lng="[store.latitude, store.longitude]"
+                >
                   <l-popup>
                     {{ store.name }}
                   </l-popup>
@@ -123,65 +146,82 @@
           </el-form>
         </el-col>
         <!-- 订单展示-->
-        <el-col :span=10>
+        <el-col :span="10">
           <el-form ref="form" class="display-orders">
             <!--订单详细信息-->
             <el-form-item v-if="yelp === true" class="formItemNoFound">
-              <span>
+              <div class="aa">
                 This Service Provider is from Yelp, You can click
                 <el-link type="primary" :href="store.url">
                   here
                 </el-link>
                 to visit it.
-              </span>
-
+              </div>
             </el-form-item>
-            <el-form-item v-if="countOrder === false && yelp === false" class="formItemNoFound">
+            <el-form-item
+              v-if="countOrder === false && yelp === false"
+              class="formItemNoFound"
+            >
               <div class="notFoundService">
                 The Service Provider did not provide any services yet
               </div>
             </el-form-item>
-            <el-form-item v-if="countOrder === true && yelp === false" class="order"
-                          v-for="itemFeature in orderDisplay">
-              <el-col :span=12>
+            <el-form-item
+              v-if="countOrder === true && yelp === false"
+              class="order"
+              v-for="itemFeature in orderDisplay"
+            >
+              <el-col :span="12">
                 <div class="orderTitle">
                   {{ itemFeature.featureName }}
                 </div>
               </el-col>
-              <el-col :span=7>
+              <el-col :span="7">
                 <div class="orderPrice">
-                  Price: ${{ itemFeature.featurePrice }}
+                  <font size="2"> Price: ${{ itemFeature.featurePrice }} </font>
                 </div>
               </el-col>
-              <el-col :span=4>
-                <router-link v-if="isToken"
-                  :to="{name: 'orderAdd', params: {type: itemFeature.featureType, id: itemFeature.featureId, price: itemFeature.featurePrice, yelp: yelp}}">
+              <el-col :span="4">
+                <router-link
+                  v-if="isToken"
+                  :to="{
+                    name: 'orderAdd',
+                    params: {
+                      type: itemFeature.featureType,
+                      id: itemFeature.featureId,
+                      price: itemFeature.featurePrice,
+                      yelp: yelp
+                    }
+                  }"
+                >
                   <el-button type="primary">
                     Book
                   </el-button>
                 </router-link>
 
-                  <el-button v-else @click="jumpToLogin" type="primary">
-                    Book
-                  </el-button>
-
+                <el-button v-else @click="jumpToLogin" type="primary">
+                  Book
+                </el-button>
               </el-col>
             </el-form-item>
 
             <!--订单分页-->
-            <el-pagination v-if="yelp === false" class="pagination-order"
-                           background
-                           @current-change="handleCurrentChange"
-                           layout="prev, pager, next"
-                           :total="store.feature.length"
-                           :page-size="orderPageSize">
+            <el-pagination
+              v-if="yelp === false"
+              class="pagination-order"
+              background
+              @current-change="handleCurrentChange"
+              layout="prev, pager, next"
+              :total="store.feature.length"
+              :page-size="orderPageSize"
+            >
             </el-pagination>
           </el-form>
         </el-col>
       </el-row>
 
       <el-row :gutter="20">
-        <el-col :span=18 :offset=3>
+        <el-col :span="18" :offset="3">
           <el-form v-if="yelp === false" ref="form" class="display-comment">
             <!--评论-->
             <el-form-item v-if="countComment === false" style="height: 50px">
@@ -189,62 +229,64 @@
                 The Service Provider did not have any reviews yet
               </div>
             </el-form-item>
-            <el-form-item v-if="countComment === true" v-for="item in commentDisplay" class="comment-item">
+            <el-form-item
+              v-if="countComment === true"
+              v-for="item in commentDisplay"
+              class="comment-item"
+            >
               <div>
                 <!--评论用户头像-->
-                <el-col :span=3>
+                <el-col :span="3">
                   <div class="avatar_box">
-                    <img :src="item.src" alt="">
+                    <img :src="item.src" alt="" />
                   </div>
                 </el-col>
                 <!--评论用户名-->
-                <el-col :span=15>
+                <el-col :span="15">
                   <div class="userName">
-                    {{ item.userName }}
+                    <font size="3"> {{ item.userName }} </font>
                   </div>
                 </el-col>
                 <!--评论时间-->
-                <el-col :span=5>
+                <el-col :span="5">
                   <div class="commentTime">
-                    {{ item.commentTime }}
+                    <font size="3"> {{ item.commentTime }}</font>
                   </div>
                 </el-col>
                 <!--评论评分-->
-                <el-col :span=20>
+                <el-col :span="20">
                   <el-rate
                     v-model="item.commentStar"
                     disabled
                     show-score
                     text-color="#ff9900"
-                    score-template="{value}">
+                    score-template="{value}"
+                  >
                   </el-rate>
                 </el-col>
                 <!--评论内容-->
-                <el-col :span=20>
+                <el-col :span="20">
                   <div class="comment">
                     <div class="comment-context">
-                      {{ item.comment }}
+                      <font size="2"> {{ item.comment }}</font>
                     </div>
                   </div>
                 </el-col>
-
               </div>
-
             </el-form-item>
             <!--评论分页-->
-            <el-pagination class="pagination-comment"
-                           background
-                           @current-change="handleCommentCurrentChange"
-                           layout="prev, pager, next"
-                           :total="store.comments.length"
-                           :page-size="commentPageSize">
+            <el-pagination
+              class="pagination-comment"
+              background
+              @current-change="handleCommentCurrentChange"
+              layout="prev, pager, next"
+              :total="store.comments.length"
+              :page-size="commentPageSize"
+            >
             </el-pagination>
-
           </el-form>
         </el-col>
       </el-row>
-
-
     </el-main>
   </el-container>
 </template>
@@ -255,9 +297,8 @@ import axios from "axios";
 export default {
   data() {
     return {
-
-      input1: ' ',
-      input2: ' ',
+      input1: " ",
+      input2: " ",
       //商店具体信息
       store: {
         src: "",
@@ -273,7 +314,7 @@ export default {
         comments: [],
         latitude: 0,
         longitude: 0,
-        url: ''
+        url: ""
       },
       //订单功能分页展示
       orderPageSize: 3,
@@ -309,7 +350,7 @@ export default {
       yelp: false,
 
       isToken: false
-    }
+    };
   },
 
   mounted() {
@@ -322,80 +363,95 @@ export default {
   },
 
   methods: {
-
     logout() {
-      window.sessionStorage.clear()
+      window.sessionStorage.clear();
       this.$router.go(0);
       //this.$router.push('/home')
     },
-    login(){
-      this.$router.push('/homelogin')
+    login() {
+      this.$router.push("/homelogin");
     },
 
     toggleCollapse() {
-      this.isCollapse = !this.isCollapse
+      this.isCollapse = !this.isCollapse;
     },
     handleCommand(command) {
       if (command == "order") {
-        this.myorder()
+        this.myorder();
       } else if (command == "information") {
-        this.information()
+        this.information();
       } else {
-        this.logout()
+        this.logout();
       }
     },
     myorder() {
-      this.$router.replace('/ordernotstart')
+      this.$router.replace("/ordernotstart");
     },
     information() {
-      this.$router.replace('/information')
+      this.$router.replace("/information");
     },
 
     //处理订单功能分页
     handleCurrentChange(currentPage) {
-      this.countOrder = true
-      this.orderDisplay = []
-      var m = 0
+      this.countOrder = true;
+      this.orderDisplay = [];
+      var m = 0;
       if (currentPage * this.orderPageSize > this.store.feature.length) {
-        m = this.store.feature.length
+        m = this.store.feature.length;
       } else {
-        m = currentPage * this.orderPageSize
+        m = currentPage * this.orderPageSize;
       }
       for (var i = (currentPage - 1) * this.orderPageSize; i < m; i++) {
-        this.orderDisplay.push(JSON.parse(JSON.stringify(this.store.feature[i])))
+        this.orderDisplay.push(
+          JSON.parse(JSON.stringify(this.store.feature[i]))
+        );
       }
     },
 
     //处理评论分页
     handleCommentCurrentChange(currentPage) {
       if (this.store.comments.length === 0) {
-        this.countComment = false
+        this.countComment = false;
       } else {
-        this.countComment = true
-        this.commentDisplay = []
-        var m = 0
+        this.countComment = true;
+        this.commentDisplay = [];
+        var m = 0;
         if (currentPage * this.commentPageSize > this.store.comments.length) {
-          m = this.store.comments.length
+          m = this.store.comments.length;
         } else {
-          m = currentPage * this.commentPageSize
+          m = currentPage * this.commentPageSize;
         }
         for (var i = (currentPage - 1) * this.commentPageSize; i < m; i++) {
-          this.commentDisplay.push(JSON.parse(JSON.stringify(this.store.comments[i])))
+          this.commentDisplay.push(
+            JSON.parse(JSON.stringify(this.store.comments[i]))
+          );
         }
       }
     },
-    setStore(src, name, time, numStar, price, volume, Address, description, latitude, longitude, url) {
-      this.store.src = src
-      this.store.name = name
-      this.store.time = time
-      this.store.numStar = numStar
-      this.store.price = price
-      this.store.volume = volume
-      this.store.Address = Address
-      this.store.description = description
-      this.store.latitude = latitude
-      this.store.longitude = longitude
-      this.store.url = url
+    setStore(
+      src,
+      name,
+      time,
+      numStar,
+      price,
+      volume,
+      Address,
+      description,
+      latitude,
+      longitude,
+      url
+    ) {
+      this.store.src = src;
+      this.store.name = name;
+      this.store.time = time;
+      this.store.numStar = numStar;
+      this.store.price = price;
+      this.store.volume = volume;
+      this.store.Address = Address;
+      this.store.description = description;
+      this.store.latitude = latitude;
+      this.store.longitude = longitude;
+      this.store.url = url;
     },
     setStoreAddOrder(featureName, featurePrice, featureType, featureId) {
       var newArr = {
@@ -403,8 +459,8 @@ export default {
         featurePrice: featurePrice,
         featureType: featureType,
         featureId: featureId
-      }
-      this.store.feature.push(JSON.parse(JSON.stringify(newArr)))
+      };
+      this.store.feature.push(JSON.parse(JSON.stringify(newArr)));
     },
     addStoreComments(userId, src, userName, commentStar, commentTime, comment) {
       var newArr = {
@@ -414,98 +470,139 @@ export default {
         commentStar: commentStar,
         commentTime: commentTime,
         comment: comment
-      }
-      this.store.comments.push(JSON.parse(JSON.stringify(newArr)))
+      };
+      this.store.comments.push(JSON.parse(JSON.stringify(newArr)));
     },
-    jumpToLogin(){
+    jumpToLogin() {
       this.$message({
-        message: 'You have not login!',
-        type: 'warning'
+        message: "You have not login!",
+        type: "warning"
       });
 
-      this.$router.push('/homelogin')
-    },
-
+      this.$router.push("/homelogin");
+    }
   },
   created() {
-
     const loading = this.$loading({
       lock: true,
-      text: 'Loading',
-      spinner: 'el-icon-loading',
-      background: 'rgba(0, 0, 0, 0.7)'
+      text: "Loading",
+      spinner: "el-icon-loading",
+      background: "rgba(0, 0, 0, 0.7)"
     });
 
-    const token = sessionStorage.getItem("token")
+    const token = sessionStorage.getItem("token");
 
-    if(token === null){
-      this.isToken = false
-    }else{
-      this.isToken = true
-    }
-
-    var that = this
-    if (this.$route.params.yelp === false || this.$route.params.yelp === "false") {
-      this.yelp = false
-      axios.get("http://47.96.6.135:8080/serviceProvider/" + this.$route.params.id).then(
-        function (response) {
-
-          const reqs = response.data.data
-          that.setStore(reqs.imageUrl, reqs.serviceProviderName, reqs.businessHours, reqs.rating, reqs.averagePrice, reqs.sales, reqs.address, reqs.description, reqs.latitude, reqs.longitude, '')
-        }, function (err) {
-        }
-      )
-
-      axios.get("http://47.96.6.135:8080/service/spid/" + this.$route.params.id).then(
-        function (response) {
-          const reqs = response.data.data
-
-          if (reqs === null) {
-            that.countOrder = false
-          } else {
-            for (var i = 0; i < reqs.length; i++) {
-              var mFeature = reqs[i]
-              that.setStoreAddOrder(mFeature.serviceName, mFeature.price, mFeature.isBoarding, mFeature.serviceProviderId)
-            }
-            that.handleCurrentChange(1)
-          }
-
-
-        }, function (err) {
-        }
-      )
-
-      axios.get("http://47.96.6.135:8080/review/spid/" + this.$route.params.id).then(
-        function (response) {
-          const reqs = response.data.data
-          for (var i = 0; i < reqs.length; i++) {
-            var mReview = reqs[i]
-            that.addStoreComments(mReview.userId, mReview.imageUrl, mReview.nickName, mReview.rating, mReview.createTime, mReview.content)
-          }
-          that.handleCommentCurrentChange(1)
-        }, function (err) {
-        }
-      )
-      loading.close()
+    if (token === null) {
+      this.isToken = false;
     } else {
-      this.yelp = true
-      console.log(this.yelp)
-      axios.get("http://47.96.6.135:8080/serviceProvider/yelp/" + this.$route.params.id).then(
-        function (response) {
-          const reqs = response.data.data
-          that.setStore(reqs.image_url, reqs.name, '', reqs.rating, '', '', reqs.address, '', reqs.latitude, reqs.longitude, reqs.url)
-        }
-      )
-      loading.close()
+      this.isToken = true;
     }
 
+    var that = this;
+    if (
+      this.$route.params.yelp === false ||
+      this.$route.params.yelp === "false"
+    ) {
+      this.yelp = false;
+      axios
+        .get("http://47.96.6.135:8080/serviceProvider/" + this.$route.params.id)
+        .then(
+          function(response) {
+            const reqs = response.data.data;
+            that.setStore(
+              reqs.imageUrl,
+              reqs.serviceProviderName,
+              reqs.businessHours,
+              reqs.rating,
+              reqs.averagePrice,
+              reqs.sales,
+              reqs.address,
+              reqs.description,
+              reqs.latitude,
+              reqs.longitude,
+              ""
+            );
+          },
+          function(err) {}
+        );
+
+      axios
+        .get("http://47.96.6.135:8080/service/spid/" + this.$route.params.id)
+        .then(
+          function(response) {
+            const reqs = response.data.data;
+
+            if (reqs === null) {
+              that.countOrder = false;
+            } else {
+              for (var i = 0; i < reqs.length; i++) {
+                console.log(reqs);
+                var mFeature = reqs[i];
+                that.setStoreAddOrder(
+                  mFeature.serviceName,
+                  mFeature.price,
+                  mFeature.isBoarding,
+                  mFeature.sid
+                );
+              }
+              that.handleCurrentChange(1);
+            }
+          },
+          function(err) {}
+        );
+
+      axios
+        .get("http://47.96.6.135:8080/review/spid/" + this.$route.params.id)
+        .then(
+          function(response) {
+            const reqs = response.data.data;
+            for (var i = 0; i < reqs.length; i++) {
+              var mReview = reqs[i];
+              that.addStoreComments(
+                mReview.userId,
+                mReview.imageUrl,
+                mReview.nickName,
+                mReview.rating,
+                mReview.createTime,
+                mReview.content
+              );
+            }
+            that.handleCommentCurrentChange(1);
+          },
+          function(err) {}
+        );
+      loading.close();
+    } else {
+      this.yelp = true;
+      console.log(this.yelp);
+      axios
+        .get(
+          "http://47.96.6.135:8080/serviceProvider/yelp/" +
+            this.$route.params.id
+        )
+        .then(function(response) {
+          const reqs = response.data.data;
+          that.setStore(
+            reqs.image_url,
+            reqs.name,
+            "",
+            reqs.rating,
+            "",
+            "",
+            reqs.address,
+            "",
+            reqs.latitude,
+            reqs.longitude,
+            reqs.url
+          );
+        });
+      loading.close();
+    }
   }
-}
+};
 </script>
 
 <style scoped lang="less" scoped>
-
-
 .twoinput {
   background-color: #fb9a7f;
   border: transparent;
@@ -516,7 +613,6 @@ export default {
 }
 
 body {
-
   //font-family: "American Typewriter", serif;
   font-family: "Object Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
@@ -557,7 +653,6 @@ body {
   }
 }
 
-
 .el-col {
   border-radius: 4px;
 }
@@ -586,12 +681,11 @@ body {
 .search-item {
   padding: 10px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px 0 #B3B3B3;
+  box-shadow: 0 2px 12px 0 #b3b3b3;
 }
 
 /deep/ .el-rate__icon {
   font-size: 15px;
-
 }
 
 /deep/ .el-rate__text {
@@ -601,7 +695,6 @@ body {
 /deep/ .el-rate {
   margin-top: 12px;
 }
-
 
 .priceAndvolume {
   font-size: 8px;
@@ -632,7 +725,7 @@ body {
 
 .order {
   border-radius: 4px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0,), 0 0 6px rgba(0, 0, 0, .04);
+  box-shadow: 0 2px 4px rgba(0, 0, 0), 0 0 6px rgba(0, 0, 0, 0.04);
   padding: 15px;
   margin-top: 35px;
   margin-bottom: 45px;
@@ -652,7 +745,6 @@ body {
 
 .orderPrice {
   font-size: 10px;
-
 }
 
 .display-comment {
@@ -717,15 +809,13 @@ body {
 .comment-item {
   padding: 15px;
   border-radius: 8px;
-  box-shadow: 0 2px 12px 0 #B3B3B3;
-
+  box-shadow: 0 2px 12px 0 #b3b3b3;
 }
 
 .pagination-comment {
   position: absolute;
   left: 45%;
 }
-
 
 .commentTime {
   padding-top: 5px;
@@ -734,7 +824,6 @@ body {
 }
 
 .notFoundService {
-
   color: #999999;
 }
 
@@ -752,7 +841,10 @@ body {
 
 .description {
   font-size: 8px;
-  color: #9E9C9C;
+  color: #9e9c9c;
 }
 
+.aa {
+  margin-left: -50px;
+}
 </style>

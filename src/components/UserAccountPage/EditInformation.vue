@@ -159,7 +159,7 @@ export default {
     //获取用户信息
     getInfo(){
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/user/" + 1) //userid是1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/user/" + _this.userid) //userid是1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           console.log(response.data.data);
           _this.customer = response.data.data;

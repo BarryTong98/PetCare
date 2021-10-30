@@ -165,7 +165,9 @@ export default {
         petType: '',
         caseDescription: ''
       },
-      isToken: false
+      isToken: false,
+      userId: 0,
+      serviceProviderId: ' '
 
     }
   },
@@ -270,7 +272,10 @@ export default {
         if(
           this.value1 ==='' || this.value2 === '' || this.form.petType === '' || this.form.petName === '' || this.form.caseDescription === ''
         ){
-          alert('Your information is incomplete')
+          this.$message({
+            message: 'Your information is incomplete',
+            type: 'warning'
+          });
           this.active = 0
         }
         else {
@@ -288,20 +293,22 @@ export default {
           else if(this.value2 ==='option6') time = '16:30 -- 17:30'
           var serviceTime = dateString + " " + time
           console.log(this.price.split('/')[0])
-          var nowDate = new Date()
+
 
           axios.post("http://47.96.6.135:8080/order/add",{
             amount: that.price.split('/')[0],
-            createTime: nowDate,
             serviceId: that.id,
             serviceTime: serviceTime,
             status: 1,
-            userId: 1
+            userId: that.userId
           }).then(function (response){
             console.log(response)
             if (response.data.code === 200) {
-              alert('Add Order Successfully')
-              that.$router.push({name:'information', params: {id: that.id}})
+              that.$message({
+                message: 'Add Order Successfully',
+                type: 'success'
+              });
+              that.$router.push({name:'information', params: {id: that.serviceProviderId, yelp: that.yelp}})
             }
           })
         }
@@ -311,7 +318,10 @@ export default {
         if(
           this.value1 ==='' || this.form.petType === '' || this.form.petName === '' || this.form.caseDescription === ''
         ){
-          alert('Your information is incomplete')
+          this.$message({
+            message: 'Your information is incomplete',
+            type: 'warning'
+          });
           this.active = 0
         }
         else {
@@ -328,20 +338,22 @@ export default {
           var dateString0 = dateString1 + " --> " + dateString2
           var days = (date2 -date1) / (1000*60*60*24)
           var amount = this.price.split('/')[0] * days
-          var nowDate0 = new Date()
+          //var nowDate0 = new Date()
 
           axios.post("http://47.96.6.135:8080/order/add",{
             amount: amount,
-            createTime: nowDate0,
             serviceId: that.id,
             serviceTime: dateString0,
             status: 1,
-            userId: 1
+            userId: that.userId
           }).then(function (response){
             console.log(response)
             if (response.data.code === 200) {
-              alert('Add Order Successfully')
-              that.$router.push({name:'information', params: {id: that.id, yelp: that.yelp}})
+              that.$message({
+                message: 'Add Order Successfully',
+                type: 'success'
+              });
+              that.$router.push({name:'information', params: {id: that.serviceProviderId, yelp: that.yelp}})
             }
           })
         }
@@ -353,6 +365,9 @@ export default {
   },
   created() {
     const token = sessionStorage.getItem("token")
+    const userId = sessionStorage.getItem("userId")
+    this.userId = userId
+    console.log("userId: "+ userId)
     console.log("token:" + token)
     console.log(token === null)
     if(token === null){
@@ -366,6 +381,17 @@ export default {
       this.price = this.$route.params.price
       this.id = this.$route.params.id
       this.yelp = this.$route.params.yelp
+      var that = this
+      axios.get("http://47.96.6.135:8080/service/" + this.id).then(
+        function (response){
+          const reqs = response.data
+          console.log(reqs)
+          that.serviceProviderId = reqs.data.serviceProviderId
+          console.log(that.serviceProviderId)
+        },function(err){
+
+        }
+      )
     }
 
   }

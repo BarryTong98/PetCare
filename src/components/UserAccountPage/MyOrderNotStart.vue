@@ -126,6 +126,7 @@ export default {
       if (this.orders.length === 0) {
         this.countStore = false
         this.show = false
+        this.storeDisplay = []
       } else {
         this.countStore = true
         this.storeDisplay = []
@@ -142,7 +143,6 @@ export default {
       }
     },
 
-    //取消订单
     cancelOrder(oid) {
       this.status = 3;
       let updateStatus = {
@@ -161,41 +161,33 @@ export default {
     //搜索框
     searchOrders() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080//order/search?userId=" + _this.userid + "&keyword=" + _this.searchInfo + "&code=" + 1) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/search?userId=" + _this.userid + "&keyword=" + _this.searchInfo + "&code=" + 1) //1目前是瞎写的，到时候从localdatabse拿
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
             _this.orders.length = 0;
             for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
-              console.log(temporders[item])
-              temporders.forEach(function (element) {
-                console.log(element);
-                //把得到的jason转化为字符串
-                const newstr = JSON.stringify(element);
-                if (newstr.search(_this.searchInfo)) {
-                  _this.orders.push(temporders[item]);
-                  console.log("成功")
-                }
-              })
+              _this.orders.push(temporders[item]);
             }
+            _this.handleCurrentChange(1);
+
           } else {
             //如果输入的内容不匹配，则清空列表
             while (_this.orders.length > 0) {
               _this.orders.pop();
             }
-            console.log("失败")
+            _this.handleCurrentChange(1);
+            console.log("失败" + _this.orders.length)
           }
         });
     },
 
-    //搜索之前先判断一下搜索框中有没有输入内容，如果没有输入内容就显示所有订单
     checKSearch() {
       if (this.searchInfo == '') {
         while (this.orders.length > 0) {
           this.orders.pop();
         }
         this.findAll();
-        console.log("显示所有订单")
       } else {
         this.searchOrders();
 
@@ -204,18 +196,17 @@ export default {
 
     findAll() {
       const _this = this;
-      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid) //1目前是瞎写的，到时候从localdatabse拿
+      _this.$http.get("http://47.96.6.135:8080/order/user/" + _this.userid)
         .then(function (response) {
           let temporders = response.data.data;
           if (temporders != null) {
-            for (var item = 0; item < temporders.length; item++) {  //遍历对象数组，item表示某个具体的对象
+            for (var item = 0; item < temporders.length; item++) {
               if (temporders[item].status == 1) {
                 console.log(temporders[item])
                 _this.orders.push(temporders[item]);
               }
             }
           }
-          //遍历orders数组,把createTime改格式
           for (var i = 0; i < _this.orders.length; i++) {
             _this.orders[i].createTime = _this.convertTime(_this.orders[i].createTime)
           }
@@ -233,14 +224,14 @@ export default {
 </script>
 
 <style scoped>
-/*为了让所有的ul都不缩进，并且没有一点*/
+
 ul {
   list-style: none;
   margin: 0px;
   padding: 0px;
 }
 
-/*order搜索框*/
+
 .bar1 input {
   border: 2px solid #fb9a7f;
   border-radius: 5px;
