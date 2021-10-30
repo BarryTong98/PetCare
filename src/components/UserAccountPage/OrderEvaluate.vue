@@ -1,32 +1,32 @@
 <template>
-<div>
-  <!--最上面返回按钮-->
-  <el-row>
-    <el-page-header @back="back2Order" content="Evaluate Page" title="Back" style="color:#fa997e">
-    </el-page-header>
-  </el-row>
-  <!--评价表单-->
-  <el-form :model="ruleForm"
-           :rules="rules"
-           ref="ruleForm"
-           label-width="100px"
-           class="demo-ruleForm">
-    <el-form-item label="Rate:" prop="name">
-      <el-rate
-        v-model="rate"
-        :colors="colors">
-      </el-rate>
-    </el-form-item>
-    <el-form-item label="Comment:" prop="desc">
-      <el-input type="textarea" v-model="ruleForm.desc"></el-input>
-    </el-form-item>
+  <div>
+    <!--最上面返回按钮-->
+    <el-row>
+      <el-page-header @back="back2Order" content="Evaluate Page" title="Back" style="color:#fa997e">
+      </el-page-header>
+    </el-row>
+    <!--评价表单-->
+    <el-form :model="ruleForm"
+             :rules="rules"
+             ref="ruleForm"
+             label-width="100px"
+             class="demo-ruleForm">
+      <el-form-item label="Rate:" prop="name">
+        <el-rate
+          v-model="rate"
+          :colors="colors">
+        </el-rate>
+      </el-form-item>
+      <el-form-item label="Comment:" prop="desc">
+        <el-input type="textarea" v-model="ruleForm.desc"></el-input>
+      </el-form-item>
 
-    <el-form-item>
-      <el-button type="primary" @click="submitForm('ruleForm')">Evaluate</el-button>
-    </el-form-item>
-  </el-form>
+      <el-form-item>
+        <el-button type="primary" @click="submitForm('ruleForm')">Evaluate</el-button>
+      </el-form-item>
+    </el-form>
 
-</div>
+  </div>
 </template>
 
 <script>
@@ -37,6 +37,7 @@ export default {
       gettime:'',
       spid:0,
       oid:0,
+      userid: 1,
       //rate
       rate: null,
       colors: ['#99A9BF', '#F7BA2A', '#FF9900'],
@@ -66,7 +67,6 @@ export default {
           let mm = new Date().getMonth()+1;
           let dd = new Date().getDate();
           this.gettime = yy+'-'+mm+'-'+dd;
-          console.log(this.gettime);
 
           //提交数据
           const _this = this;
@@ -77,11 +77,9 @@ export default {
             rating: _this.rate,
             rid: null,
             serviceProviderId: _this.spid,
-            userId: 1,
+            userId: _this.userid,
           }).then(function(response){
             if (response.data.message == "success"){
-              //切换路由
-              alert("Comment successful!")
 
               let updateStatus = {
                 code: 4,
@@ -90,7 +88,7 @@ export default {
               _this.$http.put('http://47.96.6.135:8080/order/update', updateStatus)
                 .then((response) => {
                   _this.$message({
-                    message: 'Change status successfully!',
+                    message: 'Evaluate successfully!',
                     type: 'success'
                   });
                 });
@@ -127,6 +125,7 @@ export default {
   created() {
     this.spid = this.$route.query.currentspid;
     this.oid = this.$route.query.orderid;
+    this.userid = sessionStorage.getItem("userId")
   }
 
 }
