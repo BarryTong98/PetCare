@@ -7,7 +7,7 @@
       <el-form-item label="Password" prop="pass">
         <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="Confirm" prop="checkPass">
+      <el-form-item label="Comfirm" prop="checkPass">
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="Username" prop="username">
