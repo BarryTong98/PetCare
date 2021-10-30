@@ -18,6 +18,7 @@
         <router-link :to="{name: 'search', params: {keyword: input1, address: input2, checked: 4095}}">
           <el-button class="searchBtn" type="info" icon="el-icon-search"></el-button>
         </router-link>
+
         <el-button v-if="!isToken" style="margin-right: -55%;margin-left: 55%" type="info" class="signoutButton"
                    @click="login">Login
         </el-button>
@@ -223,14 +224,14 @@ export default {
   },
   data() {
     return {
-      input1: '',
-      input2: '',
+      input1: ' ',
+      input2: ' ',
       isCollapse: true,
       isToken: false,
     }
   },
   created() {
-   const token = sessionStorage.getItem("token")
+    const token = sessionStorage.getItem("token")
     console.log("token:" + token)
     console.log(token === null)
     if(token === null){
