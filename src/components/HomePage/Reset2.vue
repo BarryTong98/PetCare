@@ -27,7 +27,10 @@ export default {
       if (value === '') {
         callback(new Error('Please Enter Your Password'))
       } else {
-        if (this.ruleForm.checkPass !== '') {
+        if(this.ruleForm.checkPass !== '' && (value.length < 6 || value.length >15)){
+          callback(new Error('Please Enter Your Password Between 6 And 15'))
+        }
+        else if (this.ruleForm.checkPass !== '') {
           this.$refs.ruleForm.validateField('checkPass')
         }
         callback()
@@ -49,11 +52,9 @@ export default {
         checkPass: '',
       },
       rules: {
-        pass: [
-          {
-            validator: validatePass,
-            trigger: 'blur'
-          }
+        pass:[
+          { required: true, message: 'Please Input Password', trigger: 'blur' },
+          { min: 6, max: 15, message: 'Please Enter Your Password Between 6 And 15', trigger: 'blur' }
         ],
         checkPass: [
           {

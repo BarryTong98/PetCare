@@ -7,7 +7,7 @@
       <el-form-item label="Password" prop="pass">
         <el-input type="password" v-model="ruleForm.pass" autocomplete="off"></el-input>
       </el-form-item>
-      <el-form-item label="Comfirm" prop="checkPass">
+      <el-form-item label="Confirm" prop="checkPass">
         <el-input type="password" v-model="ruleForm.checkPass" autocomplete="off"></el-input>
       </el-form-item>
       <el-form-item label="Username" prop="username">
@@ -56,7 +56,8 @@ export default {
           { required: true, message: 'Please Input Username', trigger: 'blur' }
         ],
         pass:[
-          { required: true, message: 'Please Input Password', trigger: 'blur' }
+          { required: true, message: 'Please Input Password', trigger: 'blur' },
+          { min: 6, max: 15, message: 'Please Enter Your Password Between 6 And 15', trigger: 'blur' }
         ],
         checkPass: [
           { validator: validatePass2, trigger: 'blur' }
@@ -66,7 +67,7 @@ export default {
         ],
         email:[
           { required: true, message: 'Please Input Email', trigger: 'blur' },
-          { type: 'email', message: 'Email format is incorrect', trigger: ['blur', 'change'] }
+          { type: 'email', message: 'Email Format Is Incorrect', trigger: ['blur', 'change'] }
         ],
       }
     }
