@@ -76,6 +76,7 @@ server:
     enabled: true
     mime-types: application/javascript,text/css,application/json,application/xml,text/html,text/xml,text/plain
     min-response-size: 1024
+  port: 8088
 aliyun:
   oss:
     endpoint: oss-cn-beijing.aliyuncs.com
