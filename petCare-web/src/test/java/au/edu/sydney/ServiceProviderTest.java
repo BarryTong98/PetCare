@@ -30,18 +30,6 @@ public class ServiceProviderTest {
     ServiceProviderService serviceProviderService;
 
     @Test
-    public void getRecommendProvidersTest() {
-        List<ServiceProvider> recommendProviders = serviceProviderMapper.getRecommendProviders();
-        if (!recommendProviders.isEmpty()) {
-            for (ServiceProvider recommendProvider : recommendProviders) {
-                System.out.println(recommendProvider);
-            }
-        } else {
-            System.out.println("No recommend provider");
-        }
-    }
-
-    @Test
     public void getProvidersByTypeTest() {
         List<ServiceProvider> providers = serviceProviderMapper.getServiceProviderByType(3);
         if (!providers.isEmpty()) {
